@@ -12,6 +12,3 @@ class UserType(BaseMixin, me.Document):
     id = me.SequenceField(primary_key=True)
     user_type = me.StringField(null=False)
 
-
-    # allows for 'inheritance' while allowing other models to be created as separate collections
-    meta = {'abstract': True}
