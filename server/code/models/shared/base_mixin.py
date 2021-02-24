@@ -9,7 +9,7 @@ class BaseMixin(me.Document):
     Base model from which all other tables inherit
     '''
 
-    guid = me.StringField(default=default_uuid_value)
+    guid = me.StringField(default=uuid_value)
     created_at = me.DateTimeField(default=current_timestamp)
     updated_at = me.DateTimeField(default=current_timestamp)
 
