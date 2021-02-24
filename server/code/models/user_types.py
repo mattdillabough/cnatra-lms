@@ -12,3 +12,5 @@ class UserTypeModel(BaseMixin, me.Document):
     id = me.SequenceField(primary_key=True)
     user_type = me.StringField(null=False)
 
+    meta = {'collection': 'user_types'}
+
