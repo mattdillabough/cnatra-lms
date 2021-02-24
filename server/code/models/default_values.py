@@ -5,4 +5,4 @@ import datetime
 # project imports
 
 uuid_value = lambda: str(uuid4()).replace('-','')
-current_timestamp = datetime.datetime.utcnow
+current_timestamp = datetime.utcnow

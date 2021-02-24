@@ -5,9 +5,9 @@ import mongoengine as me
 from models.shared.base_mixin import BaseMixin
 from models.user_types import UserType
 
-class UserType(BaseMixin, UserType, me.Document):
+class User(BaseMixin, UserType, me.Document):
     '''
-    User types
+    Users
     '''
 
     id = me.SequenceField(primary_key=True)
