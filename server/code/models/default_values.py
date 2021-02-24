@@ -1,3 +1,8 @@
+# python imports
 from uuid import uuid4
+import datetime
 
-default_uuid_value = lambda: str(uuid4()).replace('-','')
+# project imports
+
+uuid_value = lambda: str(uuid4()).replace('-','')
+current_timestamp = datetime.datetime.utcnow
