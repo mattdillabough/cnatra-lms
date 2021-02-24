@@ -4,7 +4,7 @@ import mongoengine as me
 # project imports
 from models.shared.base_mixin import BaseMixin
 
-class UserType(BaseMixin, me.Document):
+class UserTypeModel(BaseMixin, me.Document):
     '''
     User types
     '''
