@@ -10,7 +10,7 @@ from models.shared.start_date_end_date_mixin import StartDateEndDateMixin
 
 class PhaseModel(BaseMixin, StartDateEndDateMixin, me.Document):
     '''
-    Phases
+    Phases - belong to Pipelines
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)

@@ -4,13 +4,13 @@ import mongoengine as me
 # project imports
 from models.default_values import uuid_value
 from models.phases import PhaseModel
-from models.stage_types import StageTypeModel
 from models.shared.base_mixin import BaseMixin
 from models.shared.start_date_end_date_mixin import StartDateEndDateMixin
+from models.stage_types import StageTypeModel
 
 class StageModel(BaseMixin, StartDateEndDateMixin, me.Document):
     '''
-    Stages
+    Stages - belong to Phases
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)

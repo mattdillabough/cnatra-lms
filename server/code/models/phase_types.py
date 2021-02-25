@@ -3,13 +3,12 @@ import mongoengine as me
 
 # project imports
 from models.pipeline_types import PipelineTypeModel
+from models.shared.available_choice_sort_order_mixin import AvailableChoiceSortOrderMixin
 from models.shared.base_mixin import BaseMixin
-from models.shares.available_choice_sort_order_mixin import AvailableChoiceSortOrderMixin
 
 class PhaseTypeModel(BaseMixin, AvailableChoiceSortOrderMixin, me.Document):
     '''
-    Phase types
-    Phases belong to Pipelines
+    Phase types - belong to Pipeline types
     '''
 
     id = me.SequenceField(primary_key=True)

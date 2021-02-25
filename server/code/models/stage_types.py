@@ -3,13 +3,12 @@ import mongoengine as me
 
 # project imports
 from models.phase_types import PhaseTypeModel
+from models.shared.available_choice_sort_order_mixin import AvailableChoiceSortOrderMixin
 from models.shared.base_mixin import BaseMixin
-from models.shares.available_choice_sort_order_mixin import AvailableChoiceSortOrderMixin
 
 class StageTypeModel(BaseMixin, AvailableChoiceSortOrderMixin, me.Document):
     '''
-    Stage types
-    Stages belong to Phases
+    Stage types - belong to Phase types
     '''
 
     id = me.SequenceField(primary_key=True)
