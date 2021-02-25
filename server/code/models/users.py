@@ -12,10 +12,10 @@ class UserModel(BaseMixin, me.Document):
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)
-    first_name = me.StringField(required=True)
-    last_name = me.StringField(required=True)
-    email_address = me.EmailField(required=True, unique=True)
-    password = me.StringField(required=True)
+    first_name = me.StringField(null=False)
+    last_name = me.StringField(null=False)
+    email_address = me.EmailField(null=False, unique=True)
+    password = me.StringField(null=False)
     user_type = me.ReferenceField(UserTypeModel)
 
     meta = {'collection': 'users'}
