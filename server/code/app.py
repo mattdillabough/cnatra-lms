@@ -1,10 +1,8 @@
 #### IMPORTS
 
 # python imports
-from dotenv import load_dotenv
 from flask import Flask
 from flask_mongoengine import MongoEngine
-import os
 
 # project imports
 
@@ -13,11 +11,9 @@ import os
 
 # initialize app
 app = Flask(__name__)
-load_dotenv()
 
 # connect db
-DB_URI = os.getenv('DB_URI')
-app.config['MONGODB_HOST'] = DB_URI
+app.config.from_object('config.DevConfig')
 db = MongoEngine(app)
 
 
@@ -29,4 +25,4 @@ def index():
 
 #### RUN APP
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
