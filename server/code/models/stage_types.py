@@ -14,7 +14,7 @@ class StageTypeModel(BaseMixin, AvailableChoiceSortOrderMixin, me.Document):
 
     id = me.SequenceField(primary_key=True)
     stage_type = me.StringField(null=False)
-    stage_type = me.ReferenceField(PhaseTypeModel)
+    phase_type = me.ReferenceField(PhaseTypeModel)
 
     meta = {'collection': 'stage_types'}
 
