@@ -12,8 +12,10 @@ from flask_mongoengine import MongoEngine
 # initialize app
 app = Flask(__name__)
 
-# connect db
+# configure app
 app.config.from_object('config.DevConfig')
+
+# connect db
 db = MongoEngine(app)
 
 
