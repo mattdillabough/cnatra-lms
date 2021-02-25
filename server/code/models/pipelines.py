@@ -13,6 +13,7 @@ class PipelineModel(BaseMixin, StartDateEndDateMixin, me.Document):
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)
+    name = me.StringField(null=False)
     pipeline_type = me.ReferenceField(PipelineTypeModel)
 
 
