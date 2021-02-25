@@ -17,6 +17,10 @@ class Config:
 
 
 class DevConfig(Config):
+    '''
+    Development configuration
+    '''
+    
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = True
