@@ -4,16 +4,15 @@ import mongoengine as me
 # project imports
 from models.default_values import uuid_value
 from models.shared.base_mixin import BaseMixin
-from models.shared.start_date_end_date_mixin import StartDateEndDateMixin
+from models.shared.course_mixin import CourseMixin
 
-class PipelineModel(BaseMixin, StartDateEndDateMixin, me.Document):
+class PipelineModel(BaseMixin, CourseMixin, me.Document):
     '''
     Pipelines
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)
     pipeline = me.StringField(null=False, unique=True)
-    description = me.StringField(null=False)
 
 
     meta = {'collection': 'pipelines'}

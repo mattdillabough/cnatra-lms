@@ -5,9 +5,9 @@ import mongoengine as me
 from models.default_values import uuid_value
 from models.pipelines import PipelineModel
 from models.shared.base_mixin import BaseMixin
-from models.shared.start_date_end_date_mixin import StartDateEndDateMixin
+from models.shared.course_mixin import CourseMixin
 
-class PhaseModel(BaseMixin, StartDateEndDateMixin, me.Document):
+class PhaseModel(BaseMixin, CourseMixin, me.Document):
     '''
     Phases - belong to Pipelines
     '''
@@ -15,7 +15,6 @@ class PhaseModel(BaseMixin, StartDateEndDateMixin, me.Document):
     id = me.StringField(primary_key=True, default=uuid_value)
     phase = me.StringField(null=False)
     pipeline = me.ReferenceField(PipelineModel)
-    description = me.StringField(null=False)
 
 
     meta = {'collection': 'phases'}
