@@ -13,7 +13,7 @@ class Config:
     Base configuation
     '''
 
-    DATABASE_URI = environ.get('DATABASE_URI')
+    MONGODB_HOST = environ.get('DATABASE_URI')
 
 
 class DevConfig(Config):
