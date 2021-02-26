@@ -3,7 +3,6 @@
 # project imports
 from models.pipeline_types import PipelineTypeModel
 
-
 # records to insert
 pipeline_types = [
    "Helicopter Pilot",
@@ -20,7 +19,7 @@ pipeline_types.sort()
 def create_pipeline_types():
 
     # delete records (if any)
-    PipeTypeModel.objects().delete()
+    #PipeTypeModel.objects().delete()
 
     # loop through list and insert records
     for i, pipeline_type in enumerate(pipeline_types):
@@ -30,4 +29,3 @@ def create_pipeline_types():
         })
         pipeline_type_model.save()
 
-    
