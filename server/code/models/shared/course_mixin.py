@@ -3,11 +3,12 @@ import mongoengine as me
 
 # project imports
 
-class StartDateEndDateMixin(me.Document):
+class CourseMixin(me.Document):
     '''
-    Adds date columns to table to indicate start and end
+    Adds course-related columns to tables
     '''
 
+    description = me.StringField(null=False)
     start_date = me.DateTimeField(required=True)
     end_date = me.DateTimeField(required=True)
 

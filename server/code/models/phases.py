@@ -15,6 +15,7 @@ class PhaseModel(BaseMixin, StartDateEndDateMixin, me.Document):
     id = me.StringField(primary_key=True, default=uuid_value)
     phase = me.StringField(null=False)
     pipeline = me.ReferenceField(PipelineModel)
+    description = me.StringField(null=False)
 
 
     meta = {'collection': 'phases'}
