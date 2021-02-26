@@ -2,12 +2,13 @@
 
 # project imports
 from app import db
-from seed.pipeline_types import create_pipeline_types
+from seed.pipelines import create_pipelines
 
+#  ORDER OF INSERTION MATTERS
 
 try:    
-    create_pipeline_types()
-    print("Added pipeline_types")
+    create_pipelines()
+    print("Added pipelines")
 except Exception as e:
-    print(f"Error when adding pipeline_types:")
+    print(f"Error when adding pipelines:")
     print(e)

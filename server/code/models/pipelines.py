@@ -12,7 +12,8 @@ class PipelineModel(BaseMixin, StartDateEndDateMixin, me.Document):
     '''
 
     id = me.StringField(primary_key=True, default=uuid_value)
-    pipeline = me.StringField(null=False)
+    pipeline = me.StringField(null=False, unique=True)
+    description = me.StringField(null=False)
 
 
     meta = {'collection': 'pipelines'}
