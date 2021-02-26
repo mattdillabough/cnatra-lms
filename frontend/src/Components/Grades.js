@@ -2,7 +2,7 @@ import React from "react"
 
 function Grades() {
   return(
-    <div>
+    <div className="container-fluid">
       <h2>This is the landing page for Grades</h2>
     </div>
   )

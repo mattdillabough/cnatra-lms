@@ -4,10 +4,9 @@ import NavigationBar from "./Components/NavigationBar"
 
 function App() {
   return (
-    <div className="App">
-      <Routes/>
+    <div className="App container-fluid">
       <NavigationBar/>
-      <h2>Hello World</h2>
+      <Routes/>
     </div>
   );
 }
