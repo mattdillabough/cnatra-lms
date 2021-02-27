@@ -27,8 +27,8 @@ def create_pipelines():
     for pipeline in pipelines:
         # create record
         pipeline_model = PipelineModel(**{
-            'pipeline': f"{pipeline} pipeline",
-            'description': pipeline,
+            'pipeline': pipeline,
+            'description': f"{pipeline} pipeline",
             'start_date': start_date,
             'end_date': end_date
         })
