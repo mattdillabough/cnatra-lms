@@ -2,29 +2,21 @@
 
 # project imports
 from app import db
-from seed.medias import create_medias
-from seed.phases import create_phases
-from seed.pipelines import create_pipelines
+from seed.courses import create_courses
+from seed.prerequisite_trainings import create_prerequisite_trainings
 
 #  ORDER OF INSERTION MATTERS
 
 try:    
-    create_pipelines()
-    print("Added pipelines")
+    create_courses()
+    print("Added courses")
 except Exception as e:
-    print(f"Error when adding pipelines:")
+    print(f"Error when adding courses:")
     print(e)
 
 try:    
-    create_phases()
-    print("Added phases")
+    create_prerequisite_trainings()
+    print("Added prerequisite trainings")
 except Exception as e:
-    print(f"Error when adding phases:")
-    print(e)
-
-try:    
-    create_medias()
-    print("Added medias")
-except Exception as e:
-    print(f"Error when adding medias:")
+    print(f"Error when adding prerequisite trainings:")
     print(e)
