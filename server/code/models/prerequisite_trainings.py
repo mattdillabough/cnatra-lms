@@ -11,8 +11,7 @@ class PrerequisiteTrainingModel(BaseMixin, me.Document):
     Prerequisite Training
     '''
 
-    id = me.StringField(primary_key=True, default=uuid_value)
-    prerequisite_training_id = me.StringField(default=uuid_value)
+    prerequisite_training_id = me.StringField(primary_key=True, default=uuid_value)
     prerequisite_training = me.StringField()
     course = me.ReferenceField(CourseModel)
 

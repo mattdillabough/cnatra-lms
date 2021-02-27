@@ -9,7 +9,7 @@ class CourseModel(BaseMixin, me.Document):
     '''
     Courses
     '''
-    id = me.StringField(primary_key=True, default=uuid_value)
+    course_id = me.StringField(primary_key=True, default=uuid_value)
     course_title = me.StringField()
     cin = me.StringField()
     location = me.StringField()
