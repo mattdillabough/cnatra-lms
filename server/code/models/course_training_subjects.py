@@ -13,6 +13,7 @@ class CourseTrainingSubjectModel(BaseMixin, me.Document):
 
     course_training_subject_id = me.StringField(primary_key=True, default=uuid_value)
     course_training_subject = me.StringField()
+    sort_order = me.IntField()
     course = me.ReferenceField(CourseModel)
 
 

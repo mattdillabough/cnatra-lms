@@ -13,6 +13,7 @@ class PrerequisiteTrainingModel(BaseMixin, me.Document):
 
     prerequisite_training_id = me.StringField(primary_key=True, default=uuid_value)
     prerequisite_training = me.StringField()
+    sort_order = me.IntField()
     course = me.ReferenceField(CourseModel)
 
 

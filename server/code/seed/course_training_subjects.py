@@ -8,15 +8,18 @@ from models.courses import CourseModel
 course_training_subjects = [
     {
        'course_training_subject': 'Ground Training',
-       'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)' 
+       'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)',
+       'sort_order': 1
     },
     {
         'course_training_subject': 'Flight Support',
-        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)'
+        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)',
+        'sort_order': 2
     },
     {
         'course_training_subject': 'Flight Training',
-        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)'
+        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)',
+        'sort_order': 3
     }
 ]
 

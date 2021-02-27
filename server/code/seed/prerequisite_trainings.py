@@ -8,11 +8,13 @@ from models.prerequisite_trainings import PrerequisiteTrainingModel
 prerequisite_trainings = [
     {
        'prerequisite_training': 'Successful completion of T-6B Joint Primary Pilot Training (JPPT), (TW4: Q-2A-3166 or TW5: Q-2A-4166)',
-       'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)' 
+       'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)',
+       'sort_order': 1
     },
     {
         'prerequisite_training': ' Successful completion of Naval Aviation Survival Training Program (NASTP) Supplemental Emergency Breathing Device (SEBD) training',
-        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)'
+        'course': 'Advanced Helicopter Multi-Service Pilot Training System (MPTS)',
+        'sort_order': 2
     }
 ]
 
