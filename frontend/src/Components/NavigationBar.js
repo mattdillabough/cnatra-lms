@@ -1,6 +1,6 @@
 import React from "react"
 import {FaBars, FaHome, FaGraduationCap} from "react-icons/fa"
-import {RiBookMarkLine} from "react-icons/ri"
+import {RiBookMarkLine, RiLogoutBoxLine} from "react-icons/ri"
 import {IoSettingsOutline} from "react-icons/io5"
 import {IconContext} from "react-icons";
 
@@ -14,6 +14,7 @@ function NavigationBar() {
         <FaGraduationCap title="Academics"/>
         <RiBookMarkLine title="Gradebooks"/>
         <IoSettingsOutline title="Settings"/>
+        <RiLogoutBoxLine title="Logout"/>
       </div>
     </IconContext.Provider>
     </>
