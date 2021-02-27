@@ -34,28 +34,28 @@ function NavigationBar() {
           </Link>
       </div>
       <nav className={sidebar? "nav-menu active": "nav-menu"}>
-      <ul className="nav-menu-items" >
-        <li className="navbar-toggle" onClick={showSidebar}>
-              <Link to="#" className="menu-bars">
-                <IoClose className="close"/>
-              </Link>
-        </li>
-            {InstructorSidebarData.map((nav, idx)=>{
-              return(
-                <li key={idx} className={nav.cName} onClick={showSidebar}>
-                  <Link to={nav.path}>
-                    {nav.icon}
-                    <span>{nav.title}</span>
-                  </Link>
-              </li>
-            )
-          })}
-        <li className="nav-text">
-          <Link to="/Logout">
-            <RiLogoutBoxLine title="Logout"/>
-            <span>Logout</span>
-          </Link>
-        </li>
+        <ul className="nav-menu-items" >
+          <li className="navbar-toggle" onClick={showSidebar}>
+                <Link to="#" className="menu-bars">
+                  <IoClose title="close"/>
+                </Link>
+          </li>
+              {InstructorSidebarData.map((nav, idx)=>{
+                return(
+                  <li key={idx} className={nav.cName} onClick={showSidebar}>
+                    <Link to={nav.path}>
+                      {nav.icon}
+                      <span>{nav.title}</span>
+                    </Link>
+                </li>
+              )
+            })}
+          <li className="nav-text">
+            <Link to="/Logout">
+              <RiLogoutBoxLine title="Logout"/>
+              <span>Logout</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </IconContext.Provider>

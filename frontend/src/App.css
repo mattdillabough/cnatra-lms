@@ -49,11 +49,6 @@
   transition: 350ms;
 }
 
-.close {
-  margin-left: 2rem;
-  color: white;
-}
-
 .nav-text {
   display: flex;
   justify-content: flex-start;
