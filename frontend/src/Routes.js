@@ -6,6 +6,7 @@ import Academics from "./Components/Academics";
 import Grades from "./Components/Grades";
 import Settings from "./Components/Settings";
 import Login from "./Components/Login";
+import Logout from "./Components/Logout";
 
 
 function Routes() {
@@ -16,6 +17,7 @@ function Routes() {
       <Route path="/Grades" component={Grades}/>
       <Route path="/Settings" component={Settings}/>
       <Route path="/Login" component={Login}/>
+      <Route path="/Logout" component={Logout}/>
     </Switch>
   )
 }
