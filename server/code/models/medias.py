@@ -11,6 +11,7 @@ class MediaModel(BaseMixin, me.Document):
 
     media_id = me.IntField(primary_key=True)
     media = me.StringField()
+    description = me.StringField()
 
     meta = {'collection': 'medias'}
     
