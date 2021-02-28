@@ -2,6 +2,7 @@
 
 # project imports
 from models.blocks import BlockModel
+from models.events import EventModel
 from models.medias import MediaModel
 
 # records to insert
@@ -11,28 +12,32 @@ events = [
         'media': 'Sqdn',
         'block': 'GND01',
         'title': 'Check-In',
-        'hours': 2.0
+        'hours': 2.0,
+        'sort_order': 1
     },
     {
         'event_number': 'GND0102A',
         'media': 'Issue',
         'block': 'GND01',
         'title': 'Training Publications Issue',
-        'hours': 0.5
+        'hours': 0.5,
+        'sort_order': 2
     },
     {
         'event_number': 'GND0103A',
         'media': 'Sqdn',
         'block': 'GND01',
         'title': 'Curriculum Indoctrination and Flight Leader’s Brief',
-        'hours': 2.0
+        'hours': 2.0,
+        'sort_order': 3
     },
     {
         'event_number': 'GND0104A',
         'media': 'Sqdn',
         'block': 'GND01',
         'title': 'Welcome Aboard',
-        'hours': 3.0
+        'hours': 3.0,
+        'sort_order': 4
     }
 ]
 
@@ -51,7 +56,7 @@ def create_events():
         
         # find block_model
         block = event_dict['block']
-        block_model = BlockModel(block_number=block).first()
+        block_model = BlockModel.objects(block_number=block).first()
         event_dict['block'] = block_model
 
         # create record

@@ -16,5 +16,6 @@ class EventModel(BaseMixin, me.Document):
     block = me.ReferenceField(BlockModel)
     title = me.StringField()
     hours = me.DecimalField()
+    sort_order = me.IntField()
 
     meta = {'collection': 'events'}
