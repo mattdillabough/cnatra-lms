@@ -26,6 +26,15 @@
   padding: 1em;
   background-color: navy;
   color: whitesmoke;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+.NavigationBar.open {
+  transition: visibility 0.85s, opacity 0.85s;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .menu-bars {
@@ -42,9 +51,12 @@
   top: 0;
   left: -100%;
   transition: 850ms;
+  visibility: hidden;
 }
 
 .nav-menu.active {
+  /* display: flex; */
+  visibility: visible;
   left: 0;
   transition: 350ms;
 }

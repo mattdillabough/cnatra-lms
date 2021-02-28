@@ -18,7 +18,7 @@ function NavigationBar() {
   return (
     <>
     <IconContext.Provider value={{className: "react-icons"}}>
-      <div className="NavigationBar">
+      <div className={sidebar? "NavigationBar open": "NavigationBar"}>
           <Link to="#" className="menu-bars">
             <FaBars title="Open menu" onClick={showSidebar}/>
           </Link>
