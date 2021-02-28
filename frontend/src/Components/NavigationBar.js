@@ -50,7 +50,7 @@ function NavigationBar() {
                 </li>
               )
             })}
-          <li className="nav-text">
+          <li className="nav-text" onClick={showSidebar}>
             <Link to="/Logout">
               <RiLogoutBoxLine title="Logout"/>
               <span>Logout</span>
