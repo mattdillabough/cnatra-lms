@@ -33,6 +33,7 @@
   min-width: 100vw;
   position: sticky;
   align-items: center;
+  justify-content: space-between;
   padding: 1em;
   margin-bottom: 4em;
 
@@ -55,8 +56,11 @@
     min-width: fit-content;
     position: sticky;
     align-items: center;
+    justify-content: flex-start;
     padding: 1em;
     margin-bottom: 0em;
+
+    overflow-x: hidden;
   }
 }
 
