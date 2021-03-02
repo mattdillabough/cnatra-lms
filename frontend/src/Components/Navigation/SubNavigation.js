@@ -7,6 +7,7 @@ function SubNav({item}) {
 
   const showSubNav = () => setSubnav(!subNav)
   return (
+    <>
     <li className={`${item.cName}`}>
       <span className="nav-section">
         <Link to={item.path} >
@@ -23,7 +24,8 @@ function SubNav({item}) {
               null}
           </span>
       </span>
-        <ul>
+    </li>
+        <ul className="subNav-drawer">
         {subNav && item.subNav.map((item, index)=>{
         return(
           <li key={`subNav_${index}`} className="drop-down-link">
@@ -35,7 +37,7 @@ function SubNav({item}) {
         )
       })}
       </ul>
-    </li>
+    </>
   )
 }
 
