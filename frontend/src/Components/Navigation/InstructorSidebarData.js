@@ -1,7 +1,8 @@
 import React from "react"
 import {FaHome, FaGraduationCap} from "react-icons/fa"
-import {RiBookMarkLine} from "react-icons/ri"
+import {RiBookMarkLine, RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri"
 import {IoSettingsOutline} from "react-icons/io5"
+import {IoIosPaper} from "react-icons/io";
 
 
 const SidebarData = [
@@ -16,7 +17,24 @@ const SidebarData = [
     path: "/Academics",
     icon: <FaGraduationCap title="Academics"/>,
     cName: "nav-text",
+
+    iconClosed: <RiArrowDownSFill/>,
+    iconOpened: <RiArrowUpSFill/>,
+
+    subNav: [
+      {
+        title: "Phase 1",
+        path: "/Academics/Phase-1",
+        icon: <IoIosPaper />
+      },
+      {
+        title: "Phase 2",
+        path: "/Academics/Phase-2",
+        icon: <IoIosPaper />
+      },
+    ]
   },
+
   {
     title: "Gradebooks",
     path: "/Grades",

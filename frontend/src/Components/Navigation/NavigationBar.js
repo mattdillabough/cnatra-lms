@@ -1,10 +1,12 @@
-import React, {useState} from "react"
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
-import {FaBars} from "react-icons/fa"
-import {RiLogoutBoxLine} from "react-icons/ri"
-import {IoClose} from "react-icons/io5"
+import {FaBars} from "react-icons/fa";
+import {RiLogoutBoxLine} from "react-icons/ri";
+import {IoClose} from "react-icons/io5";
 import {IconContext} from "react-icons";
+
+import SubNav from "./SubNavigation";
 
 //Thinking we can conditionally load nav icons based on type of user
 import InstructorSidebarData from "./InstructorSidebarData";
@@ -19,35 +21,36 @@ function NavigationBar() {
     <>
     <IconContext.Provider value={{className: "react-icons"}}>
       <div className={sidebar? "NavigationBar open": "NavigationBar"}>
-          <Link to="#" className="menu-bars">
-            <FaBars title="Open menu" onClick={showSidebar}/>
+          <Link to="#" >
+            <FaBars className="menu-bars tray-icon" title="Open menu" onClick={showSidebar}/>
           </Link>
           {InstructorSidebarData.map((nav, idx)=>{
             return(
-                <Link key={`navIcon_${idx}`} to={nav.path}>
+                <Link key={`navIcon_${idx}`} to={nav.path} className="tray-icon">
                   {nav.icon}
                 </Link>
              )
           })}
           <Link to="/Logout">
-            <RiLogoutBoxLine title="Logout"/>
+            <RiLogoutBoxLine className="tray-icon" title="Logout"/>
           </Link>
       </div>
       <nav className={sidebar? "nav-menu active": "nav-menu"}>
         <ul className="nav-menu-items" >
-          <li className="navbar-toggle" onClick={showSidebar}>
-                <Link to="#" className="menu-bars">
-                  <IoClose title="close"/>
+          <li className="navbar-toggle" >
+                <Link to="#" className="menu-bars tray-icon">
+                  <IoClose title="close"onClick={showSidebar}/>
                 </Link>
           </li>
-              {InstructorSidebarData.map((nav, idx)=>{
+              {InstructorSidebarData.map((navItem, idx)=>{
                 return(
-                  <li key={idx} className={nav.cName} onClick={showSidebar}>
-                    <Link to={nav.path}>
-                      {nav.icon}
-                      <span>{nav.title}</span>
-                    </Link>
-                </li>
+                  <SubNav key={`navItem_${idx}`} item={navItem}/>
+                //   <li key={idx} className={nav.cName} onClick={showSidebar}>
+                //     <Link to={nav.path}>
+                //       {nav.icon}
+                //       <span>{nav.title}</span>
+                //     </Link>
+                // </li>
               )
             })}
           <li className="nav-text" onClick={showSidebar}>
