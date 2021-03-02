@@ -45,12 +45,6 @@ function NavigationBar() {
               {InstructorSidebarData.map((navItem, idx)=>{
                 return(
                   <SubNav key={`navItem_${idx}`} item={navItem}/>
-                //   <li key={idx} className={nav.cName} onClick={showSidebar}>
-                //     <Link to={nav.path}>
-                //       {nav.icon}
-                //       <span>{nav.title}</span>
-                //     </Link>
-                // </li>
               )
             })}
           <li className="nav-text" onClick={showSidebar}>
