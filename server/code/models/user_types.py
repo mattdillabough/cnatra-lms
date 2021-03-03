@@ -9,8 +9,8 @@ class UserTypeModel(BaseMixin, me.Document):
     User types
     '''
 
-    id = me.SequenceField(primary_key=True)
-    user_type = me.StringField(null=False)
+    user_type_id = me.IntField(primary_key=True)
+    user_type = me.StringField()
 
     meta = {'collection': 'user_types'}
 
