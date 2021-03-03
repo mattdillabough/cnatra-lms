@@ -202,3 +202,8 @@ a .nav-tab:hover,
 .cardgroup-title {
   width: 100%;
 }
+
+/* ----Gradesheet-----  */
+.Gradesheet {
+  background-color: palegoldenrod;
+}
