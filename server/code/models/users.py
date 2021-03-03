@@ -11,7 +11,7 @@ class UserModel(BaseMixin, me.Document):
     Users
     '''
 
-    id = me.StringField(primary_key=True, default=uuid_value)
+    user_id = me.StringField(primary_key=True, default=uuid_value)
     first_name = me.StringField()
     last_name = me.StringField()
     email_address = me.EmailField()
