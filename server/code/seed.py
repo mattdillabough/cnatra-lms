@@ -2,6 +2,7 @@
 
 # project imports
 from app import db
+from seed.stages import insert_stages
 from seed.user_types import insert_user_types
 from seed.users import insert_users
 
@@ -9,7 +10,8 @@ from seed.users import insert_users
 # ORDER OF INSERTION MATTERS
 models = [
     'user_types',
-    'users'
+    'users',
+    'stages'
 ]
 
 for model in models:
