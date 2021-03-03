@@ -3,11 +3,13 @@
 # project imports
 from app import db
 from seed.user_types import insert_user_types
+from seed.users import insert_users
 
 
 # ORDER OF INSERTION MATTERS
 models = [
-    'user_types'
+    'user_types',
+    'users'
 ]
 
 for model in models:

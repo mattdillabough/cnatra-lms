@@ -30,5 +30,5 @@ def insert_user_types():
     for user_type in user_types:
         # create record
         user_type_model = UserTypeModel(**user_type)
-        # save record
+        # insert record
         user_type_model.save()
