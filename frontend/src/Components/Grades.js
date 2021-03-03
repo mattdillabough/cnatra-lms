@@ -29,7 +29,7 @@ function Grades() {
           <div className="card">
             <label className="card-title">{mockGradeData.phaseName}</label>
             <Link to={`/Grades/${mockGradeData.phaseId}`}>
-            <button>Open Gradebook</button>
+            <button type="button">Open Gradebook</button>
             </Link>
           </div>
         </div>
@@ -40,7 +40,7 @@ function Grades() {
               <div className="card" key={`phase_${idx}`}>
                 <label className="card-title">{phase.phaseName}</label>
                 <Link to={`/Grades/${phase.phaseId}`}>
-                  <button>Open Gradebook</button>
+                  <button type="button">Open Gradebook</button>
                  </Link>
               </div>
             )

@@ -1,5 +1,6 @@
 //Event Grade sheet
-import React from "react";
+import React, {useState} from "react";
+import {RiArrowDownSFill} from "react-icons/ri";
 
 function Gradesheet(){
   const mockGradesheetData = {
@@ -96,9 +97,17 @@ function Gradesheet(){
 
   return(
     <div className="Gradesheet container">
-      <h2>[Event ID] - [Event Name]</h2>
-      <div className="container-fluid">
-
+      <h2 className="event-identifier">[Event ID] - [Event Name]</h2>
+      <div className="maneuver container-fluid">
+        <div className="maneuver-header">
+          <div>Manuver Name</div>
+          <div>Grade</div>
+          <div>MIF</div>
+          <button type="button"><RiArrowDownSFill/></button>
+        </div>
+        <div className="maneuver-body">
+          <div></div>
+        </div>
       </div>
     </div>
   )
