@@ -2,6 +2,7 @@
 
 # project imports
 from app import db
+from seed.blocks import insert_blocks
 from seed.stages import insert_stages
 from seed.user_types import insert_user_types
 from seed.users import insert_users
@@ -11,7 +12,8 @@ from seed.users import insert_users
 models = [
     'user_types',
     'users',
-    'stages'
+    'stages',
+    'blocks'
 ]
 
 for model in models:
