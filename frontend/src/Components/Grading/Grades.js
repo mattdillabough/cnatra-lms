@@ -25,7 +25,7 @@ function Grades() {
       <h2 >This is the landing page for Grades</h2>
       <div className="container">
         <div className="card-group">
-          <h3 className="cardgroup-title">Current Phase Gradebook</h3>
+          <h4 className="cardgroup-title">Current Phase Gradebook</h4>
           <div className="card">
             <label className="card-title">{mockGradeData.phaseName}</label>
             <Link to={`/Grades/${mockGradeData.phaseId}`}>
@@ -34,7 +34,7 @@ function Grades() {
           </div>
         </div>
         <div className="card-group">
-          <h3 className="cardgroup-title">Past Gradebooks</h3>
+          <h4 className="cardgroup-title">Past Gradebooks</h4>
           {mockGradeData.pastGradebooks.map((phase, idx)=>{
             return (
               <div className="card" key={`phase_${idx}`}>

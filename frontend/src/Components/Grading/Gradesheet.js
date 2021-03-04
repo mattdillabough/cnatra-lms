@@ -104,7 +104,7 @@ function Gradesheet(){
 
   return(
     <div className="Gradesheet container">
-      <h2 className="event-identifier">[Event ID] - [Event Name]</h2>
+      <h4 className="event-identifier">[Event ID] - [Event Name]</h4>
       {mockGradesheetData.maneuvers.map((maneuver)=>{
         return(
           <Maneuver key={maneuver.id} maneuver={maneuver}/>

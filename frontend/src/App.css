@@ -18,6 +18,13 @@
     display: flex;
     flex-direction: row;
   }
+
+  .App .container-fluid,
+  .App .container {
+    max-height: calc(100vh - 2em);
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 }
 
 .container-fluid {
@@ -26,8 +33,6 @@
 
 .App .container-fluid,
 .App .container {
-  max-height: calc(100vh - 2em);
-  overflow-y: auto;
   border-radius: 5px;
 }
 
@@ -214,6 +219,14 @@
 }
 
 /* ----Gradesheet-----  */
+/* For smaller screens  */
+@media (max-width: 576px) {
+  .Gradesheet {
+    width: calc(100vw - 2em);
+    margin: 0em 1em;
+  }
+}
+
 .Gradesheet {
   background-color: palegoldenrod;
   padding: 0.5em;
@@ -225,6 +238,7 @@
 .maneuver {
   background: palegreen;
   padding: 0.5em;
+  margin: 1em 0em;
 }
 
 .maneuver-header {
