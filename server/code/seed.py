@@ -13,7 +13,8 @@ models = [
     'blocks',
     'media_types',
     'events',
-    'maneuvers'
+    'maneuvers',
+    'maneuver_item_files'
 ]
 
 for model in models:
