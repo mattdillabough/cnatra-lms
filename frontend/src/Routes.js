@@ -3,8 +3,8 @@ import {withRouter, Route, Switch} from "react-router-dom";
 
 import Home from "./Components/Home";
 import Academics from "./Components/Academics";
-import Grades from "./Components/Grades";
-import Gradesheet from "./Components/Gradesheet";
+import Grades from "./Components/Grading/Grades";
+import Gradesheet from "./Components/Grading/Gradesheet";
 import Settings from "./Components/Settings";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";

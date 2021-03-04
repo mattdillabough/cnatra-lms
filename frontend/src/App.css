@@ -222,3 +222,7 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.maneuver-body {
+  background-color: rgb(119, 175, 23);
+}

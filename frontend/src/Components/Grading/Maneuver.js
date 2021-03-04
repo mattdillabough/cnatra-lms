@@ -3,17 +3,18 @@ import React from "react";
 import {RiArrowDownSFill} from "react-icons/ri";
 
 
-function Maneuver(){
+function Maneuver({maneuver}){
+  // console.log("props?", maneuver)
   return(
     <div className="maneuver container-fluid">
         <div className="maneuver-header">
-          <div>Manuver Name</div>
-          <div>Grade</div>
-          <div>MIF</div>
+          <div>{maneuver.description|| "Maneuver Name"}</div>
+          <div>{maneuver.grade||"Grade"}</div>
+          <div>{maneuver.MIF||"MIF"}</div>
           <button type="button"><RiArrowDownSFill/></button>
         </div>
         <div className="maneuver-body">
-          <div></div>
+          <div>{maneuver.comments||"No comments"}</div>
         </div>
       </div>
   )
