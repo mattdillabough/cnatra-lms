@@ -33,7 +33,7 @@ function SubNav({item}) {
         {subNav && item.subNav.map((item, index)=>{
         return(
           <li key={`subNav_${index}`} className="drop-down-link">
-            <Link to={item.path} >
+            <Link to={item.path} onClick={()=>dispatch(toggleNav())} >
               {item.icon}
               <span>{item.title}</span>
             </Link>
