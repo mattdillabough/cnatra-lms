@@ -19,8 +19,16 @@
     flex-direction: row;
   }
 }
+
 .container-fluid {
   align-items: center;
+}
+
+.App .container-fluid,
+.App .container {
+  max-height: calc(100vh - 2em);
+  overflow-y: auto;
+  border-radius: 5px;
 }
 
 /* ------Navbar--------  */
@@ -93,6 +101,7 @@
   visibility: visible;
   left: 0;
   transition: 350ms;
+  box-shadow: #10034da6 10px 0px 20px;
 }
 
 .nav-menu .react-icons {
