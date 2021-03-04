@@ -11,7 +11,8 @@ models = [
     'users',
     'stages',
     'blocks',
-    'events'
+    'events',
+    'maneuvers'
 ]
 
 for model in models:
