@@ -237,19 +237,25 @@
 }
 .maneuver {
   background: palegreen;
-  padding: 0.5em;
+  padding: 0.5em 0.5em;
   margin: 1em 0em;
 }
 
 .maneuver-header {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5em 0em;
 }
 
 .maneuver-body {
   background-color: rgb(119, 175, 23);
 }
 
+.toggle-maneuver {
+  padding: 0;
+}
+
 .toggle-maneuver:hover {
-  background: pink;
+  background: rgb(56, 190, 74);
 }
