@@ -3,6 +3,7 @@
 # project imports
 from models.blocks import BlockModel
 from models.events import EventModel
+from models.media_types import MediaTypeModel
 
 
 # records to insert
@@ -35,8 +36,9 @@ def insert_events():
 
     # loop through records
     for event in events:
-
-         # find block record
+        # find media_type record
+        event['media_type'] = MediaTypeModel.objects(media_type=event['media_type']).first()
+        # find block record
         event['block'] = BlockModel.objects(block_number=event['block']).first()
         # create record
         event_model = EventModel(**event)

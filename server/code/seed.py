@@ -11,6 +11,7 @@ models = [
     'users',
     'stages',
     'blocks',
+    'media_types',
     'events',
     'maneuvers'
 ]
