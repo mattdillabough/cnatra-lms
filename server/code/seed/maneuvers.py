@@ -17,6 +17,18 @@ maneuvers = [
     {
         'maneuver_id': 3,
         'maneuver': 'Crew Resource Management'
+    },
+    {
+        'maneuver_id': 4,
+        'maneuver': 'Cockpit Management'
+    },
+    {
+        'maneuver_id': 5,
+        'maneuver': 'Checklist Management'
+    },
+    {
+        'maneuver_id': 6,
+        'maneuver': 'Radio Procedures'
     }
 ]
 

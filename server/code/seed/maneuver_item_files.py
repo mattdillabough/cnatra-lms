@@ -25,6 +25,24 @@ maneuver_item_files = [
         'maneuver': 'Crew Resource Management',
         'grade': 3,
         'is_required': True
+    },
+    {
+        'event': 'FAM2002A',
+        'maneuver': 'Cockpit Management',
+        'grade': 3,
+        'is_required': True
+    },
+    {
+        'event': 'FAM2002A',
+        'maneuver': 'Checklist Management',
+        'grade': 3,
+        'is_required': True
+    },
+    {
+        'event': 'FAM2002A',
+        'maneuver': 'Radio Procedures',
+        'grade': 3,
+        'is_required': True
     }
 ]
 
