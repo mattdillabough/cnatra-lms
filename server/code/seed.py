@@ -2,10 +2,7 @@
 
 # project imports
 from app import db
-from seed.blocks import insert_blocks
-from seed.stages import insert_stages
-from seed.user_types import insert_user_types
-from seed.users import insert_users
+
 
 
 # ORDER OF INSERTION MATTERS
@@ -13,12 +10,23 @@ models = [
     'user_types',
     'users',
     'stages',
-    'blocks'
+    'blocks',
+    'events'
 ]
 
 for model in models:
     try:
-        exec(f"insert_{model}()")
+        model_import = f"seed.{model}"
+        model_function = f"insert_{model}"
+        exec(f"from {model_import} import {model_function}")
+        exec(f"{model_function}()")
         print(f"Added {model}")
     except Exception as e:
         print(f"{model} error: {e}")
+
+#for model in models:
+#    try:
+#        exec(f"insert_{model}()")
+#        print(f"Added {model}")
+#    except Exception as e:
+#        print(f"{model} error: {e}")
