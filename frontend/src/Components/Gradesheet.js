@@ -1,5 +1,5 @@
 //Event Grade sheet
-import React, {useState} from "react";
+import React from "react";
 import {RiArrowDownSFill} from "react-icons/ri";
 
 function Gradesheet(){
