@@ -117,7 +117,6 @@
   color: white;
   display: flex;
   flex-direction: column;
-  padding: 1em 0em 1em 1em;
   list-style: none;
 }
 
@@ -129,16 +128,16 @@
   display: flex;
   align-items: center;
   border-radius: 4px;
+  padding: 1em;
+}
+
+.nav-text a:hover {
+  background-color: teal;
 }
 
 .nav-text .nav-section,
 .nav-tab {
   display: flex;
-}
-a .nav-tab:hover,
-.nav-text:hover {
-  background-color: teal;
-  cursor: pointer;
 }
 
 .subNav-drawer {
@@ -149,6 +148,11 @@ a .nav-tab:hover,
 
 .drop-down {
   display: flex;
+  align-items: center;
+}
+
+.drop-down:hover {
+  background-color: cornflowerblue;
 }
 
 .drop-down .react-icons {
@@ -170,10 +174,6 @@ a .nav-tab:hover,
   color: white;
   display: flex;
   align-items: center;
-}
-
-.drop-down .react-icons:hover {
-  background-color: cornflowerblue;
 }
 
 .drop-down-link:hover {
