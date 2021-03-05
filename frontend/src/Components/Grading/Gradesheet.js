@@ -7,7 +7,7 @@ import Maneuver from "./Maneuver";
 function Gradesheet(){
   const mockGradesheetData = {
     eventId: "H3l1c0p73r",
-    title: "Helicopter Procedures",
+    title: "Helicopter Flight",
     date: "02-Mar-21",
     hours: 5,
     lessonGrade: "pass",
@@ -104,7 +104,9 @@ function Gradesheet(){
 
   return(
     <div className="Gradesheet container">
-      <h4 className="event-identifier">[Event ID] - [Event Name]</h4>
+      <h4 className="event-identifier">{`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}`||"[Event ID] - [Event Name]"}</h4>
+     <div>Event Details</div>
+     <div>Will also likely be a drop-down...Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.</div>
       {mockGradesheetData.maneuvers.map((maneuver)=>{
         return(
           <Maneuver key={maneuver.id} maneuver={maneuver}/>

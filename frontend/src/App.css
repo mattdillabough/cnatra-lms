@@ -248,6 +248,10 @@
   padding: 0.5em 0em;
 }
 
+.maneuver-header.row {
+  width: 100%;
+}
+
 .maneuver-body {
   background-color: rgb(167 194 216);
 }
@@ -257,5 +261,5 @@
 }
 
 .toggle-maneuver:hover {
-  background: rgb(56, 190, 74);
+  background: cornflowerblue;
 }
