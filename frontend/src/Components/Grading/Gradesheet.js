@@ -142,7 +142,7 @@ function Gradesheet() {
             <div>
               {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
             </div>
-            <div className="col-1">
+            <div className="col-1 event-dropdown">
               <button
                 type="button"
                 className="toggle-dropdown btn"
