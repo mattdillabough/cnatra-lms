@@ -219,6 +219,7 @@
 }
 
 /* ----Gradesheet-----  */
+
 /* For smaller screens  */
 @media (max-width: 576px) {
   .Gradesheet {
@@ -232,20 +233,37 @@
   padding: 0.5em;
 }
 
+.student-name {
+  background-color: black;
+  color: white;
+  text-align: left;
+  padding-left: 0.5em;
+}
 .event-identifier {
   text-align: left;
+  border-bottom: 2px solid black;
 }
 
-/* .gradesheet-details {
+.gradesheet-submission {
+  display: flex;
+  justify-content: space-between;
+  padding: 0em 0.5em;
+}
 
-} */
+.positive-status {
+  background-color: lime;
+}
+
+.pending-status {
+  background-color: orange;
+}
 
 .details-header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 0.5em 0em;
-  background-color: rgb(98, 132, 243);
+  /* background-color: rgb(98, 132, 243); */
 }
 
 /* ------Maneuver-----  */
