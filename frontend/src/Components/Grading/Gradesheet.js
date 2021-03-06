@@ -1,10 +1,15 @@
 //Event Grade sheet
-import React from "react";
-// import {RiArrowDownSFill} from "react-icons/ri";
+import React, { useState } from "react";
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
 import Maneuver from "./Maneuver";
 
 function Gradesheet() {
+  const [dropdown, setDropDown] = useState(false);
+  const toggleDropDown = () => {
+    setDropDown(!dropdown);
+  };
+
   const mockGradesheetData = {
     eventId: "H3l1c0p73r",
     title: "Helicopter Flight",
@@ -134,9 +139,31 @@ function Gradesheet() {
             }
             title="Event Details"
           >
-            {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
+            <div>
+              {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
+            </div>
+            <div className="col-1">
+              <button
+                type="button"
+                className="toggle-dropdown btn"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseEvent"
+                aria-expanded="false"
+                aria-controls="collapse"
+                onClick={toggleDropDown}
+              >
+                {dropdown ? <RiArrowUpSFill /> : <RiArrowDownSFill />}
+              </button>
+            </div>
           </div>
-          <div className="details-body">
+          <div
+            className={
+              dropdown ? "details-body collapse show" : "details-body collapse"
+            }
+            id="collapseEvent"
+            aria-expanded="false"
+            aria-controls="collapse"
+          >
             Will also likely be a drop-down...Suspendisse at gravida tellus.
             Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at
             risus in luctus. In hac habitasse platea dictumst. Etiam sit amet

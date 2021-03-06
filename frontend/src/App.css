@@ -266,6 +266,10 @@
   /* background-color: rgb(98, 132, 243); */
 }
 
+.toggle-dropdown {
+  padding: 0;
+}
+
 /* ------Maneuver-----  */
 .maneuver {
   background: #bbd2d9;
@@ -287,10 +291,6 @@
 
 .maneuver-body {
   background-color: rgb(167 194 216);
-}
-
-.toggle-maneuver {
-  padding: 0;
 }
 
 .toggle-maneuver:hover {

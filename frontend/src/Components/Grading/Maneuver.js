@@ -28,7 +28,7 @@ function Maneuver({ maneuver }) {
         <div className="col-1">
           <button
             type="button"
-            className="toggle-maneuver btn"
+            className="toggle-dropdown btn"
             data-bs-toggle="collapse"
             data-bs-target="#collapseExample"
             aria-expanded="false"
