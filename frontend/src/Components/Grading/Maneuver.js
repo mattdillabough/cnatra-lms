@@ -9,19 +9,34 @@ function Maneuver({ maneuver }) {
     setDropDown(!dropdown);
   };
 
+  const gradeValues = {
+    1: "N - Not graded",
+    2: "U - Unsafe",
+    3: "F - Fair",
+    4: "G - Good",
+    5: "E - Excellent",
+  };
+
   return (
-    <div className="maneuver container-fluid">
+    <div
+      className={
+        maneuver.grade >= maneuver.MIF
+          ? "maneuver container-fluid"
+          : "maneuver container-fluid below-MIF"
+      }
+    >
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
             <div className="col-sm-12 col-md-8" title="Maneuver Description">
               {maneuver.description || "Maneuver Name"}
             </div>
-            <div className="col-6 col-md-2" title="Maneuver Grade">
+            <div className="col-6 col-md-2" title={gradeValues[maneuver.grade]}>
               {`Grade: ${maneuver.grade}` || "Grade"}
             </div>
             <div className="col-6 col-md-2" title="Maneuver Item File">
               {`MIF: ${maneuver.MIF}` || "MIF"}
+              {maneuver.MIF > 1 ? "+" : ""}
             </div>
           </div>
         </div>

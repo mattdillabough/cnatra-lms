@@ -9,7 +9,7 @@
   min-width: 100vw;
   text-align: center;
   padding: 0;
-  background: lightblue;
+  background: #aecce6;
 }
 
 /* larger than tablet view  */
@@ -280,10 +280,11 @@
   background: white;
   padding: 0em 0.45em;
   box-shadow: grey 1px 1px 3px;
+  transition: background-color 0.25s;
 }
 
 .event-dropdown .toggle-dropdown:hover {
-  background: linear-gradient(352deg, #fffffff7, #ffffff7d);
+  background-color: #2525257d;
 }
 
 .event-dropdown .toggle-dropdown:active {
@@ -292,7 +293,7 @@
 
 /* ------Maneuver-----  */
 .maneuver {
-  background: #bbd2d9;
+  background: #7f7b824f;
   padding: 0.5em 0.5em;
   margin: 1em 0em;
 }
@@ -309,10 +310,22 @@
   margin: 0;
 }
 
+.maneuver-header .toggle-dropdown {
+  transition: background-color 0.25s;
+}
+
+.maneuver-header .toggle-dropdown:hover {
+  background-color: grey;
+}
+
 .maneuver-body {
-  background-color: rgb(167 194 216);
+  background-color: #a9bccb;
 }
 
 .toggle-maneuver:hover {
   background: cornflowerblue;
+}
+
+.below-MIF {
+  border: 3.5px yellow groove;
 }
