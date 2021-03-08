@@ -1,6 +1,6 @@
 export const mockGradesheetData = {
-  eventId: "H3l1c0p73r",
-  title: "Helicopter Flight",
+  eventId: "N4301",
+  title: "Low-Level Navigation Flight 1",
   date: "02-Mar-21",
   hours: 5,
   lessonGrade: "Pass",
@@ -60,7 +60,8 @@ export const mockGradesheetData = {
       typeNo: "",
     },
   },
-  comments: "Student was amazing!",
+  comments:
+    "One of the best N4301's I've seen for the navigation portion! SMA followed process at every CP and communicated well with IP his plan of attack before arriving at each CP including fuel and instrument checks.Understood a/s g/s corrections to arrive within 3 seconds overall timing. Nice!",
   maneuvers: [
     {
       id: 1,
@@ -78,7 +79,7 @@ export const mockGradesheetData = {
     },
     {
       id: 3,
-      description: "No Hover Takeoff",
+      description: "Headwork / Situational Awareness",
       MIF: "4+",
       grade: "F", //corresponds to 3
       comments:
@@ -86,7 +87,7 @@ export const mockGradesheetData = {
     },
     {
       id: 4,
-      description: "Low-level Navigation",
+      description: "Basic Air Work",
       MIF: "4+",
       grade: "E", //corresponds to 5
       comments:
@@ -94,11 +95,121 @@ export const mockGradesheetData = {
     },
     {
       id: 5,
+      description: "Flight Planning",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 6,
+      description: "Ground Operations",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 7,
+      description: "CRM",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 8,
+      description: "Cockpit Management",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 9,
+      description: "Radio Procedures",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 10,
+      description: "Vertical Takeoff",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 11,
+      description: "No-hover Takeoff",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 12,
+      description: "Transition to Forward Flight",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 13,
+      description: "Groundspeed / Fuel Checks",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 14,
+      description: "Normal Approach",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 15,
+      description: "360-, 180-, 90-Degreee Approach",
+      MIF: "3+",
+      grade: "G",
+      comments:
+        "Was very smooth on the controls but just be sure to work that airspeed a little more in the turn to arrive on 60 knots at the 90 for a solid final on parameters 45-55 knots. Had a tendency to roll on final a little slow (35 kias) but then carry too much speed at the bottom. Set the attitude once on final and then control descent with collective. Will need to keep positive pressure on the collective through ground effect to avoid getting into a hover taxi.",
+    },
+    {
+      id: 16,
+      description: "Low-level Navigation",
+      MIF: "3+",
+      grade: "E",
+      comments:
+        "Maintained exceptional situation awareness through entire route of flight. Never allowed course to deviate from intended path and backed IP on flight instruments. Fed the plan of attack before each CP with clear instructions. Gave distant steer then also gave intermediate CP's along the way.",
+    },
+    {
+      id: 17,
+      description: "Timing",
+      MIF: "4+",
+      grade: "E",
+      comments: "Within 3 sec overall timing!",
+    },
+    {
+      id: 18,
+      description: "Vertical Landing",
+      MIF: "4+",
+      grade: "G",
+      comments:
+        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+    },
+    {
+      id: 19,
       description: "Special Syllabus Requirements",
       MIF: "1",
       grade: "N", //corresponds to 1 (not graded)
-      comments:
-        "Nulla at congue orci. Nulla ut leo ipsum. Sed fringilla libero a magna aliquet sodales. Nam feugiat quam vitae congue hendrerit. Suspendisse ac eros euismod nisi lacinia ultricies. Ut vel tempus justo, eu consectetur sapien. Suspendisse at gravida tellus. Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at risus in luctus. In hac habitasse platea dictumst. Etiam sit amet leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget ex convallis, feugiat neque eget, scelerisque orci. Nunc at vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui, a luctus velit tincidunt sit amet.",
+      comments: "IP demo'd brief and first 4 CP's",
     },
   ],
 };

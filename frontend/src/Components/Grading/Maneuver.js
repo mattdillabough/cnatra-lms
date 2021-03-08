@@ -14,13 +14,13 @@ function Maneuver({ maneuver }) {
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
-            <div className="col-sm-12 col-md-8">
+            <div className="col-sm-12 col-md-8" title="Maneuver Description">
               {maneuver.description || "Maneuver Name"}
             </div>
-            <div className="col-6 col-md-2">
+            <div className="col-6 col-md-2" title="Maneuver Grade">
               {`Grade: ${maneuver.grade}` || "Grade"}
             </div>
-            <div className="col-6 col-md-2">
+            <div className="col-6 col-md-2" title="Maneuver Item File">
               {`MIF: ${maneuver.MIF}` || "MIF"}
             </div>
           </div>
@@ -47,7 +47,9 @@ function Maneuver({ maneuver }) {
         aria-expanded="false"
         aria-controls="collapseExample"
       >
-        <div>{maneuver.comments || "No comments"}</div>
+        <div title="Maneuver comments">
+          {maneuver.comments || "No comments"}
+        </div>
       </div>
     </div>
   );

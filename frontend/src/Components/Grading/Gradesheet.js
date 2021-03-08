@@ -14,26 +14,32 @@ function Gradesheet() {
   return (
     <>
       <div className="Gradesheet container">
-        <h2 className="student-name">{`${mockGradesheetData.student.rank} ${mockGradesheetData.student.name}`}</h2>
-        <h4 className="event-identifier">
+        <h2
+          className="student-name"
+          title="Student Name"
+        >{`${mockGradesheetData.student.rank} ${mockGradesheetData.student.name}`}</h2>
+        <h4 className="event-identifier" title="Event Identifier and title">
           {`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}` ||
             "[Event ID] - [Event Name]"}
         </h4>
         <div className="gradesheet-submission">
-          <div>{mockGradesheetData.date}</div>
-          <div>
+          <div title="Date of event">{mockGradesheetData.date}</div>
+          <div title="Gradesheet submitter">
             <strong>Submitted by: </strong>
             {`${mockGradesheetData.instructor.rank} ${mockGradesheetData.instructor.name}`}
           </div>
         </div>
-        <div className="gradesheet-details container-fluid">
+        <div
+          className="gradesheet-details container-fluid"
+          title="Event Details"
+        >
           <div
             className={
               mockGradesheetData.status === "Complete"
                 ? "details-header positive-status"
                 : "details-header pending-status"
             }
-            title="Event Details"
+            title="Event Status | Grade"
           >
             <div>
               {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
