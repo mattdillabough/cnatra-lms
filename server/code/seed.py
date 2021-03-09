@@ -14,7 +14,7 @@ models = [
     , 'media_types'
     , 'events'
     , 'maneuvers'
-    #'maneuver_item_files'
+    , 'maneuver_item_files'
 ]
 
 for model in models:
