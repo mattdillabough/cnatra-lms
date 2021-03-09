@@ -7,14 +7,14 @@ from app import db
 
 # ORDER OF INSERTION MATTERS
 models = [
-    'user_types',
-    'users',
-    'stages',
-    'blocks',
-    'media_types',
-    'events',
-    'maneuvers',
-    'maneuver_item_files'
+    'user_types'
+    , 'users'
+    #'stages',
+    #'blocks',
+    #'media_types',
+    #'events',
+    #'maneuvers',
+    #'maneuver_item_files'
 ]
 
 for model in models:

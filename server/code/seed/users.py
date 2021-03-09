@@ -8,39 +8,18 @@ from models.users import UserModel
 # reords to insert
 users = [
     {
-        'first_name': 'Victoria',
-        'last_name': 'Lee',
-        'email_address': 'victoria@lee.com',
-        'password': 'password',
-        'user_type': 'student'
-    },
-    {
-        'first_name': 'Justin',
-        'last_name': 'Devies',
-        'email_address': 'justin@devies.com',
-        'password': 'password',
-        'user_type': 'student'
-    },
-    {
-        'first_name': 'Aneesh',
-        'last_name': 'Kodali',
-        'email_address': 'aneesh@kodali.com',
-        'password': 'password',
-        'user_type': 'student'
-    },
-    {
-        'first_name': 'Danny',
+        'first_name': 'Daniel',
         'last_name': 'Canham',
-        'email_address': 'danny@canham.com',
+        'email_address': 'daniel@canham.com',
+        'password': 'password',
+        'user_type': 'student'
+    },
+    {
+        'first_name': 'Greg',
+        'last_name': 'Sharp',
+        'email_address': 'greg@sharp.com',
         'password': 'password',
         'user_type': 'instructor'
-    },
-    {
-        'first_name': 'Joshua',
-        'last_name': 'Strand',
-        'email_address': 'joshua@strand.com',
-        'password': 'password',
-        'user_type': 'administrator'
     }
 ]
 
