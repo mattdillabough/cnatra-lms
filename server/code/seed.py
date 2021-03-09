@@ -10,7 +10,7 @@ models = [
       'user_types'
     , 'users'
     , 'stages'
-    #'blocks',
+    , 'blocks'
     #'media_types',
     #'events',
     #'maneuvers',

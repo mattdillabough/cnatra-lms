@@ -8,10 +8,10 @@ from models.stages import StageModel
 # records to insert
 blocks = [
     {
-        'block_number': 'FAM20',
-        'title': 'Cockpit Procedures',
-        'block_in_stage': 1,
-        'stage': 'FAM'
+        'block_number': 'N43',
+        'title': 'Low-Level Navigation',
+        'block_in_stage': 4,
+        'stage': 'N'
     }
 ]
 
