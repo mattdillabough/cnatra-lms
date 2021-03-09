@@ -16,7 +16,7 @@ class UserModel(BaseMixin, me.Document):
     last_name = me.StringField()
     email_address = me.EmailField()
     password = me.StringField()
-    user_type = me.ReferenceField(UserTypeModel)
+    user_type = me.ReferenceField(UserTypeModel, required=True)
 
     meta = {'collection': 'users'}
 

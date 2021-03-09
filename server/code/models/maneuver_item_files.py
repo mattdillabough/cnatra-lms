@@ -12,7 +12,7 @@ class ManeuverItemFileModel(BaseMixin, me.Document):
     '''
 
     maneuver_item_file_id = me.StringField(primary_key=True, default=uuid_value)
-    event = me.ReferenceField(EventModel)
+    event = me.ReferenceField(EventModel, required=True)
 
     meta = {'collection': 'maneuver_item_files'}
 

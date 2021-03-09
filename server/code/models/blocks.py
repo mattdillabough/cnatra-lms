@@ -16,6 +16,6 @@ class BlockModel(BaseMixin, me.Document):
     block_number = me.StringField()
     title = me.StringField()
     block_in_stage = me.IntField()
-    stage = me.ReferenceField(StageModel)
+    stage = me.ReferenceField(StageModel, required=True)
 
     meta = {'collection': 'blocks'}
