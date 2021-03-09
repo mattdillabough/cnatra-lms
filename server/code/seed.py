@@ -7,9 +7,9 @@ from app import db
 
 # ORDER OF INSERTION MATTERS
 models = [
-    'user_types'
+      'user_types'
     , 'users'
-    #'stages',
+    , 'stages'
     #'blocks',
     #'media_types',
     #'events',
