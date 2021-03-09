@@ -275,6 +275,10 @@
   position: absolute;
   right: 2em;
 }
+.details-body .row {
+  background-color: #e7e0e0;
+  margin: 0;
+}
 
 .event-dropdown .toggle-dropdown {
   background: white;

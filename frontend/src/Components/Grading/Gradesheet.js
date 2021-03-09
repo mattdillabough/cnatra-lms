@@ -66,14 +66,61 @@ function Gradesheet() {
             aria-expanded="false"
             aria-controls="collapse"
           >
-            Will also likely be a drop-down...Suspendisse at gravida tellus.
-            Vivamus placerat maximus ligula nec facilisis. Etiam suscipit at
-            risus in luctus. In hac habitasse platea dictumst. Etiam sit amet
-            leo et sapien hendrerit fringilla. Sed facilisis condimentum odio in
-            luctus. Suspendisse tempus malesuada felis ut volutpat. Etiam eget
-            ex convallis, feugiat neque eget, scelerisque orci. Nunc at
-            vestibulum tellus, quis mattis ex. Pellentesque suscipit metus dui,
-            a luctus velit tincidunt sit amet.
+            <div className="row">
+              <div className="col">
+                <div>Flight Lesson</div>
+                <div>Start Date / Time: </div>
+                <div>Duration: </div>
+                <div>Details</div>
+                <div>Modifier: </div>
+                <div>Instruction: </div>
+                <div>Cleared for Solo:</div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      id="clear-solo-N/A"
+                      name="clear-for-solo"
+                      value="N/A"
+                    ></input>
+                    N/A
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      id="clear-solo-Yes"
+                      name="clear-for-solo"
+                      value="Yes"
+                    ></input>
+                    Yes
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      id="clear-solo-No"
+                      name="clear-for-solo"
+                      value="No"
+                    ></input>
+                    No
+                  </label>
+                </div>
+              </div>
+              <div className="col">
+                <div>Writeups upload: </div>
+                <div>Reason:</div>
+                <div>Activities: </div>
+                <div>Miscellaneous: </div>
+                <div>Flight Record: </div>
+                <div>Winds: </div>
+                <div>Weather: </div>
+                <div>Overall Grade: </div>
+                <div>Progression: </div>
+              </div>
+              <div className="col-12">
+                <div>Event Comments: </div>
+                <div>{mockGradesheetData.comments}</div>
+              </div>
+            </div>
           </div>
         </div>
         {mockGradesheetData.maneuvers.map((maneuver) => {
