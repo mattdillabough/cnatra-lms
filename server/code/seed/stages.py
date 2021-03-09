@@ -7,8 +7,8 @@ from models.stages import StageModel
 # records to insert
 stages = [
     {
-        'stage_id': 'N',
-        'stage': 'Navigation'
+        'stage': 'N',
+        'stage_name': 'Navigation'
     }
 ]
 

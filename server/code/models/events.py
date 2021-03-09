@@ -3,6 +3,7 @@ import mongoengine as me
 
 # project imports
 from models.blocks import BlockModel
+from models.default_values import uuid_value
 from models.media_types import MediaTypeModel
 from models.shared.base_mixin import BaseMixin
 
@@ -12,12 +13,12 @@ class EventModel(BaseMixin, me.Document):
     Events
     '''
 
-    event_code = me.StringField(primary_key=True)
+    event_id = me.StringField(primary_key=True, default=uuid_value)
+    event_code = me.StringField()
     media_type = me.ReferenceField(MediaTypeModel)
     title = me.StringField()
     hours = me.FloatField()
     event_in_block = me.IntField()
-    is_last_event_in_block = me.BooleanField()
     block = me.ReferenceField(BlockModel)
 
     meta = {'collection': 'events'}

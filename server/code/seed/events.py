@@ -9,22 +9,20 @@ from models.media_types import MediaTypeModel
 # records to insert
 events = [
     {
-        'event_code': 'FAM2001A',
-        'media_type': 'CPT (TH57B/FTD-6)',
-        'title': 'Cockpit Procedures',
-        'hours': 1.3,
+        'event_code': 'N4301',
+        'media_type': 'TH-57C',
+        'title': 'Low-Level Navigation Flight 1',
+        'hours': 1.8,
         'event_in_block': 1,
-        'is_last_event_in_block': False,
-        'block': 'FAM20'
+        'block': 'N43'
     },
     {
-        'event_code': 'FAM2002A',
-        'media_type': 'CPT (TH57B/FTD-6)',
-        'title': 'Cockpit Procedures',
-        'hours': 1.3,
+        'event_code': 'N4302',
+        'media_type': 'TH-57C',
+        'title': 'Low-Level Navigation Flight 2',
+        'hours': 1.8,
         'event_in_block': 2,
-        'is_last_event_in_block': True,
-        'block': 'FAM20'
+        'block': 'N43'
     }
 ]
 

@@ -11,8 +11,8 @@ models = [
     , 'users'
     , 'stages'
     , 'blocks'
-    #'media_types',
-    #'events',
+    , 'media_types'
+    , 'events'
     #'maneuvers',
     #'maneuver_item_files'
 ]

@@ -8,7 +8,7 @@ from models.media_types import MediaTypeModel
 media_types = [
     {
         'media_type_id': 1,
-        'media_type': 'CPT (TH57B/FTD-6)'
+        'media_type': 'TH-57C'
     }
 ]
 
