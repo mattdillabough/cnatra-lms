@@ -3,6 +3,7 @@
 # python imports
 from flask import Flask
 from flask_mongoengine import MongoEngine
+from flask_restful import Api
 
 # project imports
 
@@ -14,6 +15,9 @@ app = Flask(__name__)
 
 # configure app
 app.config.from_object('config.DevConfig')
+
+# configure flask_restful
+api = Api(app)
 
 # connect db
 db = MongoEngine(app)
