@@ -16,6 +16,7 @@ models = [
     , 'maneuvers'
     , 'maneuver_item_files'
     , 'maneuver_item_file_maneuvers'
+    , 'grade_sheets'
 ]
 
 for model in models:
