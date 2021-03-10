@@ -12,7 +12,7 @@ class GradeSheetModel(BaseMixin, me.Document):
     Grade sheets
     '''
 
-    gradesheet_id = me.StringField(primary_key=True, default=uuid_value)
+    grade_sheet_id = me.StringField(primary_key=True, default=uuid_value)
     student = me.ReferenceField(UserModel, required=True)
     instructor = me.ReferenceField(UserModel, required=True)
     event = me.ReferenceField(EventModel, required=True)
