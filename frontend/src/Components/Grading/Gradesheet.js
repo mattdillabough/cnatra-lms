@@ -67,57 +67,59 @@ function Gradesheet() {
             aria-controls="collapse"
           >
             <div className="row">
-              <div className="col">
-                <div>Flight Lesson</div>
-                <div>Start Date / Time: </div>
-                <div>Duration: </div>
-                <div>Details</div>
-                <div>Modifier: </div>
-                <div>Instruction: </div>
-                <div>Cleared for Solo:</div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      id="clear-solo-N/A"
-                      name="clear-for-solo"
-                      value="N/A"
-                    ></input>
-                    N/A
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      id="clear-solo-Yes"
-                      name="clear-for-solo"
-                      value="Yes"
-                    ></input>
-                    Yes
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      id="clear-solo-No"
-                      name="clear-for-solo"
-                      value="No"
-                    ></input>
-                    No
-                  </label>
+              <div className="col-12">
+                <h5>Flight Lesson</h5>
+                <div className="event-details-section">
+                  <div>Start Date / Time: </div>
+                  <div>Duration: </div>
+                </div>
+                <h5>Details</h5>
+                <div className="event-details-section">
+                  <div>Modifier: </div>
+                  <div>Instruction: </div>
+                  <div>Cleared for Solo:</div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        id="clear-solo-N/A"
+                        name="clear-for-solo"
+                        value="N/A"
+                      ></input>
+                      N/A
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        id="clear-solo-Yes"
+                        name="clear-for-solo"
+                        value="Yes"
+                      ></input>
+                      Yes
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        id="clear-solo-No"
+                        name="clear-for-solo"
+                        value="No"
+                      ></input>
+                      No
+                    </label>
+                  </div>
+                  <div>Writeups upload: </div>
+                  <div>Reason:</div>
+                  <div>Activities: </div>
+                  <div>Miscellaneous: </div>
+                  <div>Flight Record: </div>
+                  <div>Winds: </div>
+                  <div>Weather: </div>
+                  <div>Overall Grade: </div>
+                  <div>Progression: </div>
                 </div>
               </div>
-              <div className="col">
-                <div>Writeups upload: </div>
-                <div>Reason:</div>
-                <div>Activities: </div>
-                <div>Miscellaneous: </div>
-                <div>Flight Record: </div>
-                <div>Winds: </div>
-                <div>Weather: </div>
-                <div>Overall Grade: </div>
-                <div>Progression: </div>
-              </div>
               <div className="col-12">
-                <div>Event Comments: </div>
+                <h5>Event Comments: </h5>
                 <div>{mockGradesheetData.comments}</div>
               </div>
             </div>

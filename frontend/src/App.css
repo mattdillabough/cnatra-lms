@@ -278,6 +278,7 @@
 .details-body .row {
   background-color: #e7e0e0;
   margin: 0;
+  text-align: left;
 }
 
 .event-dropdown .toggle-dropdown {
@@ -293,6 +294,15 @@
 
 .event-dropdown .toggle-dropdown:active {
   background: #1a171770;
+}
+
+/* Larger than tablet views */
+@media (min-width: 576px) {
+  .event-details-section {
+    display: grid;
+    grid-template-areas: "a a";
+    grid-auto-rows: 1fr 1fr;
+  }
 }
 
 /* ------Maneuver-----  */
