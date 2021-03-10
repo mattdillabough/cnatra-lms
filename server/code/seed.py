@@ -15,7 +15,6 @@ models = [
     , 'events'
     , 'maneuvers'
     , 'maneuver_item_files'
-    , 'maneuver_item_file_maneuvers'
     , 'grade_sheets'
     , 'grade_sheet_maneuvers'
 ]
