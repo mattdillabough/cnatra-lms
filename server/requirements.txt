@@ -11,5 +11,6 @@ MarkupSafe==1.1.1
 mongoengine==0.22.1
 pymongo==3.11.3
 python-dotenv==0.15.0
+uuid==1.30
 Werkzeug==1.0.1
 WTForms==2.3.3
