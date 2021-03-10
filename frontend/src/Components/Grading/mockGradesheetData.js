@@ -3,9 +3,10 @@ export const mockGradesheetData = {
   title: "Low-Level Navigation Flight 1",
   date: "02-Mar-21",
   hours: 5,
+  score: "",
   lessonGrade: "Pass",
   status: "Complete",
-  type: "flight",
+  media: "Flight",
   deviceType: "TH-57C",
   student: {
     name: "Avatar, Aang",
