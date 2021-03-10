@@ -25,7 +25,7 @@ def insert_blocks():
     for block in blocks:
 
          # find stage record
-        block['stage'] = StageModel.objects(stage_id=block['stage']).first()
+        block['stage'] = StageModel.objects(stage=block['stage']).first()
         # create record
         block_model = BlockModel(**block)
         # insert record
