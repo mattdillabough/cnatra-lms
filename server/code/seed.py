@@ -15,6 +15,7 @@ models = [
     , 'events'
     , 'maneuvers'
     , 'maneuver_item_files'
+    , 'maneuver_item_file_maneuvers'
 ]
 
 for model in models:

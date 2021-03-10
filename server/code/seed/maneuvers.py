@@ -40,11 +40,11 @@ maneuvers = [
     },
     {
         'maneuver_id': 9,
-        'maneuver': 'RADIO_PROCEDURES'
+        'maneuver': 'RADIO PROCEDURES'
     },
     {
         'maneuver_id': 10,
-        'maneuver': 'VERTICAL_TAKEOFF'
+        'maneuver': 'VERTICAL TAKEOFF'
     },
     {
         'maneuver_id': 11,
