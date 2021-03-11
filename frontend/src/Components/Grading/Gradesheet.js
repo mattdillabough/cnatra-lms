@@ -6,22 +6,33 @@ import Maneuver from "./Maneuver";
 import { mockGradesheetData } from "./mockGradesheetData";
 
 //To simulate different user types
-const user = "instructor";
+const user = "student";
 
 function Gradesheet() {
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
+
+  const [edit, setEditMode] = useState(false);
+  const toggleEditMode = () => setEditMode(!edit);
+
   //Would likely check state or local storage for user type
   const elementType = user === "instructor" ? "input" : "div";
   //TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
-  function TOI({ labeltxt, type, defaultValue, editable = false, ...props }) {
+  function TOI({
+    labeltxt,
+    type,
+    defaultValue,
+    displayVal,
+    editable = false,
+    ...props
+  }) {
     return (
       <label>
         {labeltxt}
         {elementType === "div" ? (
-          <div>{props.value}</div>
+          <div>{displayVal}</div>
         ) : type === "textarea" ? (
           <textarea
             disabled={!editable}
@@ -43,6 +54,9 @@ function Gradesheet() {
   return (
     <>
       <div className="Gradesheet container">
+        <button type="button" onClick={toggleEditMode}>
+          {edit === true ? "View" : "Edit"}
+        </button>
         <h2
           className="student-name"
           title="Student Name"
@@ -111,23 +125,26 @@ function Gradesheet() {
                   <TOI
                     className="constrain-input"
                     labeltxt="Instructor: "
-                    placeholder={mockGradesheetData.instructor.name}
-                    editable={true}
+                    defaultValue={mockGradesheetData.instructor.name}
+                    editable={edit}
+                    displayVal={mockGradesheetData.instructor.name}
                   />
                   <TOI
                     className="constrain-input"
                     labeltxt="Start Date / Time: "
                     defaultValue={mockGradesheetData.date}
                     type="datetime-local"
-                    editable={true}
+                    editable={edit}
+                    displayVal={mockGradesheetData.date}
                   />
                   <TOI
                     className="constrain-input"
                     labeltxt="Duration: "
-                    placeholder={mockGradesheetData.flightTimelog.fltDur}
+                    defaultValue={mockGradesheetData.flightTimelog.fltDur}
                     type="number"
                     step={0.1}
-                    editable={true}
+                    editable={edit}
+                    displayVal={mockGradesheetData.flightTimelog.fltDur}
                   />
                 </div>
                 <h5>Details</h5>
@@ -141,33 +158,25 @@ function Gradesheet() {
                   <label>
                     Cleared for Solo:
                     <div>
-                      <label>
-                        <input
-                          type="radio"
-                          id="clear-solo-N/A"
-                          name="clear-for-solo"
-                          value="N/A"
-                        ></input>
-                        N/A
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          id="clear-solo-Yes"
-                          name="clear-for-solo"
-                          value="Yes"
-                        ></input>
-                        Yes
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          id="clear-solo-No"
-                          name="clear-for-solo"
-                          value="No"
-                        ></input>
-                        No
-                      </label>
+                      {["N/a", "Yes", "No"].map((option, idx) => {
+                        return (
+                          <label key={`COS_${idx}`}>
+                            {option}
+                            <input
+                              type="radio"
+                              id={option}
+                              name="clear-for-solo"
+                              value={option}
+                              disabled={!edit}
+                              checked={
+                                mockGradesheetData.clearedForSolo === option
+                                  ? true
+                                  : false
+                              }
+                            />
+                          </label>
+                        );
+                      })}
                     </div>
                   </label>
                   <div>Writeups upload: </div>
@@ -188,7 +197,8 @@ function Gradesheet() {
                   rows="5"
                   defaultValue={mockGradesheetData.comments}
                   autoComplete="on"
-                  editable={true}
+                  editable={edit}
+                  displayVal={mockGradesheetData.comments}
                 />
               </div>
             </div>

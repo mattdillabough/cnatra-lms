@@ -8,6 +8,7 @@ export const mockGradesheetData = {
   status: "Complete",
   media: "Flight",
   deviceType: "TH-57C",
+  clearedForSolo: "Yes",
   student: {
     name: "Avatar, Aang",
     rank: "1st Lt",
