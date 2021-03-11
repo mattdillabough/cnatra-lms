@@ -1,7 +1,7 @@
 export const mockGradesheetData = {
   eventId: "N4301",
   title: "Low-Level Navigation Flight 1",
-  date: "02-Mar-21",
+  date: "2011-03-02T17:00",
   hours: 5,
   score: "",
   lessonGrade: "Pass",

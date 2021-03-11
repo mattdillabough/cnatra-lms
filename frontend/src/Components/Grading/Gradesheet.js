@@ -5,11 +5,41 @@ import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import Maneuver from "./Maneuver";
 import { mockGradesheetData } from "./mockGradesheetData";
 
+//To simulate different user types
+const user = "instructor";
+
 function Gradesheet() {
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
+  //Would likely check state or local storage for user type
+  const elementType = user === "instructor" ? "input" : "div";
+  //text or input
+  function TOI({
+    labeltxt,
+    prevVal,
+    val,
+    editable = false,
+    inputtype = "text",
+    pattern,
+  }) {
+    return (
+      <label>
+        {labeltxt}
+        {elementType === "div" ? (
+          <div>{val}</div>
+        ) : (
+          <input
+            type={inputtype}
+            placeholder={prevVal}
+            defaultValue={val}
+            disabled={!editable}
+          />
+        )}
+      </label>
+    );
+  }
 
   return (
     <>
@@ -70,43 +100,61 @@ function Gradesheet() {
               <div className="col-12">
                 <h5>Flight Lesson</h5>
                 <div className="event-details-section">
-                  <div>Start Date / Time: </div>
-                  <div>Duration: </div>
+                  <TOI
+                    labeltxt={"Instructor: "}
+                    prevVal={mockGradesheetData.instructor.name}
+                  />
+                  <TOI
+                    labeltxt={"Start Date / Time: "}
+                    val={mockGradesheetData.date}
+                    inputtype="datetime-local"
+                    editable={true}
+                  />
+                  <label>
+                    Duration:
+                    <div>5 hours</div>
+                  </label>
                 </div>
                 <h5>Details</h5>
                 <div className="event-details-section">
-                  <div>Modifier: </div>
-                  <div>Instruction: </div>
-                  <div>Cleared for Solo:</div>
-                  <div>
-                    <label>
-                      <input
-                        type="radio"
-                        id="clear-solo-N/A"
-                        name="clear-for-solo"
-                        value="N/A"
-                      ></input>
-                      N/A
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        id="clear-solo-Yes"
-                        name="clear-for-solo"
-                        value="Yes"
-                      ></input>
-                      Yes
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        id="clear-solo-No"
-                        name="clear-for-solo"
-                        value="No"
-                      ></input>
-                      No
-                    </label>
-                  </div>
+                  <label>
+                    <div>Modifier: </div>
+                  </label>
+                  <label>
+                    <div>Instruction: </div>
+                  </label>
+                  <label>
+                    Cleared for Solo:
+                    <div>
+                      <label>
+                        <input
+                          type="radio"
+                          id="clear-solo-N/A"
+                          name="clear-for-solo"
+                          value="N/A"
+                        ></input>
+                        N/A
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          id="clear-solo-Yes"
+                          name="clear-for-solo"
+                          value="Yes"
+                        ></input>
+                        Yes
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          id="clear-solo-No"
+                          name="clear-for-solo"
+                          value="No"
+                        ></input>
+                        No
+                      </label>
+                    </div>
+                  </label>
                   <div>Writeups upload: </div>
                   <div>Reason:</div>
                   <div>Activities: </div>
