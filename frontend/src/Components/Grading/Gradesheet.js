@@ -15,18 +15,26 @@ function Gradesheet() {
   };
   //Would likely check state or local storage for user type
   const elementType = user === "instructor" ? "input" : "div";
-  //text or input
-  function TOI({ labeltxt, editable = false, ...props }) {
-    if (elementType === "input") {
-      console.log("TOI PROPS", props);
-    }
+  //TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
+  function TOI({ labeltxt, type, defaultValue, editable = false, ...props }) {
     return (
       <label>
         {labeltxt}
         {elementType === "div" ? (
           <div>{props.value}</div>
+        ) : type === "textarea" ? (
+          <textarea
+            disabled={!editable}
+            defaultValue={defaultValue}
+            {...props}
+          ></textarea>
         ) : (
-          <input disabled={!editable} {...props} />
+          <input
+            disabled={!editable}
+            type={type}
+            defaultValue={defaultValue}
+            {...props}
+          />
         )}
       </label>
     );
@@ -92,20 +100,25 @@ function Gradesheet() {
                 <h5>Flight Lesson</h5>
                 <div className="event-details-section">
                   <TOI
+                    className="constrain-input"
                     labeltxt="Instructor: "
                     placeholder={mockGradesheetData.instructor.name}
+                    editable={true}
                   />
                   <TOI
+                    className="constrain-input"
                     labeltxt="Start Date / Time: "
                     defaultValue={mockGradesheetData.date}
                     type="datetime-local"
                     editable={true}
                   />
                   <TOI
-                    labeltxt="Duration"
+                    className="constrain-input"
+                    labeltxt="Duration: "
                     placeholder={mockGradesheetData.flightTimelog.fltDur}
                     type="number"
                     step={0.1}
+                    editable={true}
                   />
                 </div>
                 <h5>Details</h5>
@@ -161,7 +174,13 @@ function Gradesheet() {
               </div>
               <div className="col-12">
                 <h5>Event Comments: </h5>
-                <div>{mockGradesheetData.comments}</div>
+                <TOI
+                  type="textarea"
+                  rows="5"
+                  defaultValue={mockGradesheetData.comments}
+                  autoComplete="on"
+                  editable={true}
+                />
               </div>
             </div>
           </div>

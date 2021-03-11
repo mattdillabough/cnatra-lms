@@ -36,6 +36,20 @@
   border-radius: 5px;
 }
 
+label {
+  max-width: 100%;
+}
+
+textarea {
+  width: 85vw;
+  max-width: 100%;
+}
+
+input:disabled {
+  border: none;
+  color: black;
+}
+
 /* ------Navbar--------  */
 .NavigationBar {
   display: flex;
@@ -296,8 +310,17 @@
   background: #1a171770;
 }
 
+.constrain-input {
+  width: 250px;
+  max-width: 95%;
+}
+
 /* Larger than tablet views */
 @media (min-width: 576px) {
+  .constrain-input {
+    width: 250px;
+    max-width: 85%;
+  }
   .event-details-section {
     display: grid;
     grid-template-areas: "a a";
