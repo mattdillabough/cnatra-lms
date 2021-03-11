@@ -52,7 +52,16 @@ function Gradesheet() {
             "[Event ID] - [Event Name]"}
         </h4>
         <div className="gradesheet-submission">
-          <div title="Date of event">{mockGradesheetData.date}</div>
+          <div title="Date of event">
+            {new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
+              month: "long",
+              day: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })}
+          </div>
           <div title="Gradesheet submitter">
             <strong>Submitted by: </strong>
             {`${mockGradesheetData.instructor.rank} ${mockGradesheetData.instructor.name}`}
