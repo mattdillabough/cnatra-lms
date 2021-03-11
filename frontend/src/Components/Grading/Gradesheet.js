@@ -16,26 +16,17 @@ function Gradesheet() {
   //Would likely check state or local storage for user type
   const elementType = user === "instructor" ? "input" : "div";
   //text or input
-  function TOI({
-    labeltxt,
-    prevVal,
-    val,
-    editable = false,
-    inputtype = "text",
-    pattern,
-  }) {
+  function TOI({ labeltxt, editable = false, ...props }) {
+    if (elementType === "input") {
+      console.log("TOI PROPS", props);
+    }
     return (
       <label>
         {labeltxt}
         {elementType === "div" ? (
-          <div>{val}</div>
+          <div>{props.value}</div>
         ) : (
-          <input
-            type={inputtype}
-            placeholder={prevVal}
-            defaultValue={val}
-            disabled={!editable}
-          />
+          <input disabled={!editable} {...props} />
         )}
       </label>
     );
@@ -101,19 +92,21 @@ function Gradesheet() {
                 <h5>Flight Lesson</h5>
                 <div className="event-details-section">
                   <TOI
-                    labeltxt={"Instructor: "}
-                    prevVal={mockGradesheetData.instructor.name}
+                    labeltxt="Instructor: "
+                    placeholder={mockGradesheetData.instructor.name}
                   />
                   <TOI
-                    labeltxt={"Start Date / Time: "}
-                    val={mockGradesheetData.date}
-                    inputtype="datetime-local"
+                    labeltxt="Start Date / Time: "
+                    defaultValue={mockGradesheetData.date}
+                    type="datetime-local"
                     editable={true}
                   />
-                  <label>
-                    Duration:
-                    <div>5 hours</div>
-                  </label>
+                  <TOI
+                    labeltxt="Duration"
+                    placeholder={mockGradesheetData.flightTimelog.fltDur}
+                    type="number"
+                    step={0.1}
+                  />
                 </div>
                 <h5>Details</h5>
                 <div className="event-details-section">
