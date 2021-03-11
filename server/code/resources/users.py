@@ -1,5 +1,4 @@
 # python imports
-from flask import jsonify
 from flask_restful import Resource
 
 # project imports
@@ -12,7 +11,7 @@ class User(Resource):
         
         user = UserModel.objects(user_id=user_id).first()
         if user:
-            return jsonify(user)
+            return {'user': user.as_dict()}
         return {'message': 'User not found'}, 404
 
 class Users(Resource):
