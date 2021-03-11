@@ -6,6 +6,7 @@ from flask_mongoengine import MongoEngine
 from flask_restful import Api
 
 # project imports
+from resources.users import User, Users
 
 
 #### APP SETUP
@@ -27,6 +28,9 @@ db = MongoEngine(app)
 @app.route('/')
 def index():
     return 'Hello World'
+
+api.add_resource(User, '/server/users/<string:user_id>')
+api.add_resource(Users, '/server/users')
 
 
 #### RUN APP
