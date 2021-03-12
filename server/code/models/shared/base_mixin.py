@@ -28,7 +28,7 @@ class BaseMixin(me.Document):
                 self_dict[field] = self[field].isoformat()
             # handle custom classes
             elif isinstance(self[field], BaseMixin):
-                self_dict[field] = self[field].as_dict()
+                self_dict[field] = self[field].pk
             else:
                 self_dict[field] = self[field]
         return self_dict
