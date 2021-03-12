@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
 import Maneuver from "./Maneuver";
+import TOI from "./TextOrInput";
 import { mockGradesheetData } from "./mockGradesheetData";
 
 //To simulate different user types
-const user = "student";
+// const user = "student";
 
 function Gradesheet() {
   const [dropdown, setDropDown] = useState(false);
@@ -18,44 +19,44 @@ function Gradesheet() {
   const toggleEditMode = () => setEditMode(!edit);
 
   //Would likely check state or local storage for user type
-  const elementType = user === "instructor" ? "input" : "div";
+  // const elementType = user === "instructor" ? "input" : "div";
   //TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
-  function TOI({
-    labeltxt,
-    type,
-    defaultValue,
-    displayVal,
-    editable = false,
-    ...props
-  }) {
-    return (
-      <label>
-        {labeltxt}
-        {elementType === "div" ? (
-          <div>{displayVal}</div>
-        ) : type === "textarea" ? (
-          <textarea
-            disabled={!editable}
-            defaultValue={defaultValue}
-            {...props}
-          ></textarea>
-        ) : (
-          <input
-            disabled={!editable}
-            type={type}
-            defaultValue={defaultValue}
-            {...props}
-          />
-        )}
-      </label>
-    );
-  }
+  // function TOI({
+  //   labeltxt,
+  //   type,
+  //   defaultValue,
+  //   displayVal,
+  //   editable = false,
+  //   ...props
+  // }) {
+  //   return (
+  //     <label>
+  //       {labeltxt}
+  //       {elementType === "div" ? (
+  //         <div>{displayVal}</div>
+  //       ) : type === "textarea" ? (
+  //         <textarea
+  //           disabled={!editable}
+  //           defaultValue={defaultValue}
+  //           {...props}
+  //         ></textarea>
+  //       ) : (
+  //         <input
+  //           disabled={!editable}
+  //           type={type}
+  //           defaultValue={defaultValue}
+  //           {...props}
+  //         />
+  //       )}
+  //     </label>
+  //   );
+  // }
 
   return (
     <>
       <div className="Gradesheet container">
         <button type="button" onClick={toggleEditMode}>
-          {edit === true ? "View" : "Edit"}
+          {edit === true ? "Cancel" : "Edit"}
         </button>
         <h2
           className="student-name"
@@ -135,7 +136,16 @@ function Gradesheet() {
                     defaultValue={mockGradesheetData.date}
                     type="datetime-local"
                     editable={edit}
-                    displayVal={mockGradesheetData.date}
+                    displayVal={new Date(
+                      mockGradesheetData.date
+                    ).toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
                   />
                   <TOI
                     className="constrain-input"
@@ -155,7 +165,32 @@ function Gradesheet() {
                   <label>
                     <div>Instruction: </div>
                   </label>
-                  <label>
+                  <TOI
+                    name="status-select"
+                    type="select"
+                    labeltxt="Status: "
+                    options={["Complete", "Incomplete"]}
+                    displayVal={mockGradesheetData.status}
+                    defaultValue={mockGradesheetData.status}
+                    editable={edit}
+                  />
+                  {/* <label>
+                    {`Status: `}
+                    <select name="status" id="status-select" disabled={!edit}>
+                      <option value="">--Select a Status--</option>
+                      <option value="Complete">Complete</option>
+                      <option value="Incomplete">Incomplete</option>
+                    </select>
+                  </label> */}
+                  <TOI
+                    type="radio"
+                    name="clear-for-solo"
+                    labeltxt="Cleared for Solo: "
+                    options={["N/A", "Yes", "No"]}
+                    displayVal={mockGradesheetData.clearedForSolo}
+                    editable={edit}
+                  />
+                  {/* <label>
                     Cleared for Solo:
                     <div>
                       {["N/a", "Yes", "No"].map((option, idx) => {
@@ -178,7 +213,7 @@ function Gradesheet() {
                         );
                       })}
                     </div>
-                  </label>
+                  </label> */}
                   <div>Writeups upload: </div>
                   <div>Reason:</div>
                   <div>Activities: </div>
