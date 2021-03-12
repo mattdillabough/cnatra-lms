@@ -18,40 +18,6 @@ function Gradesheet() {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
-  //Would likely check state or local storage for user type
-  // const elementType = user === "instructor" ? "input" : "div";
-  //TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
-  // function TOI({
-  //   labeltxt,
-  //   type,
-  //   defaultValue,
-  //   displayVal,
-  //   editable = false,
-  //   ...props
-  // }) {
-  //   return (
-  //     <label>
-  //       {labeltxt}
-  //       {elementType === "div" ? (
-  //         <div>{displayVal}</div>
-  //       ) : type === "textarea" ? (
-  //         <textarea
-  //           disabled={!editable}
-  //           defaultValue={defaultValue}
-  //           {...props}
-  //         ></textarea>
-  //       ) : (
-  //         <input
-  //           disabled={!editable}
-  //           type={type}
-  //           defaultValue={defaultValue}
-  //           {...props}
-  //         />
-  //       )}
-  //     </label>
-  //   );
-  // }
-
   return (
     <>
       <div className="Gradesheet container">
@@ -174,46 +140,15 @@ function Gradesheet() {
                     defaultValue={mockGradesheetData.status}
                     editable={edit}
                   />
-                  {/* <label>
-                    {`Status: `}
-                    <select name="status" id="status-select" disabled={!edit}>
-                      <option value="">--Select a Status--</option>
-                      <option value="Complete">Complete</option>
-                      <option value="Incomplete">Incomplete</option>
-                    </select>
-                  </label> */}
                   <TOI
                     type="radio"
                     name="clear-for-solo"
                     labeltxt="Cleared for Solo: "
                     options={["N/A", "Yes", "No"]}
                     displayVal={mockGradesheetData.clearedForSolo}
+                    defaultValue={mockGradesheetData.clearedForSolo}
                     editable={edit}
                   />
-                  {/* <label>
-                    Cleared for Solo:
-                    <div>
-                      {["N/a", "Yes", "No"].map((option, idx) => {
-                        return (
-                          <label key={`COS_${idx}`}>
-                            {option}
-                            <input
-                              type="radio"
-                              id={option}
-                              name="clear-for-solo"
-                              value={option}
-                              disabled={!edit}
-                              checked={
-                                mockGradesheetData.clearedForSolo === option
-                                  ? true
-                                  : false
-                              }
-                            />
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </label> */}
                   <div>Writeups upload: </div>
                   <div>Reason:</div>
                   <div>Activities: </div>
