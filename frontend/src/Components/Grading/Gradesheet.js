@@ -1,15 +1,20 @@
 //Event Grade sheet
+//External Imports
 import React, { useState } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import { connect } from "react-redux";
 
+//Internal imports
 import Maneuver from "./Maneuver";
 import TOI from "./TextOrInput";
 import { mockGradesheetData } from "./mockGradesheetData";
 
-//To simulate different user types
-// const user = "student";
+import { getGradesheet } from "../../Store/grades";
+
+const gradesheet_id = "fe8119fdbbf34fcfbb1f33007d736150";
 
 function Gradesheet() {
+  //Managing state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
@@ -174,6 +179,7 @@ function Gradesheet() {
             </div>
           </div>
         </div>
+        {/* Maps out event's maneuvers */}
         {mockGradesheetData.maneuvers.map((maneuver) => {
           return <Maneuver key={maneuver.id} maneuver={maneuver} />;
         })}
@@ -182,4 +188,17 @@ function Gradesheet() {
   );
 }
 
-export default Gradesheet;
+//Retreive properties from redux store's state
+const mapStateToProps = (state) => {
+  return {
+    eventDetails: state.grades,
+  };
+};
+//Sends/dispatches changes to the redux store
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchGradesheet: (id) => dispatch(getGradesheet(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gradesheet);
