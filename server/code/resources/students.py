@@ -16,7 +16,7 @@ class Student(Resource):
         # get student grade_sheets
         student['grade_sheets'] = [grade_sheet.as_dict() for grade_sheet in GradeSheetModel.objects(student=student_model)]
 
-        # return student or error
+        # return student or 404 (not found)
         if student:
             return {'student': student}
         return {'message': 'Student not found'}, 404
