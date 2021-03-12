@@ -1,23 +1,29 @@
 #### IMPORTS
 
 # python imports
-from dotenv import load_dotenv
 from flask import Flask
 from flask_mongoengine import MongoEngine
-import os
+from flask_restful import Api
 
 # project imports
+from resources.grade_sheet_maneuvers import GradeSheetManeuver
+from resources.grade_sheets import GradeSheet
+from resources.students import Student
+from resources.users import User, Users
 
 
 #### APP SETUP
 
 # initialize app
 app = Flask(__name__)
-load_dotenv()
+
+# configure app
+app.config.from_object('config.DevConfig')
+
+# configure flask_restful
+api = Api(app)
 
 # connect db
-DB_URI = os.getenv('DB_URI')
-app.config['MONGODB_HOST'] = DB_URI
 db = MongoEngine(app)
 
 
@@ -26,7 +32,13 @@ db = MongoEngine(app)
 def index():
     return 'Hello World'
 
+api.add_resource(GradeSheetManeuver, '/server/grade_sheet_maneuvers/<string:grade_sheet_maneuver_id>')
+api.add_resource(GradeSheet, '/server/grade_sheets/<string:grade_sheet_id>')
+api.add_resource(Student, '/server/students/<string:student_id>')
+api.add_resource(User, '/server/users/<string:user_id>')
+api.add_resource(Users, '/server/users')
+
 
 #### RUN APP
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
