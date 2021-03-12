@@ -40,6 +40,6 @@ class GradeSheetManeuver(Resource):
                     'comments': data['comments']
                 }
             )
-            return {'grade_sheet_maneuver': grade_sheet_maneuver.as_dict()}
+            return {'message': 'Grade sheet maneuver successfully updated'}
         except:
             return {'message': 'Grade sheet maneuver not updated'}, 409
