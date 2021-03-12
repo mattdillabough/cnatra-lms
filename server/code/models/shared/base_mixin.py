@@ -1,4 +1,5 @@
 # python imports
+import datetime
 import mongoengine as me
 
 # project imports
@@ -16,3 +17,18 @@ class BaseMixin(me.Document):
 
     # allows for 'inheritance' while allowing other models to be created as separate collections
     meta = {'abstract': True}
+
+    def as_dict(self):
+
+        self_dict = {}
+
+        for field in self._fields:
+            # handle dates
+            if isinstance(self[field], datetime.date):
+                self_dict[field] = self[field].isoformat()
+            # handle custom classes
+            elif isinstance(self[field], BaseMixin):
+                self_dict[field] = self[field].pk
+            else:
+                self_dict[field] = self[field]
+        return self_dict
