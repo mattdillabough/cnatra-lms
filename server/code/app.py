@@ -4,6 +4,8 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask_restful import Api
+from flask_cors import CORS
+
 
 # project imports
 from resources.grade_sheet_maneuvers import GradeSheetManeuver
@@ -16,6 +18,7 @@ from resources.users import User, Users
 
 # initialize app
 app = Flask(__name__)
+CORS(app)
 
 # configure app
 app.config.from_object('config.DevConfig')

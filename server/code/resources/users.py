@@ -8,11 +8,13 @@ from models.users import UserModel
 class User(Resource):
 
     def get(self, user_id):
-        
+
         user = UserModel.objects(user_id=user_id).first()
-        if user:
+        try:
             return {'user': user.as_dict()}
-        return {'message': 'User not found'}, 404
+        except Error as e:
+            return {'error': e}, 404
+
 
 class Users(Resource):
 
