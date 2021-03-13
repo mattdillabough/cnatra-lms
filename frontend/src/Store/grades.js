@@ -29,7 +29,7 @@ export const getGradesheet = (id) => {
 export default function gradesReducer(state = {}, action) {
   switch (action.type) {
     case GET_GRADESHEET:
-      return {};
+      return { ...state, details: action.data };
     default:
       return state;
   }

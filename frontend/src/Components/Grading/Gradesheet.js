@@ -1,6 +1,6 @@
 //Event Grade sheet
 //External Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { connect } from "react-redux";
 
@@ -13,7 +13,7 @@ import { getGradesheet } from "../../Store/grades";
 
 const gradesheet_id = "fe8119fdbbf34fcfbb1f33007d736150";
 
-function Gradesheet() {
+function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Managing state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -23,6 +23,23 @@ function Gradesheet() {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
+  const [details, setDetails] = useState({});
+
+  useEffect(() => {
+    let mounted = true;
+    fetchGradesheet(gradesheet_id)
+      .then((data) => {
+        if (mounted) {
+          setDetails(data);
+        }
+      })
+      .catch((error) => {
+        console.log("There was an error in gradesheet useEffect", error);
+      });
+
+    //Cleans up / unsubscribe when component unmounts
+    return () => (mounted = false);
+  }, [gradesheet_id, fetchGradesheet]);
   return (
     <>
       <div className="Gradesheet container">
@@ -39,14 +56,15 @@ function Gradesheet() {
         </h4>
         <div className="gradesheet-submission">
           <div title="Date of event">
-            {new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
-              month: "long",
-              day: "2-digit",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            })}
+            {gradeDetails?.grade_sheet.date ||
+              new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
+                month: "long",
+                day: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              })}
           </div>
           <div title="Gradesheet submitter">
             <strong>Submitted by: </strong>
@@ -191,7 +209,7 @@ function Gradesheet() {
 //Retreive properties from redux store's state
 const mapStateToProps = (state) => {
   return {
-    eventDetails: state.grades,
+    gradeDetails: state.grades.details,
   };
 };
 //Sends/dispatches changes to the redux store
