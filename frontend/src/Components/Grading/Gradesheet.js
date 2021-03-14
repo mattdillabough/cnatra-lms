@@ -2,7 +2,7 @@
 //External Imports
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Maneuver from "./Maneuver";
@@ -23,23 +23,32 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
-  const [details, setDetails] = useState({});
+  const dispatch = useDispatch();
+  const details = useSelector((state) => state.grades.details);
+  // const [details, setDetails] = useState({});
 
   useEffect(() => {
-    let mounted = true;
-    fetchGradesheet(gradesheet_id)
-      .then((data) => {
-        if (mounted) {
-          setDetails(data);
-        }
-      })
-      .catch((error) => {
-        console.log("There was an error in gradesheet useEffect", error);
-      });
+    dispatch(getGradesheet(gradesheet_id));
 
-    //Cleans up / unsubscribe when component unmounts
-    return () => (mounted = false);
-  }, [gradesheet_id, fetchGradesheet]);
+    // let mounted = true;
+    // fetchGradesheet(gradesheet_id)
+    //   .then((data) => {
+    //     if (mounted) {
+    //       setDetails(data);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("There was an error in gradesheet useEffect", error);
+    //   });
+
+    // //Cleans up / unsubscribe when component unmounts
+    // return () => (mounted = false);
+  }, [dispatch]);
+
+  if (!details || !details.grade_sheet) {
+    return <div className="Gradesheet container">Loading...</div>;
+  }
+
   return (
     <>
       <div className="Gradesheet container">
@@ -56,7 +65,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
         </h4>
         <div className="gradesheet-submission">
           <div title="Date of event">
-            {gradeDetails?.grade_sheet.date ||
+            {details?.grade_sheet.date ||
               new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
                 month: "long",
                 day: "2-digit",
@@ -206,17 +215,19 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   );
 }
 
-//Retreive properties from redux store's state
-const mapStateToProps = (state) => {
-  return {
-    gradeDetails: state.grades.details,
-  };
-};
-//Sends/dispatches changes to the redux store
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchGradesheet: (id) => dispatch(getGradesheet(id)),
-  };
-};
+// //Retreive properties from redux store's state
+// const mapStateToProps = (state) => {
+//   return {
+//     gradeDetails: state.grades.details,
+//   };
+// };
+// //Sends/dispatches changes to the redux store
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchGradesheet: (id) => dispatch(getGradesheet(id)),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gradesheet);
+// export default connect(mapStateToProps, mapDispatchToProps)(Gradesheet);
+
+export default Gradesheet;
