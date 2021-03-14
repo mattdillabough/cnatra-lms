@@ -53,15 +53,15 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
         </h4>
         <div className="gradesheet-submission">
           <div title="Date of event">
-            {details?.grade_sheet.date ||
-              new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
-                month: "long",
-                day: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false,
-              })}
+            {new Date(details.grade_sheet.date).toLocaleDateString("en-US", {
+              month: "long",
+              day: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+              timeZone: "CST",
+            })}
           </div>
           <div title="Gradesheet submitter">
             <strong>Submitted by: </strong>
@@ -74,14 +74,17 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
         >
           <div
             className={
-              mockGradesheetData.status === "Complete"
+              details.grade_sheet.status === "CMP" &&
+              details.grade_sheet.grade === "PASS"
                 ? "details-header positive-status"
                 : "details-header pending-status"
             }
             title="Event Status | Grade"
           >
             <div>
-              {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
+              {details.grade_sheet.status === "CMP" ? "Complete" : "Incomplete"}{" "}
+              |{" "}
+              {details.grade_sheet.grade === "PASS" ? "Pass" : "Unsatisfactory"}
             </div>
             <div className="col-1 event-dropdown">
               <button
@@ -116,14 +119,22 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                     editable={edit}
                     displayVal={mockGradesheetData.instructor.name}
                   />
+                  {/* Fix time*/}
                   <TOI
                     className="constrain-input"
                     labeltxt="Start Date / Time: "
-                    defaultValue={mockGradesheetData.date}
+                    defaultValue={
+                      details?.grade_sheet.date &&
+                      details.grade_sheet.date[
+                        details.grade_sheet.date.length - 6
+                      ] === "T"
+                        ? details.grade_sheet.date
+                        : String(`${details.grade_sheet.date}T12:30`)
+                    }
                     type="datetime-local"
                     editable={edit}
                     displayVal={new Date(
-                      mockGradesheetData.date
+                      details.grade_sheet.date
                     ).toLocaleDateString(undefined, {
                       month: "short",
                       day: "2-digit",
@@ -131,6 +142,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       hour: "2-digit",
                       minute: "2-digit",
                       hour12: false,
+                      timeZone: "UTC",
                     })}
                   />
                   <TOI
@@ -156,8 +168,16 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                     type="select"
                     labeltxt="Status: "
                     options={["Complete", "Incomplete"]}
-                    displayVal={mockGradesheetData.status}
-                    defaultValue={mockGradesheetData.status}
+                    displayVal={
+                      details.grade_sheet.status === "CMP"
+                        ? "Complete"
+                        : "Incomplete"
+                    }
+                    defaultValue={
+                      details.grade_sheet.status === "CMP"
+                        ? "Complete"
+                        : "Incomplete"
+                    }
                     editable={edit}
                   />
                   <TOI
