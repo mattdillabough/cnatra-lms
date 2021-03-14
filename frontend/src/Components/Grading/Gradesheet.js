@@ -1,8 +1,9 @@
 //Event Grade sheet
+
 //External Imports
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Maneuver from "./Maneuver";
@@ -23,28 +24,15 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
+  //Accessing redux state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
-  // const [details, setDetails] = useState({});
 
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
-
-    // let mounted = true;
-    // fetchGradesheet(gradesheet_id)
-    //   .then((data) => {
-    //     if (mounted) {
-    //       setDetails(data);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("There was an error in gradesheet useEffect", error);
-    //   });
-
-    // //Cleans up / unsubscribe when component unmounts
-    // return () => (mounted = false);
   }, [dispatch]);
 
+  //Displays loading page if props from redux haven't been received yet
   if (!details || !details.grade_sheet) {
     return <div className="Gradesheet container">Loading...</div>;
   }
@@ -214,20 +202,5 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     </>
   );
 }
-
-// //Retreive properties from redux store's state
-// const mapStateToProps = (state) => {
-//   return {
-//     gradeDetails: state.grades.details,
-//   };
-// };
-// //Sends/dispatches changes to the redux store
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchGradesheet: (id) => dispatch(getGradesheet(id)),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Gradesheet);
 
 export default Gradesheet;
