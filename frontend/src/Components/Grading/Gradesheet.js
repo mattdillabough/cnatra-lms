@@ -57,7 +57,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               "[Event ID] - [Event Name]"}
           </h4>
           <div className="gradesheet-submission">
-            <div title="Date of event">
+            <div title="Date submitted">
               {new Date(details.grade_sheet.date).toLocaleDateString("en-US", {
                 month: "long",
                 day: "2-digit",
@@ -70,10 +70,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               {`${mockGradesheetData.instructor.rank} ${mockGradesheetData.instructor.name}`}
             </div>
           </div>
-          <div
-            className="gradesheet-details container-fluid"
-            title="Event Details"
-          >
+          <div className="gradesheet-details container-fluid">
             <div
               className={
                 details.grade_sheet.status === "CMP" &&
@@ -94,6 +91,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               </div>
               <div className="col-1 event-dropdown">
                 <button
+                  title="Toggle Event Details"
                   type="button"
                   className="toggle-dropdown btn"
                   data-bs-toggle="collapse"
@@ -191,8 +189,15 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       defaultValue={mockGradesheetData.clearedForSolo}
                       editable={edit}
                     />
-                    <div>Writeups upload: </div>
-                    <div>Overall Grade: </div>
+                    <TOI
+                      type="radio"
+                      name="overall-grade"
+                      labeltxt="Overall Grade: "
+                      options={["Pass", "Fail"]}
+                      displayVal={details.grade_sheet.grade}
+                      defaultValue={details.grade_sheet.grade}
+                      editable={edit}
+                    />
                   </div>
                 </div>
                 <div className="col-12">

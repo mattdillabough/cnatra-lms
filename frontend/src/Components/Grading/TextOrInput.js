@@ -8,7 +8,7 @@ const user = "instructor";
 // const elementType = user === "instructor" ? "input" : "div";
 //TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
 
-// DISCLAIMER: defaultValue / displayVal attributes will likely need to be altered. defaultValue SHOULD show the initial value saved from the db (from the mockData, at the moment). displayVal should reflect the value of an input even after update.
+// DISCLAIMER: defaultValue / displayVal attributes will likely need to be altered. defaultValue SHOULD be the value if nothing was previously entered. displayVal should reflect the value of an input from the db and reflect changes after update.
 // We should also implement a warning for the user letting them know if they haven't saved their changes, they will be lost after exiting "Edit mode".
 
 function TOI({
@@ -48,14 +48,18 @@ function TOI({
             <div>
               {options.map((option, idx) => {
                 return (
-                  <label key={`${labeltxt}_${idx}`}>
+                  <label className="option-label" key={`${labeltxt}_${idx}`}>
                     {option}
                     <input
                       type={type}
                       id={option}
                       disabled={!editable}
                       value={option}
-                      defaultChecked={defaultValue === option ? true : false}
+                      defaultChecked={
+                        defaultValue.toLowerCase() === option.toLowerCase()
+                          ? true
+                          : false
+                      }
                       {...props}
                     />
                   </label>

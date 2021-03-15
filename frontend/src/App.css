@@ -306,6 +306,10 @@ input:disabled {
   font-weight: 400;
 }
 
+.option-label, .option-label input {
+  margin: 0em 0.25em;
+}
+
 .event-dropdown {
   position: absolute;
   right: 2em;
@@ -334,6 +338,10 @@ input:disabled {
 .constrain-input {
   width: 250px;
   max-width: 95%;
+}
+
+textarea {
+  padding: 0.5em;
 }
 
 /* Larger than tablet views */
