@@ -384,6 +384,11 @@ input:disabled {
   background: cornflowerblue;
 }
 
+.pass-MIF {
+  border: 1px black groove;
+  background: linear-gradient(0deg, #9be8bbba, #80ca9e);
+}
+
 .below-MIF {
   border: 3.5px yellow groove;
 }

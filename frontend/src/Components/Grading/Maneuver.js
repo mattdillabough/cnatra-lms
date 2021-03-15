@@ -21,7 +21,7 @@ function Maneuver({ maneuver }) {
     <div
       className={
         maneuver.grade >= maneuver.MIF
-          ? "maneuver container-fluid"
+          ? "maneuver container-fluid pass-MIF"
           : "maneuver container-fluid below-MIF"
       }
     >
