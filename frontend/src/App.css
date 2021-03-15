@@ -62,7 +62,7 @@ input:disabled {
   align-items: center;
   justify-content: space-between;
   padding: 1em;
-  margin-bottom: 4em;
+  margin-bottom: 1em;
 
   background-color: navy;
   color: whitesmoke;
@@ -234,11 +234,25 @@ input:disabled {
 
 /* ----Gradesheet-----  */
 
+.Gradesheet-wrap.container-fluid {
+  overflow-y: hidden;
+}
+
+.edit-controls {
+  padding: 0.5em 1em;
+  /* border: 1px solid black; */
+}
+
+.btn-group {
+  padding: 0em 0.25em;
+  /* background: blue; */
+}
+
 /* For smaller screens  */
 @media (max-width: 576px) {
   .Gradesheet {
     width: calc(100vw - 2em);
-    margin: 0em 1em;
+    /* margin: 0em 1em; */
   }
 }
 
@@ -283,6 +297,13 @@ input:disabled {
 
 .toggle-dropdown {
   padding: 0;
+}
+
+.event-label {
+  font-weight: 500;
+}
+.event-label div {
+  font-weight: 400;
 }
 
 .event-dropdown {

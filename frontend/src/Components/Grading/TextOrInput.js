@@ -23,7 +23,7 @@ function TOI({
   //if Student is viewing or Instructor in Viewing mode
   if (user === "student" || !editable) {
     return (
-      <label>
+      <label className="event-label">
         {labeltxt}
         <div>{displayVal}</div>
       </label>
@@ -88,33 +88,12 @@ function TOI({
       }
     }
     return (
-      <label>
+      <label className="event-label">
         {labeltxt}
         <RenderedElement />
       </label>
     );
   }
-  // return (
-  //   <label>
-  //     {labeltxt}
-  //     {elementType === "div" ? (
-  //       <div>{displayVal}</div>
-  //     ) : type === "textarea" ? (
-  //       <textarea
-  //         disabled={!editable}
-  //         defaultValue={defaultValue}
-  //         {...props}
-  //       ></textarea>
-  //     ) : (
-  //       <input
-  //         disabled={!editable}
-  //         type={type}
-  //         defaultValue={defaultValue}
-  //         {...props}
-  //       />
-  //     )}
-  //   </label>
-  // );
 }
 
 export default TOI;
