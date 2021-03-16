@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 // import { mockGradesheetData } from "./mockGradesheetData";
 
 //To simulate different user types
@@ -20,6 +20,16 @@ function TOI({
   editable = false,
   ...props
 }) {
+  const inputVal = useRef();
+
+  function handleChange() {
+    //would like to put debounce in here to limit frequency of change
+    console.log("handling change");
+    // console.log(
+    //   `changing textbox from ${displayVal}. Value is now ${inputVal.current.value}`
+    // );
+  }
+
   //if Student is viewing or Instructor in Viewing mode
   if (user === "student" || !editable) {
     return (
@@ -41,6 +51,10 @@ function TOI({
               disabled={!editable}
               defaultValue={defaultValue}
               {...props}
+              ref={inputVal}
+              onChange={() => {
+                handleChange();
+              }}
             ></textarea>
           );
         case "radio":
