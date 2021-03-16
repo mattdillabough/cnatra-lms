@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
+import { debounce } from "lodash";
 // import { mockGradesheetData } from "./mockGradesheetData";
 
 //To simulate different user types
@@ -22,13 +23,20 @@ function TOI({
 }) {
   const inputVal = useRef();
 
-  function handleChange() {
-    //would like to put debounce in here to limit frequency of change
-    console.log("handling change");
-    // console.log(
-    //   `changing textbox from ${displayVal}. Value is now ${inputVal.current.value}`
-    // );
-  }
+  //When a change occurs in an input function will wait until user stops interacting (using debounce) and then check to see if the value has changed since last saved value.
+  const handleChange = debounce(async (e) => {
+    console.log("EVENT TARGET VALUE:", e.target.value);
+    if (
+      displayVal.length !== e.target.value.length ||
+      displayVal !== e.target.value
+    ) {
+      console.log(
+        `Here's the difference. Original: ${displayVal}; NewVer: ${inputVal.current.value}`
+      );
+    } else {
+      console.log("Nothing's changed");
+    }
+  }, 2000);
 
   //if Student is viewing or Instructor in Viewing mode
   if (user === "student" || !editable) {
@@ -52,8 +60,8 @@ function TOI({
               defaultValue={defaultValue}
               {...props}
               ref={inputVal}
-              onChange={() => {
-                handleChange();
+              onChange={(e) => {
+                handleChange(e);
               }}
             ></textarea>
           );
@@ -69,11 +77,15 @@ function TOI({
                       id={option}
                       disabled={!editable}
                       value={option}
+                      ref={inputVal}
                       defaultChecked={
                         defaultValue.toLowerCase() === option.toLowerCase()
                           ? true
                           : false
                       }
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                       {...props}
                     />
                   </label>
@@ -84,7 +96,15 @@ function TOI({
 
         case "select":
           return (
-            <select disabled={!editable} defaultValue={defaultValue} {...props}>
+            <select
+              disabled={!editable}
+              defaultValue={defaultValue}
+              ref={inputVal}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              {...props}
+            >
               {[`--Select a ${labeltxt}--`, ...options].map((option, idx) => {
                 return (
                   <option key={`${option}_${idx}`} value={option}>
@@ -100,6 +120,10 @@ function TOI({
               disabled={!editable}
               type={type}
               defaultValue={defaultValue}
+              ref={inputVal}
+              onChange={(e) => {
+                handleChange(e);
+              }}
               {...props}
             />
           );
