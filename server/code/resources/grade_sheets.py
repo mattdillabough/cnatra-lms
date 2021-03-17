@@ -13,6 +13,10 @@ class GradeSheet(Resource):
         grade_sheet_model = GradeSheetModel.objects(grade_sheet_id=grade_sheet_id).first()
         grade_sheet = grade_sheet_model.as_dict()
 
+        # get student and instructor names
+        grade_sheet['student'] = {k:grade_sheet['student'][k] for k in ['first_name', 'last_name']}
+        grade_sheet['instructor'] = {k:grade_sheet['instructor'][k] for k in ['first_name', 'last_name']}
+
         # get grade_sheet grade_sheet_maneuvers
         grade_sheet['grade_sheet_maneuvers'] = [grade_sheet_maneuver.as_dict() for grade_sheet_maneuver in GradeSheetManeuverModel.objects(grade_sheet=grade_sheet_model)]
 
