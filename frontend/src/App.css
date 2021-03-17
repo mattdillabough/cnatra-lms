@@ -1,0 +1,368 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+  text-align: center;
+  padding: 0;
+  background: #aecce6;
+}
+
+/* larger than tablet view  */
+@media (min-width: 768px) {
+  .App {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .App .container-fluid,
+  .App .container {
+    max-height: calc(100vh - 2em);
+    overflow-y: auto;
+    border-radius: 5px;
+  }
+}
+
+.container-fluid {
+  align-items: center;
+}
+
+.App .container-fluid,
+.App .container {
+  border-radius: 5px;
+}
+
+label {
+  max-width: 100%;
+}
+
+textarea {
+  width: 85vw;
+  max-width: 100%;
+}
+
+input:disabled {
+  border: none;
+  color: black;
+}
+
+/* ------Navbar--------  */
+.NavigationBar {
+  display: flex;
+  flex-direction: row;
+  height: 4em;
+  min-height: fit-content;
+  width: 100%;
+  min-width: 100vw;
+  position: sticky;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  margin-bottom: 4em;
+
+  background-color: navy;
+  color: whitesmoke;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+/* larger than tablet view */
+@media (min-width: 768px) {
+  .NavigationBar {
+    flex-direction: column;
+    width: 4em;
+    height: 100%;
+    min-height: 100vh;
+    min-width: fit-content;
+    position: sticky;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1em;
+    margin-bottom: 0em;
+
+    overflow-x: hidden;
+  }
+}
+
+.NavigationBar.open {
+  transition: visibility 0.5s, opacity 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu-bars {
+  background: none;
+}
+
+.nav-menu {
+  background: navy;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  padding: 0.5em 1em 1em 1em;
+  transition: 850ms;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.nav-menu.active {
+  visibility: visible;
+  left: 0;
+  transition: 350ms;
+  box-shadow: #10034da6 10px 0px 20px;
+}
+
+.nav-menu .react-icons {
+  margin-right: 1em;
+}
+
+.nav-menu-items {
+  width: 100%;
+  padding-left: 0em;
+}
+
+.navbar-toggle {
+  background: navy;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-text {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.nav-text a {
+  color: white;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+.nav-text a:hover {
+  background-color: teal;
+}
+
+.nav-text .nav-section,
+.nav-tab {
+  display: flex;
+}
+
+.subNav-drawer {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+}
+
+.drop-down {
+  display: flex;
+  align-items: center;
+}
+
+.drop-down:hover {
+  background-color: cornflowerblue;
+}
+
+.drop-down .react-icons {
+  margin-right: 0px;
+}
+
+.drop-down-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  text-decoration: none;
+  background: #051747;
+}
+
+.drop-down-link a {
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0.25em;
+  padding-left: 2em;
+}
+
+.drop-down-link a:hover {
+  background-color: #5d9fe4;
+  cursor: pointer;
+}
+
+/* ------Icons-------  */
+.tray-icon {
+  margin: 1em;
+}
+
+.react-icons {
+  color: white;
+  width: 28px;
+  height: 28px;
+}
+
+/* -----Grades-------- */
+.Grades .card-group,
+.Grades .card {
+  padding: 1em;
+  flex-flow: column wrap;
+}
+
+.cardgroup-title {
+  width: 100%;
+}
+
+/* ----Gradesheet-----  */
+
+/* For smaller screens  */
+@media (max-width: 576px) {
+  .Gradesheet {
+    width: calc(100vw - 2em);
+    margin: 0em 1em;
+  }
+}
+
+.Gradesheet {
+  background-color: #f0efeb;
+  padding: 0.5em;
+}
+
+.student-name {
+  background-color: black;
+  color: white;
+  text-align: left;
+  padding-left: 0.5em;
+}
+.event-identifier {
+  text-align: left;
+  border-bottom: 2px solid black;
+}
+
+.gradesheet-submission {
+  display: flex;
+  justify-content: space-between;
+  padding: 0em 0.5em;
+  flex-wrap: wrap;
+}
+
+.positive-status {
+  background-color: lime;
+}
+
+.pending-status {
+  background-color: orange;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5em 0em;
+  position: relative;
+}
+
+.toggle-dropdown {
+  padding: 0;
+}
+
+.event-dropdown {
+  position: absolute;
+  right: 2em;
+}
+.details-body .row {
+  background-color: #e7e0e0;
+  margin: 0;
+  text-align: left;
+}
+
+.event-dropdown .toggle-dropdown {
+  background: white;
+  padding: 0em 0.45em;
+  box-shadow: grey 1px 1px 3px;
+  transition: background-color 0.25s;
+}
+
+.event-dropdown .toggle-dropdown:hover {
+  background-color: #2525257d;
+}
+
+.event-dropdown .toggle-dropdown:active {
+  background: #1a171770;
+}
+
+.constrain-input {
+  width: 250px;
+  max-width: 95%;
+}
+
+/* Larger than tablet views */
+@media (min-width: 576px) {
+  .constrain-input {
+    width: 250px;
+    max-width: 85%;
+  }
+  .event-details-section {
+    display: grid;
+    grid-template-areas: "a a";
+    grid-auto-rows: 1fr 1fr;
+  }
+}
+
+/* ------Maneuver-----  */
+.maneuver {
+  background: #7f7b824f;
+  padding: 0.5em 0.5em;
+  margin: 1em 0em;
+}
+
+.maneuver-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5em 0em;
+}
+
+.maneuver-header.row {
+  width: 100%;
+  margin: 0;
+}
+
+.maneuver-header .toggle-dropdown {
+  transition: background-color 0.25s;
+}
+
+.maneuver-header .toggle-dropdown:hover {
+  background-color: grey;
+}
+
+.maneuver-body {
+  background-color: #a9bccb;
+}
+
+.toggle-maneuver:hover {
+  background: cornflowerblue;
+}
+
+.below-MIF {
+  border: 3.5px yellow groove;
+}
