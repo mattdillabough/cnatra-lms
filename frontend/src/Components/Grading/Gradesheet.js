@@ -31,6 +31,23 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
+  //Handling input changes
+  const [values, setValues] = useState({ grade: "" });
+  const handleChange = (e) => {
+    console.log("CHANGING: what's E?", e.target.value);
+    console.log("TARGET", e.target.name);
+
+    const { name, value } = e.target;
+
+    // setValues({ ...values, [name]: value }); //Doesn't work...
+    console.log("CHANGES:", values);
+  };
+  //Controls what happens when changes are submitted/saved
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("We're submitting~");
+    console.log("What is E?", e);
+  };
 
   //Displays loading page if props from redux haven't been received yet
   if (!details || !details.grade_sheet) {
@@ -42,6 +59,13 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
       <div className="Gradesheet-wrap container-fluid">
         <div className="edit-controls d-flex justify-content-center justify-content-md-end container">
           <div className="btn-group">
+            {edit ? (
+              <button type="submit" form="event-details-form">
+                Save
+              </button>
+            ) : (
+              ""
+            )}
             <button type="button" onClick={toggleEditMode}>
               {edit === true ? "Cancel" : "Edit"}
             </button>
@@ -114,19 +138,30 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               aria-expanded="false"
               aria-controls="collapse"
             >
-              <div className="row">
+              <form
+                className="row"
+                id="event-details-form"
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
                 <div className="col-12">
                   <h5>Flight Lesson</h5>
                   <div className="event-details-section">
                     <TOI
+                      name="instructor.name"
                       className="constrain-input"
                       labeltxt="Instructor: "
                       defaultValue={mockGradesheetData.instructor.name}
                       editable={edit}
                       displayVal={mockGradesheetData.instructor.name}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                     {/* Fix time*/}
                     <TOI
+                      name="date"
                       className="constrain-input"
                       labeltxt="Start Date / Time: "
                       defaultValue={
@@ -150,8 +185,12 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                         hour12: false,
                         timeZone: "UTC",
                       })}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                     <TOI
+                      name="fltDur"
                       className="constrain-input"
                       labeltxt="Duration: "
                       defaultValue={mockGradesheetData.flightTimelog.fltDur}
@@ -159,12 +198,15 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       step={0.1}
                       editable={edit}
                       displayVal={mockGradesheetData.flightTimelog.fltDur}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                   </div>
                   <h5>Details</h5>
                   <div className="event-details-section">
                     <TOI
-                      name="status-select"
+                      name="status"
                       type="select"
                       labeltxt="Status: "
                       options={["Complete", "Incomplete"]}
@@ -179,39 +221,53 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                           : "Incomplete"
                       }
                       editable={edit}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                     <TOI
                       type="radio"
-                      name="clear-for-solo"
+                      name="clearedForSolo"
                       labeltxt="Cleared for Solo: "
                       options={["N/A", "Yes", "No"]}
                       displayVal={mockGradesheetData.clearedForSolo}
                       defaultValue={mockGradesheetData.clearedForSolo}
                       editable={edit}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                     <TOI
                       type="radio"
-                      name="overall-grade"
+                      name="grade"
                       labeltxt="Overall Grade: "
                       options={["Pass", "Fail"]}
                       displayVal={details.grade_sheet.grade}
                       defaultValue={details.grade_sheet.grade}
                       editable={edit}
+                      // value={values.grade}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-12">
                   <h5>Event Comments: </h5>
                   <TOI
+                    name="comments"
                     type="textarea"
                     rows="5"
                     defaultValue={mockGradesheetData.comments}
                     autoComplete="on"
                     editable={edit}
                     displayVal={mockGradesheetData.comments}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
                   />
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           {/* Maps out event's maneuvers */}
