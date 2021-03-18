@@ -3,16 +3,16 @@
 //External Imports
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Maneuver from "./Maneuver";
 import TOI from "./TextOrInput";
 import { mockGradesheetData } from "./mockGradesheetData";
-
 import { getGradesheet } from "../../Store/grades";
 
-const gradesheet_id = "fe8119fdbbf34fcfbb1f33007d736150";
+const gradesheet_id = "84d8b584a4cc4665abccc2b1a455e6f9";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Managing state
@@ -28,18 +28,33 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
 
+  //Manage form data
+  const [values, setValues] = useState({
+    grade: details?.grade_sheet?.grade || "",
+    clearedForSolo: mockGradesheetData.clearedForSolo || "",
+  });
+
+  //Fetch gradesheet data
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
+
+  useEffect(() => {
+    setValues({
+      grade: details?.grade_sheet?.grade,
+      clearedForSolo: mockGradesheetData.clearedForSolo,
+    });
+    console.log("Updated!");
+  }, [details]);
+
   //Handling input changes
-  const [values, setValues] = useState({ grade: "" });
   const handleChange = (e) => {
     console.log("CHANGING: what's E?", e.target.value);
     console.log("TARGET", e.target.name);
 
     const { name, value } = e.target;
 
-    // setValues({ ...values, [name]: value }); //Doesn't work...
+    setValues({ ...values, [name]: value });
     console.log("CHANGES:", values);
   };
   //Controls what happens when changes are submitted/saved
@@ -50,7 +65,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   };
 
   //Displays loading page if props from redux haven't been received yet
-  if (!details || !details.grade_sheet) {
+  if (!details?.grade_sheet.grade) {
     return <div className="Gradesheet container">Loading...</div>;
   }
 
@@ -233,6 +248,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       displayVal={mockGradesheetData.clearedForSolo}
                       defaultValue={mockGradesheetData.clearedForSolo}
                       editable={edit}
+                      check={values.clearedForSolo}
                       onChange={(e) => {
                         handleChange(e);
                       }}
@@ -245,7 +261,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       displayVal={details.grade_sheet.grade}
                       defaultValue={details.grade_sheet.grade}
                       editable={edit}
-                      // value={values.grade}
+                      check={values.grade}
                       onChange={(e) => {
                         handleChange(e);
                       }}

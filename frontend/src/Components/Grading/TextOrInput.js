@@ -19,6 +19,7 @@ function TOI({
   displayVal,
   options = [],
   editable = false,
+  check,
   ...props
 }) {
   // const inputVal = useRef();
@@ -78,10 +79,10 @@ function TOI({
                       disabled={!editable}
                       value={option}
                       // ref={inputVal}
+                      // checked={checked === option}
                       defaultChecked={
-                        defaultValue.toLowerCase() === option.toLowerCase()
-                          ? true
-                          : false
+                        // defaultValue.toLowerCase() === option.toLowerCase()
+                        check?.toLowerCase() === option.toLowerCase()
                       }
                       // onChange={(e) => {
                       //   handleChange(e);
