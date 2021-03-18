@@ -19,7 +19,7 @@ class GradeSheet(Resource):
         grade_sheet['instructor'] = {k:grade_sheet['instructor'][k] for k in user_fields}
 
         # get grade_sheet grade_sheet_maneuvers
-        grade_sheet['grade_sheet_maneuvers'] = [grade_sheet_maneuver.as_dict() for grade_sheet_maneuver in GradeSheetManeuverModel.objects(grade_sheet=grade_sheet_model)]
+        grade_sheet['grade_sheet_maneuvers'] = [grade_sheet_maneuver.as_dict() for grade_sheet_maneuver in GradeSheetManeuverModel.objects(grade_sheet=grade_sheet['grade_sheet_id'])]
 
         # return grade_sheet or 404 (not found)
         if grade_sheet:

@@ -136,7 +136,7 @@ def insert_grade_sheet_maneuvers():
     for grade_sheet_maneuver in grade_sheet_maneuvers:
         # find grade_sheet_model
         event_model = EventModel.objects(event_code=grade_sheet_maneuver['grade_sheet']).first()
-        grade_sheet_maneuver['grade_sheet'] = GradeSheetModel.objects(event=event_model).first()
+        grade_sheet_maneuver['grade_sheet'] = GradeSheetModel.objects(event=event_model).first()['grade_sheet_id']
         # find maneuver_item_file_model
         maneuver_model = ManeuverModel.objects(maneuver=grade_sheet_maneuver['maneuver_item_file']).first()
         grade_sheet_maneuver['maneuver_item_file'] = ManeuverItemFileModel.objects(Q(event=event_model) & Q(maneuver=maneuver_model)).first()
