@@ -151,7 +151,7 @@ def insert_maneuver_item_files():
     # loop through records
     for maneuver_item_file in maneuver_item_files:
         # find maneuver_item_file_model
-        maneuver_item_file['event'] = EventModel.objects(event_code=maneuver_item_file['event']).first()
+        maneuver_item_file['event'] = EventModel.objects(event_code=maneuver_item_file['event']).first()['event_id']
         # find maneuver_model
         maneuver_item_file['maneuver'] = ManeuverModel.objects(maneuver=maneuver_item_file['maneuver']).first()
         # create record
