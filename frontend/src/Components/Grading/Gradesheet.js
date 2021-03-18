@@ -3,8 +3,8 @@
 //External Imports
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
-
 import { useSelector, useDispatch } from "react-redux";
+import { debounce } from "lodash";
 
 //Internal imports
 import Maneuver from "./Maneuver";
@@ -28,21 +28,31 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
 
-  //Manage form data
-  const [values, setValues] = useState({
-    grade: details?.grade_sheet?.grade || "",
-    clearedForSolo: mockGradesheetData.clearedForSolo || "",
-  });
-
   //Fetch gradesheet data
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
 
+  //Manage form data
+  const [values, setValues] = useState({
+    grade: details?.grade_sheet?.grade || "",
+    clearedForSolo: mockGradesheetData.clearedForSolo || "",
+    "instructor.name": mockGradesheetData.instructor.name,
+    date: details?.grade_sheet.date,
+    fltDur: mockGradesheetData.flightTimelog.fltDur,
+    status: details?.grade_sheet.status,
+    // comments: details?.grade_sheet.comments,
+  });
+
   useEffect(() => {
     setValues({
       grade: details?.grade_sheet?.grade,
       clearedForSolo: mockGradesheetData.clearedForSolo,
+      "instructor.name": mockGradesheetData.instructor.name,
+      date: details?.grade_sheet.date,
+      fltDur: mockGradesheetData.flightTimelog.fltDur,
+      status: details?.grade_sheet.status,
+      // comments: details?.grade_sheet.comments,
     });
     console.log("Updated!");
   }, [details]);
@@ -53,9 +63,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     console.log("TARGET", e.target.name);
 
     const { name, value } = e.target;
-
     setValues({ ...values, [name]: value });
-    console.log("CHANGES:", values);
+    // console.log("CHANGES:", values);
   };
   //Controls what happens when changes are submitted/saved
   const handleSubmit = (e) => {
@@ -167,9 +176,11 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       name="instructor.name"
                       className="constrain-input"
                       labeltxt="Instructor: "
-                      defaultValue={mockGradesheetData.instructor.name}
+                      type="text"
                       editable={edit}
-                      displayVal={mockGradesheetData.instructor.name}
+                      value={values["instructor.name"]}
+                      // defaultValue={mockGradesheetData.instructor.name}
+                      displayVal={values["instructor.name"]}
                       onChange={(e) => {
                         handleChange(e);
                       }}
@@ -179,27 +190,29 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       name="date"
                       className="constrain-input"
                       labeltxt="Start Date / Time: "
-                      defaultValue={
-                        details?.grade_sheet.date &&
-                        details.grade_sheet.date[
-                          details.grade_sheet.date.length - 6
-                        ] === "T"
-                          ? details.grade_sheet.date
-                          : String(`${details.grade_sheet.date}T12:30`)
-                      }
                       type="datetime-local"
                       editable={edit}
-                      displayVal={new Date(
-                        details.grade_sheet.date
-                      ).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "2-digit",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: false,
-                        timeZone: "UTC",
-                      })}
+                      value={values.date}
+                      // defaultValue={
+                      //   details?.grade_sheet.date &&
+                      //   details.grade_sheet.date[
+                      //     details.grade_sheet.date.length - 6
+                      //   ] === "T"
+                      //     ? details.grade_sheet.date
+                      //     : String(`${details.grade_sheet.date}T12:30`)
+                      // }
+                      displayVal={new Date(values.date).toLocaleDateString(
+                        undefined,
+                        {
+                          month: "short",
+                          day: "2-digit",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          hour12: false,
+                          timeZone: "UTC",
+                        }
+                      )}
                       onChange={(e) => {
                         handleChange(e);
                       }}
@@ -208,11 +221,12 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                       name="fltDur"
                       className="constrain-input"
                       labeltxt="Duration: "
-                      defaultValue={mockGradesheetData.flightTimelog.fltDur}
                       type="number"
                       step={0.1}
                       editable={edit}
-                      displayVal={mockGradesheetData.flightTimelog.fltDur}
+                      value={values.fltDur}
+                      // defaultValue={mockGradesheetData.flightTimelog.fltDur}
+                      displayVal={values.fltDur}
                       onChange={(e) => {
                         handleChange(e);
                       }}
@@ -222,46 +236,41 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                   <div className="event-details-section">
                     <TOI
                       name="status"
-                      type="select"
                       labeltxt="Status: "
-                      options={["Complete", "Incomplete"]}
-                      displayVal={
-                        details.grade_sheet.status === "CMP"
-                          ? "Complete"
-                          : "Incomplete"
-                      }
-                      defaultValue={
-                        details.grade_sheet.status === "CMP"
-                          ? "Complete"
-                          : "Incomplete"
-                      }
+                      type="select"
                       editable={edit}
+                      options={["CMP", "ICMP"]}
+                      displayVal={values.status}
+                      value={values.status}
+                      // defaultValue={
+                      //   details.grade_sheet.status === "CMP" ? "CMP" : "ICMP"
+                      // }
                       onChange={(e) => {
                         handleChange(e);
                       }}
                     />
                     <TOI
-                      type="radio"
                       name="clearedForSolo"
                       labeltxt="Cleared for Solo: "
-                      options={["N/A", "Yes", "No"]}
-                      displayVal={mockGradesheetData.clearedForSolo}
-                      defaultValue={mockGradesheetData.clearedForSolo}
+                      type="radio"
                       editable={edit}
+                      options={["N/A", "Yes", "No"]}
                       check={values.clearedForSolo}
+                      // defaultValue={mockGradesheetData.clearedForSolo}
+                      displayVal={values.clearedForSolo}
                       onChange={(e) => {
                         handleChange(e);
                       }}
                     />
                     <TOI
-                      type="radio"
                       name="grade"
                       labeltxt="Overall Grade: "
-                      options={["Pass", "Fail"]}
-                      displayVal={details.grade_sheet.grade}
-                      defaultValue={details.grade_sheet.grade}
+                      type="radio"
                       editable={edit}
+                      options={["Pass", "Fail"]}
                       check={values.grade}
+                      // defaultValue={details.grade_sheet.grade}
+                      displayVal={values.grade}
                       onChange={(e) => {
                         handleChange(e);
                       }}
@@ -273,11 +282,12 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                   <TOI
                     name="comments"
                     type="textarea"
-                    rows="5"
-                    defaultValue={mockGradesheetData.comments}
-                    autoComplete="on"
                     editable={edit}
-                    displayVal={mockGradesheetData.comments}
+                    rows="5"
+                    autoComplete="on"
+                    // value={values.comments}
+                    defaultValue={details?.grade_sheet.comments}
+                    displayVal={details?.grade_sheet.comments}
                     onChange={(e) => {
                       handleChange(e);
                     }}
