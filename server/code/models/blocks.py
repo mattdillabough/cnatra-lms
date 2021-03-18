@@ -4,7 +4,6 @@ import mongoengine as me
 # project imports
 from models.default_values import uuid_value
 from models.shared.base_mixin import BaseMixin
-from models.stages import StageModel
 
 
 class BlockModel(BaseMixin, me.Document):
@@ -16,6 +15,6 @@ class BlockModel(BaseMixin, me.Document):
     block_number = me.StringField()
     title = me.StringField()
     block_in_stage = me.IntField()
-    stage = me.ReferenceField(StageModel, required=True)
+    stage = me.StringField(required=True)
 
     meta = {'collection': 'blocks'}
