@@ -37,7 +37,7 @@ def insert_events():
         # find media_type record
         event['media_type'] = MediaTypeModel.objects(media_type=event['media_type']).first()
         # find block record
-        event['block'] = BlockModel.objects(block_number=event['block']).first()
+        event['block'] = BlockModel.objects(block_number=event['block']).first()['block_id']
         # create record
         event_model = EventModel(**event)
         # insert record
