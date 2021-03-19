@@ -4,15 +4,16 @@
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
-import { debounce } from "lodash";
+// import { debounce } from "lodash";
 
 //Internal imports
 import Maneuver from "./Maneuver";
-import TOI from "./TextOrInput";
+import { EventForm } from "./useEventForm";
+// import TOI from "./TextOrInput";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 
-const gradesheet_id = "84d8b584a4cc4665abccc2b1a455e6f9";
+const gradesheet_id = "a8d5bd938e2442619217ead735a73e0d";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Managing state
@@ -24,56 +25,60 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
-  //Accessing redux state & methods
+  // //Accessing redux state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
 
-  //Fetch gradesheet data
+  // //Fetch gradesheet data
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
 
   //Manage form data
-  const [values, setValues] = useState({
-    grade: details?.grade_sheet?.grade || "",
-    clearedForSolo: mockGradesheetData.clearedForSolo || "",
-    "instructor.name": mockGradesheetData.instructor.name,
-    date: details?.grade_sheet.date,
-    fltDur: mockGradesheetData.flightTimelog.fltDur,
-    status: details?.grade_sheet.status,
-    // comments: details?.grade_sheet.comments,
-  });
+  // const [values, setValues] = useState({
+  //   grade: details?.grade_sheet?.grade,
+  //   clearedForSolo: mockGradesheetData.clearedForSolo,
+  //   instructorName: mockGradesheetData.instructor.name,
+  //   date: details?.grade_sheet.date,
+  //   fltDur: mockGradesheetData.flightTimelog.fltDur,
+  //   status: details?.grade_sheet.status,
+  //   // comments: details?.grade_sheet.comments,
+  // });
 
-  useEffect(() => {
-    setValues({
-      grade: details?.grade_sheet?.grade,
-      clearedForSolo: mockGradesheetData.clearedForSolo,
-      "instructor.name": mockGradesheetData.instructor.name,
-      date: details?.grade_sheet.date,
-      fltDur: mockGradesheetData.flightTimelog.fltDur,
-      status: details?.grade_sheet.status,
-      // comments: details?.grade_sheet.comments,
-    });
-    console.log("Updated!");
-  }, [details]);
+  // useEffect(() => {
+  //   setValues({
+  //     grade: details?.grade_sheet?.grade,
+  //     clearedForSolo: mockGradesheetData.clearedForSolo,
+  //     instructorName: mockGradesheetData.instructor.name,
+  //     date: details?.grade_sheet.date,
+  //     fltDur: mockGradesheetData.flightTimelog.fltDur,
+  //     status: details?.grade_sheet.status,
+  //     // comments: details?.grade_sheet.comments,
+  //   });
+  //   console.log("Updated!");
+  // }, []);
 
-  //Handling input changes
-  const handleChange = (e) => {
-    console.log("CHANGING: what's E?", e.target.value);
-    console.log("TARGET", e.target.name);
+  // //Handling input changes
+  // const handleChange = (e) => {
+  //   console.log("CHANGING: what's E?", e.target.value);
+  //   console.log("TARGET", e.target.name);
 
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-    // console.log("CHANGES:", values);
-  };
-  //Controls what happens when changes are submitted/saved
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("We're submitting~");
-    console.log("What is E?", e);
-  };
+  //   const { name, value } = e.target;
+  //   setValues({ ...values, [name]: value });
 
-  //Displays loading page if props from redux haven't been received yet
+  //   // console.log("CHANGES:", values);
+  // };
+  // //Controls what happens when changes are submitted/saved
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("We're submitting~");
+  //   console.log("What is E?", e);
+  // };
+
+  // const [formValue, EventForm] = useEventForm(edit);
+  // console.log("formVALUE", formValue);
+
+  // Displays loading page if props from redux haven't been received yet
   if (!details?.grade_sheet.grade) {
     return <div className="Gradesheet container">Loading...</div>;
   }
@@ -106,7 +111,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
           </h4>
           <div className="gradesheet-submission">
             <div title="Date submitted">
-              {new Date(details.grade_sheet.date).toLocaleDateString("en-US", {
+              {new Date(details?.grade_sheet.date).toLocaleDateString("en-US", {
                 month: "long",
                 day: "2-digit",
                 year: "numeric",
@@ -162,7 +167,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               aria-expanded="false"
               aria-controls="collapse"
             >
-              <form
+              <EventForm edit={edit} />
+              {/* <form
                 className="row"
                 id="event-details-form"
                 onSubmit={(e) => {
@@ -185,7 +191,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                         handleChange(e);
                       }}
                     />
-                    {/* Fix time*/}
+
                     <TOI
                       name="date"
                       className="constrain-input"
@@ -293,7 +299,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                     }}
                   />
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
           {/* Maps out event's maneuvers */}

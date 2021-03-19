@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 // import { debounce } from "lodash";
 // import { mockGradesheetData } from "./mockGradesheetData";
 
@@ -20,6 +20,7 @@ function TOI({
   options = [],
   editable = false,
   check,
+  changed,
   ...props
 }) {
   // const inputVal = useRef();
@@ -58,7 +59,9 @@ function TOI({
           return (
             <textarea
               disabled={!editable}
-              defaultValue={defaultValue}
+              // defaultValue={defaultValue}
+              value={props.value}
+              onChange={(e) => changed(e)}
               {...props}
               // ref={inputVal}
               // onChange={(e) => {
@@ -120,11 +123,11 @@ function TOI({
             <input
               disabled={!editable}
               type={type}
-              defaultValue={defaultValue}
+              // defaultValue={defaultValue}
               // ref={inputVal}
-              // onChange={(e) => {
-              //   handleChange(e);
-              // }}
+              onChange={(e) => {
+                changed(e);
+              }}
               {...props}
             />
           );
