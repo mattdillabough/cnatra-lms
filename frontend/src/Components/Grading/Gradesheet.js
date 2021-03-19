@@ -34,29 +34,29 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
 
-  //Manage form data
-  // const [values, setValues] = useState({
-  //   grade: details?.grade_sheet?.grade,
-  //   clearedForSolo: mockGradesheetData.clearedForSolo,
-  //   instructorName: mockGradesheetData.instructor.name,
-  //   date: details?.grade_sheet.date,
-  //   fltDur: mockGradesheetData.flightTimelog.fltDur,
-  //   status: details?.grade_sheet.status,
-  //   // comments: details?.grade_sheet.comments,
-  // });
+  // Manage form data
+  const [values, setValues] = useState({
+    grade: details?.grade_sheet?.grade,
+    clearedForSolo: mockGradesheetData.clearedForSolo,
+    instructorName: mockGradesheetData.instructor.name,
+    date: details?.grade_sheet.date,
+    fltDur: mockGradesheetData.flightTimelog.fltDur,
+    status: details?.grade_sheet.status,
+    comments: details?.grade_sheet.comments,
+  });
 
-  // useEffect(() => {
-  //   setValues({
-  //     grade: details?.grade_sheet?.grade,
-  //     clearedForSolo: mockGradesheetData.clearedForSolo,
-  //     instructorName: mockGradesheetData.instructor.name,
-  //     date: details?.grade_sheet.date,
-  //     fltDur: mockGradesheetData.flightTimelog.fltDur,
-  //     status: details?.grade_sheet.status,
-  //     // comments: details?.grade_sheet.comments,
-  //   });
-  //   console.log("Updated!");
-  // }, []);
+  useEffect(() => {
+    setValues({
+      grade: details?.grade_sheet?.grade,
+      clearedForSolo: mockGradesheetData.clearedForSolo,
+      instructorName: mockGradesheetData.instructor.name,
+      date: details?.grade_sheet?.date,
+      fltDur: mockGradesheetData.flightTimelog.fltDur,
+      status: details?.grade_sheet.status,
+      comments: details?.grade_sheet.comments,
+    });
+    console.log("Updated!");
+  }, [details]);
 
   // //Handling input changes
   // const handleChange = (e) => {
@@ -167,7 +167,11 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               aria-expanded="false"
               aria-controls="collapse"
             >
-              <EventForm edit={edit} />
+              {details?.grade_sheet?.grade ? (
+                <EventForm edit={edit} values={values} />
+              ) : (
+                <div>Loading...</div>
+              )}
               {/* <form
                 className="row"
                 id="event-details-form"

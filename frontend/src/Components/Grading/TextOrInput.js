@@ -20,7 +20,7 @@ function TOI({
   options = [],
   editable = false,
   check,
-  changed,
+  register,
   ...props
 }) {
   // const inputVal = useRef();
@@ -59,9 +59,10 @@ function TOI({
           return (
             <textarea
               disabled={!editable}
-              // defaultValue={defaultValue}
-              value={props.value}
-              onChange={(e) => changed(e)}
+              ref={register}
+              defaultValue={defaultValue}
+              // value={props.value}
+              // onChange={(e) => changed(e)}
               {...props}
               // ref={inputVal}
               // onChange={(e) => {
@@ -81,6 +82,7 @@ function TOI({
                       id={option}
                       disabled={!editable}
                       value={option}
+                      ref={register}
                       // ref={inputVal}
                       // checked={checked === option}
                       defaultChecked={
@@ -103,6 +105,7 @@ function TOI({
             <select
               disabled={!editable}
               defaultValue={defaultValue}
+              ref={register}
               // ref={inputVal}
               // onChange={(e) => {
               //   handleChange(e);
@@ -123,11 +126,12 @@ function TOI({
             <input
               disabled={!editable}
               type={type}
-              // defaultValue={defaultValue}
+              ref={register}
+              defaultValue={defaultValue}
               // ref={inputVal}
-              onChange={(e) => {
-                changed(e);
-              }}
+              // onChange={(e) => {
+              //   changed(e);
+              // }}
               {...props}
             />
           );
