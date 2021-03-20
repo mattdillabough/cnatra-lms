@@ -16,7 +16,7 @@ import { getGradesheet } from "../../Store/grades";
 const gradesheet_id = "a8d5bd938e2442619217ead735a73e0d";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
-  //Managing state
+  //MANAGING STATE
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
@@ -25,16 +25,16 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
-  // //Accessing redux state & methods
+  //Accessing REDUX state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
 
-  // //Fetch gradesheet data
+  //FETCH gradesheet data
   useEffect(() => {
     dispatch(getGradesheet(gradesheet_id));
   }, [dispatch]);
 
-  // Manage form data
+  // MANAGE FORM DATA
   const [values, setValues] = useState({
     grade: details?.grade_sheet?.grade,
     clearedForSolo: mockGradesheetData.clearedForSolo,
@@ -58,27 +58,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     console.log("Updated!");
   }, [details]);
 
-  // //Handling input changes
-  // const handleChange = (e) => {
-  //   console.log("CHANGING: what's E?", e.target.value);
-  //   console.log("TARGET", e.target.name);
-
-  //   const { name, value } = e.target;
-  //   setValues({ ...values, [name]: value });
-
-  //   // console.log("CHANGES:", values);
-  // };
-  // //Controls what happens when changes are submitted/saved
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("We're submitting~");
-  //   console.log("What is E?", e);
-  // };
-
-  // const [formValue, EventForm] = useEventForm(edit);
-  // console.log("formVALUE", formValue);
-
-  // Displays loading page if props from redux haven't been received yet
+  // Displays LOADING page if props from redux haven't been received yet
   if (!details?.grade_sheet.grade) {
     return <div className="Gradesheet container">Loading...</div>;
   }
@@ -167,143 +147,12 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               aria-expanded="false"
               aria-controls="collapse"
             >
+              {/* EVENT DETAILS FORM */}
               {details?.grade_sheet?.grade ? (
                 <EventForm edit={edit} values={values} />
               ) : (
                 <div>Loading...</div>
               )}
-              {/* <form
-                className="row"
-                id="event-details-form"
-                onSubmit={(e) => {
-                  handleSubmit(e);
-                }}
-              >
-                <div className="col-12">
-                  <h5>Flight Lesson</h5>
-                  <div className="event-details-section">
-                    <TOI
-                      name="instructor.name"
-                      className="constrain-input"
-                      labeltxt="Instructor: "
-                      type="text"
-                      editable={edit}
-                      value={values["instructor.name"]}
-                      // defaultValue={mockGradesheetData.instructor.name}
-                      displayVal={values["instructor.name"]}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-
-                    <TOI
-                      name="date"
-                      className="constrain-input"
-                      labeltxt="Start Date / Time: "
-                      type="datetime-local"
-                      editable={edit}
-                      value={values.date}
-                      // defaultValue={
-                      //   details?.grade_sheet.date &&
-                      //   details.grade_sheet.date[
-                      //     details.grade_sheet.date.length - 6
-                      //   ] === "T"
-                      //     ? details.grade_sheet.date
-                      //     : String(`${details.grade_sheet.date}T12:30`)
-                      // }
-                      displayVal={new Date(values.date).toLocaleDateString(
-                        undefined,
-                        {
-                          month: "short",
-                          day: "2-digit",
-                          year: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          hour12: false,
-                          timeZone: "UTC",
-                        }
-                      )}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-                    <TOI
-                      name="fltDur"
-                      className="constrain-input"
-                      labeltxt="Duration: "
-                      type="number"
-                      step={0.1}
-                      editable={edit}
-                      value={values.fltDur}
-                      // defaultValue={mockGradesheetData.flightTimelog.fltDur}
-                      displayVal={values.fltDur}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-                  </div>
-                  <h5>Details</h5>
-                  <div className="event-details-section">
-                    <TOI
-                      name="status"
-                      labeltxt="Status: "
-                      type="select"
-                      editable={edit}
-                      options={["CMP", "ICMP"]}
-                      displayVal={values.status}
-                      value={values.status}
-                      // defaultValue={
-                      //   details.grade_sheet.status === "CMP" ? "CMP" : "ICMP"
-                      // }
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-                    <TOI
-                      name="clearedForSolo"
-                      labeltxt="Cleared for Solo: "
-                      type="radio"
-                      editable={edit}
-                      options={["N/A", "Yes", "No"]}
-                      check={values.clearedForSolo}
-                      // defaultValue={mockGradesheetData.clearedForSolo}
-                      displayVal={values.clearedForSolo}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-                    <TOI
-                      name="grade"
-                      labeltxt="Overall Grade: "
-                      type="radio"
-                      editable={edit}
-                      options={["Pass", "Fail"]}
-                      check={values.grade}
-                      // defaultValue={details.grade_sheet.grade}
-                      displayVal={values.grade}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="col-12">
-                  <h5>Event Comments: </h5>
-                  <TOI
-                    name="comments"
-                    type="textarea"
-                    editable={edit}
-                    rows="5"
-                    autoComplete="on"
-                    // value={values.comments}
-                    defaultValue={details?.grade_sheet.comments}
-                    displayVal={details?.grade_sheet.comments}
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                  />
-                </div>
-              </form> */}
             </div>
           </div>
           {/* Maps out event's maneuvers */}

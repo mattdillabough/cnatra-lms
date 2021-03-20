@@ -1,15 +1,14 @@
 import React from "react";
 // import { debounce } from "lodash";
-// import { mockGradesheetData } from "./mockGradesheetData";
 
 //To simulate different user types
 const user = "instructor";
 
 //Would likely check state or local storage for user type
-// const elementType = user === "instructor" ? "input" : "div";
-//TOI = text or input (conditionally render html elements based on user role); Thinking this functionality can be used when the 'edit' btn is implemented
 
-// DISCLAIMER: defaultValue / displayVal attributes will likely need to be altered. defaultValue SHOULD be the value if nothing was previously entered. displayVal should reflect the value of an input from the db and reflect changes after update.
+//TOI = text or input (conditionally renders html elements based on user role and/or editMode)
+
+// DISCLAIMER: defaultValue / displayVal attributes will likely need to be altered. defaultValue SHOULD be the 'old' value from the db. displayVal should reflect the value of an input from the db and reflect changes after update.
 // We should also implement a warning for the user letting them know if they haven't saved their changes, they will be lost after exiting "Edit mode".
 
 function TOI({
@@ -61,13 +60,7 @@ function TOI({
               disabled={!editable}
               ref={register}
               defaultValue={defaultValue}
-              // value={props.value}
-              // onChange={(e) => changed(e)}
               {...props}
-              // ref={inputVal}
-              // onChange={(e) => {
-              //   handleChange(e);
-              // }}
             ></textarea>
           );
         case "radio":
@@ -83,15 +76,9 @@ function TOI({
                       disabled={!editable}
                       value={option}
                       ref={register}
-                      // ref={inputVal}
-                      // checked={checked === option}
                       defaultChecked={
-                        // defaultValue.toLowerCase() === option.toLowerCase()
                         check?.toLowerCase() === option.toLowerCase()
                       }
-                      // onChange={(e) => {
-                      //   handleChange(e);
-                      // }}
                       {...props}
                     />
                   </label>
@@ -106,10 +93,6 @@ function TOI({
               disabled={!editable}
               defaultValue={defaultValue}
               ref={register}
-              // ref={inputVal}
-              // onChange={(e) => {
-              //   handleChange(e);
-              // }}
               {...props}
             >
               {[`--Select a ${labeltxt}--`, ...options].map((option, idx) => {
@@ -128,10 +111,6 @@ function TOI({
               type={type}
               ref={register}
               defaultValue={defaultValue}
-              // ref={inputVal}
-              // onChange={(e) => {
-              //   changed(e);
-              // }}
               {...props}
             />
           );
