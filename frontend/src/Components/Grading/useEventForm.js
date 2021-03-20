@@ -3,6 +3,7 @@ import TOI from "./TextOrInput";
 import { useForm } from "react-hook-form";
 
 export const EventForm = ({ edit, values }) => {
+  //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
   const { register, handleSubmit } = useForm({ defaultValues: values });
 
   const onSubmit = (data) => {

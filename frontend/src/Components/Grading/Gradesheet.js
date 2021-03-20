@@ -4,12 +4,10 @@
 import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
-// import { debounce } from "lodash";
 
 //Internal imports
 import Maneuver from "./Maneuver";
 import { EventForm } from "./useEventForm";
-// import TOI from "./TextOrInput";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 
@@ -156,8 +154,13 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             </div>
           </div>
           {/* Maps out event's maneuvers */}
-          {mockGradesheetData.maneuvers.map((maneuver) => {
-            return <Maneuver key={maneuver.id} maneuver={maneuver} />;
+          {details?.grade_sheet.grade_sheet_maneuvers.map((maneuver) => {
+            return (
+              <Maneuver
+                key={maneuver.maneuver_item_file.maneuver.maneuver_id}
+                maneuver={maneuver}
+              />
+            );
           })}
         </div>
       </div>

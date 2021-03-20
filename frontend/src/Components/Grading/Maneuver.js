@@ -20,7 +20,7 @@ function Maneuver({ maneuver }) {
   return (
     <div
       className={
-        maneuver.grade >= maneuver.MIF
+        maneuver.grade >= maneuver.maneuver_item_file.grade
           ? "maneuver container-fluid pass-MIF"
           : "maneuver container-fluid below-MIF"
       }
@@ -29,14 +29,14 @@ function Maneuver({ maneuver }) {
         <div className="col-10">
           <div className="row">
             <div className="col-sm-12 col-md-8" title="Maneuver Description">
-              {maneuver.description || "Maneuver Name"}
+              {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             <div className="col-6 col-md-2" title={gradeValues[maneuver.grade]}>
               {`Grade: ${maneuver.grade}` || "Grade"}
             </div>
             <div className="col-6 col-md-2" title="Maneuver Item File">
-              {`MIF: ${maneuver.MIF}` || "MIF"}
-              {maneuver.MIF > 1 ? "+" : ""}
+              {`MIF: ${maneuver.maneuver_item_file.grade}` || "MIF"}
+              {maneuver.maneuver_item_file.is_required ? "+" : ""}
             </div>
           </div>
         </div>
