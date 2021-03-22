@@ -11,8 +11,6 @@ import { EventForm } from "./useEventForm";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 
-const gradesheet_id = "a8d5bd938e2442619217ead735a73e0d";
-
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //MANAGING STATE
   const [dropdown, setDropDown] = useState(false);
@@ -29,7 +27,10 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
 
   //FETCH gradesheet data
   useEffect(() => {
-    dispatch(getGradesheet(gradesheet_id));
+    async function getData() {
+      await dispatch(getGradesheet(props.match.params.gradesheetId));
+    }
+    getData();
   }, [dispatch]);
 
   // MANAGE FORM DATA
