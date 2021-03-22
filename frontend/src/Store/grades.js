@@ -4,12 +4,21 @@ const baseUrl = "http://localhost:5000";
 
 //ACTIONS
 const GET_GRADESHEET = "GET_GRADESHEET";
+const UPDATE_GRADESHEET = "UPDATE_GRADESHEET"; //Only includes event details
+// const UPDATE_MANEUVER = "UPDATE_MANEUVER";
 
 //ACTION CREATOR
 const findGradeSheet = (data) => {
   return {
     type: GET_GRADESHEET,
     data,
+  };
+};
+
+const modifyGradeSheet = (update) => {
+  return {
+    type: UPDATE_GRADESHEET,
+    update,
   };
 };
 
@@ -25,11 +34,27 @@ export const getGradesheet = (id) => {
   };
 };
 
+export const updateGradesheet = (data) => {
+  return async (dispatch) => {
+    try {
+      //Assumes data will include an id corresponding to the gradesheet
+      // await axios.put(`${baseUrl}/server/grade_sheets/${data.id}`, data)
+      console.log("Data has been sent for update");
+      dispatch(modifyGradeSheet(data));
+    } catch (error) {
+      console.log("Error: there was a problem updating the gradesheet", error);
+    }
+  };
+};
+
 //REDUCER
 export default function gradesReducer(state = {}, action) {
   switch (action.type) {
     case GET_GRADESHEET:
       return { ...state, details: action.data };
+    case UPDATE_GRADESHEET:
+      //will need to find all the fields for update
+      return { ...state };
     default:
       return state;
   }
