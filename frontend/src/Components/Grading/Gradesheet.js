@@ -31,7 +31,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
       await dispatch(getGradesheet(props.match.params.gradesheetId));
     }
     getData();
-  }, [dispatch]);
+  }, [dispatch, props.match.params.gradesheetId]);
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
@@ -148,7 +148,11 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             >
               {/* EVENT DETAILS FORM */}
               {details?.grade_sheet?.grade ? (
-                <EventForm edit={edit} values={values} />
+                <EventForm
+                  edit={edit}
+                  values={values}
+                  gradesheetId={props.match.params.gradesheetId}
+                />
               ) : (
                 <div>Loading...</div>
               )}

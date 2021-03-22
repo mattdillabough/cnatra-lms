@@ -39,7 +39,7 @@ export const updateGradesheet = (data) => {
     try {
       //Assumes data will include an id corresponding to the gradesheet
       // await axios.put(`${baseUrl}/server/grade_sheets/${data.id}`, data)
-      console.log("Data has been sent for update");
+      console.log("Data has been sent for update for gradesheetId: ", data.id);
       dispatch(modifyGradeSheet(data));
     } catch (error) {
       console.log("Error: there was a problem updating the gradesheet", error);
