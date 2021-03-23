@@ -65,29 +65,31 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   return (
     <>
       <div className="Gradesheet-wrap container-fluid">
-        <div className="edit-controls d-flex justify-content-center justify-content-md-end container">
-          <div className="btn-group">
-            {edit ? (
-              <button type="submit" form="event-details-form">
-                Save
-              </button>
-            ) : (
-              ""
-            )}
-            <button type="button" onClick={toggleEditMode}>
-              {edit === true ? "Cancel" : "Edit"}
-            </button>
-          </div>
-        </div>
         <div className="Gradesheet container">
           <h2
             className="student-name"
             title="Student Name"
           >{`${mockGradesheetData.student.rank} ${mockGradesheetData.student.name}`}</h2>
-          <h4 className="event-identifier" title="Event Identifier and title">
-            {`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}` ||
-              "[Event ID] - [Event Name]"}
-          </h4>
+          <div className="d-flex justify-content-between flex-column flex-md-row">
+            <h4 className="event-identifier" title="Event Identifier and title">
+              {`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}` ||
+                "[Event ID] - [Event Name]"}
+            </h4>
+            <div className="edit-controls align-self-center align-self-md-end">
+              <div className="btn-group">
+                {edit ? (
+                  <button type="submit" form="event-details-form">
+                    Save
+                  </button>
+                ) : (
+                  ""
+                )}
+                <button type="button" onClick={toggleEditMode}>
+                  {edit === true ? "Cancel" : "Edit"}
+                </button>
+              </div>
+            </div>
+          </div>
           <div className="gradesheet-submission">
             <div title="Date submitted">
               {new Date(details?.grade_sheet.date).toLocaleDateString("en-US", {

@@ -239,7 +239,8 @@ input:disabled {
 }
 
 .edit-controls {
-  padding: 0.5em 1em;
+  max-width: fit-content;
+  padding: 0em 1em 0.5em 1em;
   /* border: 1px solid black; */
 }
 
@@ -268,7 +269,9 @@ input:disabled {
   padding-left: 0.5em;
 }
 .event-identifier {
-  text-align: left;
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
   border-bottom: 2px solid black;
 }
 
@@ -306,7 +309,8 @@ input:disabled {
   font-weight: 400;
 }
 
-.option-label, .option-label input {
+.option-label,
+.option-label input {
   margin: 0em 0.25em;
 }
 
@@ -346,6 +350,11 @@ textarea {
 
 /* Larger than tablet views */
 @media (min-width: 576px) {
+  .event-identifier {
+    text-align: left;
+    font-size: 1.4rem;
+  }
+
   .constrain-input {
     width: 250px;
     max-width: 85%;
