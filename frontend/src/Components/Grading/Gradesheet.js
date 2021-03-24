@@ -37,9 +37,10 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [values, setValues] = useState({
     grade: details?.grade_sheet?.grade,
     clearedForSolo: mockGradesheetData.clearedForSolo,
-    instructorName: mockGradesheetData.instructor.name,
+    instructorName: details?.grade_sheet.instructor.name,
     date: details?.grade_sheet.date,
-    fltDur: mockGradesheetData.flightTimelog.fltDur,
+    hours: details?.grade_sheet.event.hours,
+    media_type: details?.grade_sheet.event.media_type.media_type,
     status: details?.grade_sheet.status,
     comments: details?.grade_sheet.comments,
   });
@@ -50,7 +51,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
       clearedForSolo: mockGradesheetData.clearedForSolo,
       instructorName: mockGradesheetData.instructor.name,
       date: details?.grade_sheet?.date,
-      fltDur: mockGradesheetData.flightTimelog.fltDur,
+      hours: details?.grade_sheet.event.hours,
+      media_type: details?.grade_sheet.event.media_type.media_type,
       status: details?.grade_sheet.status,
       comments: details?.grade_sheet.comments,
     });
@@ -69,10 +71,10 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
           <h2
             className="student-name"
             title="Student Name"
-          >{`${mockGradesheetData.student.rank} ${mockGradesheetData.student.name}`}</h2>
+          >{`${mockGradesheetData.student.rank} ${details.grade_sheet.student.last_name}, ${details.grade_sheet.student.first_name}`}</h2>
           <div className="d-flex justify-content-between flex-column flex-md-row">
             <h4 className="event-identifier" title="Event Identifier and title">
-              {`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}` ||
+              {`[${details.grade_sheet.event.event_code}][${details.grade_sheet.event.event_in_block}] - ${details.grade_sheet.event.title}` ||
                 "[Event ID] - [Event Name]"}
             </h4>
             <div className="edit-controls align-self-center align-self-md-end">
@@ -101,7 +103,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             </div>
             <div title="Gradesheet submitter">
               <strong>Submitted by: </strong>
-              {`${mockGradesheetData.instructor.rank} ${mockGradesheetData.instructor.name}`}
+              {`${mockGradesheetData.instructor.rank} ${details.grade_sheet.instructor.last_name}, ${details.grade_sheet.instructor.first_name}`}
             </div>
           </div>
           <div className="gradesheet-details container-fluid">

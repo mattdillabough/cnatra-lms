@@ -96,18 +96,33 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             })}
           />
           <TOI
-            name="fltDur"
+            name="hours"
             className="constrain-input"
             labeltxt="Duration: "
             type="number"
             step={0.1}
             editable={edit}
             register={register}
-            displayVal={values?.fltDur}
+            displayVal={values?.hours}
+            defaultValue={
+              typeof values?.hours === "number"
+                ? values.hours
+                : Number(values.hours)
+            }
           />
         </div>
         <h5>Details</h5>
         <div className="event-details-section">
+          <TOI
+            name="media_type"
+            labeltxt="Media Type: "
+            type="select"
+            editable={edit}
+            options={["TH-57C", "Option 2", "Option 3"]}
+            displayVal={values?.media_type}
+            register={register}
+            defaultValue={values?.media_type}
+          />
           <TOI
             name="status"
             labeltxt="Status: "
@@ -116,8 +131,9 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             options={["CMP", "ICMP"]}
             displayVal={values?.status}
             register={register}
-            defaultValue={values?.status === "CMP" ? "CMP" : "ICMP"}
+            defaultValue={values?.status}
           />
+          {/* clearedForSolo isn't included in db data, excluding from register */}
           <TOI
             name="clearedForSolo"
             labeltxt="Cleared for Solo: "
@@ -125,7 +141,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             editable={edit}
             options={["N/A", "Yes", "No"]}
             check={values.clearedForSolo}
-            register={register}
+            // register={register}
             displayVal={values.clearedForSolo}
           />
           <TOI
