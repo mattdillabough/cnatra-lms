@@ -22,24 +22,23 @@ class GradeSheetManeuver(Resource):
 
         # parse request
         parser = reqparse.RequestParser()
-        parser.add_argument('grade_sheet_maneuver_id')
-        parser.add_argument('grade')
+        parser.add_argument('grade', type=int)
         parser.add_argument('comments')
 
         # get data from parser arguments
-        data = parser.parse_args()
+        args = parser.parse_args()
 
         # query for grade_sheet_maneuver
         grade_sheet_maneuver = GradeSheetManeuverModel.objects(grade_sheet_maneuver_id=grade_sheet_maneuver_id).first()
 
         # update record or return 409 (conflict)
         try:
-            grade_sheet_maneuver.update(
-                **{
-                    'grade': data['grade'],
-                    'comments': data['comments']
-                }
-            )
+            # find args that exist and are different
+            grade_sheet_maneuver.update(**{k: args[k] for k in args if (args[k] is not None) & (args[k] != grade_sheet_maneuver[k])})
             return {'message': 'Grade sheet maneuver successfully updated'}
-        except:
-            return {'message': 'Grade sheet maneuver not updated'}, 409
+        except Exception as e:
+            return {
+                        'message': 'Grade sheet maneuver not updated',
+                        'error': str(e)
+                    }, 409
+
