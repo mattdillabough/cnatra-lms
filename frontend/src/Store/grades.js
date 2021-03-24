@@ -53,7 +53,7 @@ export default function gradesReducer(state = {}, action) {
     case GET_GRADESHEET:
       return { ...state, details: action.data };
     case UPDATE_GRADESHEET:
-      //will need to find all the fields for update
+      //will need to find all the fields for update; or make another GET req to replace old details
       return { ...state };
     default:
       return state;

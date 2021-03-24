@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 //Internal imports
 import Maneuver from "./Maneuver";
 import { EventForm } from "./useEventForm";
+import ManeuversForm from "./ManeuversForm";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 
@@ -197,9 +198,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                   type="button"
                   onClick={toggleManeuversMode}
                   title={
-                    maneuverEdit === true
-                      ? "Cancel changes"
-                      : "maneuverEdit event details"
+                    maneuverEdit === true ? "Cancel changes" : "Edit Maneuvers "
                   }
                 >
                   {maneuverEdit === true ? "Cancel" : "Edit"}
@@ -207,7 +206,11 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               </div>
             </div>
           </div>
-          {/* Maps out event's maneuvers */}
+          <ManeuversForm
+            maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
+            edit={maneuverEdit}
+          />
+          {/* Maps out event's maneuvers
           {details?.grade_sheet.grade_sheet_maneuvers.map((maneuver) => {
             return (
               <Maneuver
@@ -216,7 +219,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                 editable={maneuverEdit}
               />
             );
-          })}
+          })} */}
         </div>
       </div>
     </>
