@@ -38,15 +38,29 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     >
       <div className="col-12">
         <h5>Flight Lesson</h5>
+        <h6>Instructor</h6>
         <div className="event-details-section">
           <TOI
-            name="instructorName"
+            name="instructor_last_name"
             className="constrain-input"
-            labeltxt="Instructor: "
+            labeltxt="Last Name: "
             type="text"
             editable={edit}
             register={register}
-            displayVal={values.instructorName}
+            displayVal={values?.instructor_last_name}
+            defaultValue={values?.instructor_last_name}
+            placeholder="Last Name"
+          />
+          <TOI
+            name="instructor_first_name"
+            className="constrain-input"
+            labeltxt="First Name: "
+            type="text"
+            editable={edit}
+            register={register}
+            displayVal={values.instructor_first_name}
+            defaultValue={values?.instructor_first_name}
+            placeholder="First Name"
           />
           {/* <label className="event-label">
             INSTRUCTOR:

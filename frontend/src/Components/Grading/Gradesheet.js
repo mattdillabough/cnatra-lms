@@ -37,7 +37,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [values, setValues] = useState({
     grade: details?.grade_sheet?.grade,
     clearedForSolo: mockGradesheetData.clearedForSolo,
-    instructorName: details?.grade_sheet.instructor.name,
+    instructor_first_name: details?.grade_sheet.instructor.first_name,
+    instructor_last_name: details?.grade_sheet.instructor.last_name,
     date: details?.grade_sheet.date,
     hours: details?.grade_sheet.event.hours,
     media_type: details?.grade_sheet.event.media_type.media_type,
@@ -49,7 +50,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     setValues({
       grade: details?.grade_sheet?.grade,
       clearedForSolo: mockGradesheetData.clearedForSolo,
-      instructorName: mockGradesheetData.instructor.name,
+      instructor_first_name: details?.grade_sheet.instructor.first_name,
+      instructor_last_name: details?.grade_sheet.instructor.last_name,
       date: details?.grade_sheet?.date,
       hours: details?.grade_sheet.event.hours,
       media_type: details?.grade_sheet.event.media_type.media_type,
