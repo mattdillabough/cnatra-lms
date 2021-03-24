@@ -1,5 +1,5 @@
 # python imports
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, inputs
 
 # project imports
 from models.grade_sheet_maneuvers import GradeSheetManeuverModel
@@ -31,7 +31,7 @@ class GradeSheet(Resource):
 
         # parse request
         parser = reqparse.RequestParser()
-        parser.add_argument('date')
+        parser.add_argument('date', type=inputs.date)
         parser.add_argument('grade')
         parser.add_argument('status')
         parser.add_argument('comments')
@@ -46,9 +46,9 @@ class GradeSheet(Resource):
         try:
             # find args that exist and are different
             grade_sheet.update(**{k: args[k] for k in args if (args[k] is not None) & (args[k] != grade_sheet[k])})
-            return {'message': 'Grade sheet maneuver successfully updated'}
+            return {'message': 'Grade sheet successfully updated'}
         except Exception as e:
             return {
-                        'message': 'Grade sheet maneuver not updated',
+                        'message': 'Grade sheet not updated',
                         'error': str(e)
                     }, 409
