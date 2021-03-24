@@ -1,5 +1,5 @@
 # python imports
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 # project imports
 from models.grade_sheet_maneuvers import GradeSheetManeuverModel
@@ -25,3 +25,30 @@ class GradeSheet(Resource):
         if grade_sheet:
             return {'grade_sheet': grade_sheet}
         return {'message': 'Grade sheet not found'}, 404
+
+
+    def put(self, grade_sheet_id):
+
+        # parse request
+        parser = reqparse.RequestParser()
+        parser.add_argument('date')
+        parser.add_argument('grade')
+        parser.add_argument('status')
+        parser.add_argument('comments')
+
+        # get data from parser arguments
+        args = parser.parse_args()
+
+        # query for grade_sheet_maneuver
+        grade_sheet = GradeSheetModel.objects(grade_sheet_id=grade_sheet_id).first()
+
+        # update record or return 409 (conflict)
+        try:
+            # find args that exist and are different
+            grade_sheet.update(**{k: args[k] for k in args if (args[k] is not None) & (args[k] != grade_sheet[k])})
+            return {'message': 'Grade sheet maneuver successfully updated'}
+        except Exception as e:
+            return {
+                        'message': 'Grade sheet maneuver not updated',
+                        'error': str(e)
+                    }, 409
