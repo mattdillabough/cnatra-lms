@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
-function Maneuver({ maneuver }) {
+function Maneuver({ maneuver, editable }) {
   // console.log("props?", maneuver)
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -31,9 +31,25 @@ function Maneuver({ maneuver }) {
             <div className="col-sm-12 col-md-8" title="Maneuver Description">
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
-            <div className="col-6 col-md-2" title={gradeValues[maneuver.grade]}>
-              {`Grade: ${maneuver.grade}` || "Grade"}
-            </div>
+            {editable ? (
+              <input
+                className="col-6 col-md-2"
+                type="number"
+                step={1}
+                min={1}
+                max={5}
+                placeholder="grade"
+                inputMode="decimal"
+                defaultValue={maneuver?.grade}
+              ></input>
+            ) : (
+              <div
+                className="col-6 col-md-2"
+                title={gradeValues[maneuver.grade]}
+              >
+                {`Grade: ${maneuver.grade}` || "--"}
+              </div>
+            )}
             <div className="col-6 col-md-2" title="Maneuver Item File">
               {`MIF: ${maneuver.maneuver_item_file.grade}` || "MIF"}
               {maneuver.maneuver_item_file.is_required ? "+" : ""}
@@ -62,9 +78,17 @@ function Maneuver({ maneuver }) {
         aria-expanded="false"
         aria-controls="collapseExample"
       >
-        <div title="Maneuver comments">
-          {maneuver.comments || "No comments"}
-        </div>
+        {editable ? (
+          <textarea
+            defaultValue={maneuver.comments}
+            placeholder="Maneuver comments"
+            rows="4"
+          ></textarea>
+        ) : (
+          <div title="Maneuver comments">
+            {maneuver.comments || "No comments"}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -43,6 +43,7 @@ label {
 textarea {
   width: 85vw;
   max-width: 100%;
+  padding: 0.5em;
 }
 
 input:disabled {
@@ -346,10 +347,6 @@ input:disabled {
 .constrain-input {
   width: 250px;
   max-width: 95%;
-}
-
-textarea {
-  padding: 0.5em;
 }
 
 /* Larger than tablet views */
