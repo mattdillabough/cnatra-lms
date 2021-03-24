@@ -17,9 +17,13 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
-
+  //Controls Event Detail edits
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
+
+  //Controls Maneuver edits
+  const [maneuverEdit, setManeuverEdit] = useState(false);
+  const toggleManeuversMode = () => setManeuverEdit(!maneuverEdit);
 
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
@@ -82,13 +86,23 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             <div className="edit-controls align-self-center align-self-md-end">
               <div className="btn-group">
                 {edit ? (
-                  <button type="submit" form="event-details-form">
+                  <button
+                    type="submit"
+                    form="event-details-form"
+                    title="Save event details"
+                  >
                     Save
                   </button>
                 ) : (
                   ""
                 )}
-                <button type="button" onClick={toggleEditMode}>
+                <button
+                  type="button"
+                  onClick={toggleEditMode}
+                  title={
+                    edit === true ? "Cancel changes" : "Edit event details"
+                  }
+                >
                   {edit === true ? "Cancel" : "Edit"}
                 </button>
               </div>
@@ -164,12 +178,42 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
               )}
             </div>
           </div>
+          <div className="d-flex justify-content-between flex-column flex-md-row">
+            <h4 className="event-identifier">Maneuvers</h4>
+            <div className="edit-controls align-self-center align-self-md-end">
+              <div className="btn-group">
+                {maneuverEdit ? (
+                  <button
+                    type="submit"
+                    form="maneuvers-form"
+                    title="Save event details"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  ""
+                )}
+                <button
+                  type="button"
+                  onClick={toggleManeuversMode}
+                  title={
+                    maneuverEdit === true
+                      ? "Cancel changes"
+                      : "maneuverEdit event details"
+                  }
+                >
+                  {maneuverEdit === true ? "Cancel" : "Edit"}
+                </button>
+              </div>
+            </div>
+          </div>
           {/* Maps out event's maneuvers */}
           {details?.grade_sheet.grade_sheet_maneuvers.map((maneuver) => {
             return (
               <Maneuver
                 key={maneuver.maneuver_item_file.maneuver.maneuver_id}
                 maneuver={maneuver}
+                editable={maneuverEdit}
               />
             );
           })}

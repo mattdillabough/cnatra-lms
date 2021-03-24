@@ -339,6 +339,10 @@ input:disabled {
   background: #1a171770;
 }
 
+.gradesheet-details {
+  margin-bottom: 1.5em;
+}
+
 .constrain-input {
   width: 250px;
   max-width: 95%;
