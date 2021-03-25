@@ -1,30 +1,36 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import Maneuver from "./Maneuver";
+import { updateManeuvers } from "../../Store/grades";
 
 function ManeuversForm({ maneuvers, edit }) {
   const { register, handleSubmit } = useForm({ defaultValues: maneuvers });
+
+  const dispatch = useDispatch();
 
   const submitHandler = (data) => {
     // console.log("Maneuver data submission: ", data);
     const filteredData = {};
     for (let key in data) {
-      let newData = {};
+      let newData = { data: {} };
       //Conversion of number strings into numbers
       let { grade, comments } = data[key];
       //Only send new data to db
       if (Number(grade) !== Number(maneuvers[key].grade)) {
-        newData.grade = Number(grade);
+        newData.data.grade = Number(grade);
       }
       if (comments !== maneuvers[key].comments) {
-        newData.comments = comments;
+        newData.data.comments = comments;
       }
-      if (newData.grade || newData.comments) {
+      if (newData.data.grade || newData.data.hasOwnProperty(comments)) {
+        newData.id = maneuvers[key].grade_sheet_maneuver_id;
         filteredData[key] = newData;
       }
     }
     console.log("FIltered MAnueveRs: ", filteredData);
+    dispatch(updateManeuvers(filteredData));
   };
 
   return (
