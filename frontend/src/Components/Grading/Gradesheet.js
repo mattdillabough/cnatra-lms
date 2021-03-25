@@ -208,17 +208,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
           <ManeuversForm
             maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
             edit={maneuverEdit}
+            gradesheetId={props.match.params.gradesheetId}
           />
-          {/* Maps out event's maneuvers
-          {details?.grade_sheet.grade_sheet_maneuvers.map((maneuver) => {
-            return (
-              <Maneuver
-                key={maneuver.maneuver_item_file.maneuver.maneuver_id}
-                maneuver={maneuver}
-                editable={maneuverEdit}
-              />
-            );
-          })} */}
         </div>
       </div>
     </>

@@ -58,7 +58,7 @@ export const updateGradesheet = (data) => {
   };
 };
 
-export const updateManeuvers = (edits) => {
+export const updateManeuvers = (edits, id) => {
   return async (dispatch) => {
     try {
       for (let key in edits) {
@@ -70,7 +70,8 @@ export const updateManeuvers = (edits) => {
       }
       console.log("Data has been sent to update maneuvers");
       //Change later: Should send updated info, properly formatted
-      dispatch(modifyManeuvers(edits));
+      const { data } = await axios.get(`${baseURL}/server/grade_sheets/${id}`);
+      dispatch(modifyManeuvers(data));
     } catch (error) {
       console.log("Error: there was a problem updating the maneuvers");
     }
@@ -87,7 +88,7 @@ export default function gradesReducer(state = {}, action) {
       return { ...state };
     case UPDATE_MANEUVERS:
       //Likewise for maneuvers
-      return { ...state };
+      return { ...state, details: action.update };
     default:
       return state;
   }

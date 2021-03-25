@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Maneuver from "./Maneuver";
 import { updateManeuvers } from "../../Store/grades";
 
-function ManeuversForm({ maneuvers, edit }) {
+function ManeuversForm({ maneuvers, edit, gradesheetId }) {
   const { register, handleSubmit } = useForm({ defaultValues: maneuvers });
 
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function ManeuversForm({ maneuvers, edit }) {
       }
     }
     console.log("FIltered MAnueveRs: ", filteredData);
-    dispatch(updateManeuvers(filteredData));
+    dispatch(updateManeuvers(filteredData, gradesheetId));
   };
 
   return (
