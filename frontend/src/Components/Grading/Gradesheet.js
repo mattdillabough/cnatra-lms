@@ -10,6 +10,7 @@ import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
+import { toggleManeuverMode } from "../../Store/formControl";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //MANAGING STATE
@@ -21,13 +22,13 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   const [edit, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!edit);
 
-  //Controls Maneuver edits
-  const [maneuverEdit, setManeuverEdit] = useState(false);
-  const toggleManeuversMode = () => setManeuverEdit(!maneuverEdit);
-
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
+
+  //Controls Maneuver edits
+  const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
+  const toggleManeuverEdits = () => dispatch(toggleManeuverMode());
 
   //FETCH gradesheet data
   useEffect(() => {
@@ -195,7 +196,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                 )}
                 <button
                   type="button"
-                  onClick={toggleManeuversMode}
+                  onClick={toggleManeuverEdits}
                   title={
                     maneuverEdit === true ? "Cancel changes" : "Edit Maneuvers "
                   }
