@@ -24,7 +24,7 @@ function ManeuversForm({ maneuvers, edit }) {
       if (comments !== maneuvers[key].comments) {
         newData.data.comments = comments;
       }
-      if (newData.data.grade || newData.data.hasOwnProperty(comments)) {
+      if (newData.data.grade || newData.data.hasOwnProperty("comments")) {
         newData.id = maneuvers[key].grade_sheet_maneuver_id;
         filteredData[key] = newData;
       }
