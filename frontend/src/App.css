@@ -386,6 +386,10 @@ input:disabled {
   margin: 0;
 }
 
+.maneuver-grade {
+  min-width: fit-content;
+}
+
 .maneuver-header .toggle-dropdown {
   transition: background-color 0.25s;
 }

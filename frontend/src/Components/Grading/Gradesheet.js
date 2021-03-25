@@ -207,7 +207,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             </div>
           </div>
           <ManeuversForm
-            maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
+            // maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
             edit={maneuverEdit}
             gradesheetId={props.match.params.gradesheetId}
           />

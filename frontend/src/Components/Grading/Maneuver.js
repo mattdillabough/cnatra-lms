@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { useSelector } from "react-redux";
 
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
@@ -8,6 +9,26 @@ function Maneuver({ maneuver, editable, register, idx }) {
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
+
+  // const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
+  // const [editGrade, setGradeEdit] = useState(maneuver?.grade);
+
+  // // //Trying to force re-render to update input prefill values
+  // useEffect(() => {
+  //   setGradeEdit({ editGrade: maneuver.grade });
+  // }, [maneuverEdit, maneuver.grade]);
+
+  // const { grade, comments } = watch();
+
+  // useEffect(() => {
+  //   register({ name: "grade" });
+  //   register({ name: "comments" });
+  // }, [register]);
+
+  // const handleChange = (name, e) => {
+  //   e.persist();
+  //   setValue(name, e.target.value);
+  // };
 
   const gradeValues = {
     1: "N - Not graded",
@@ -32,18 +53,21 @@ function Maneuver({ maneuver, editable, register, idx }) {
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
-              <input
-                name={`[${idx}].grade`}
-                className="col-6 col-md-2"
-                type="number"
-                step={1}
-                min={1}
-                max={5}
-                placeholder="grade"
-                inputMode="decimal"
-                defaultValue={maneuver?.grade}
-                ref={register}
-              ></input>
+              <span>
+                <input
+                  name={`[${idx}].grade`}
+                  className="col-6 col-md-2 maneuver-grade"
+                  type="number"
+                  step={1}
+                  min={1}
+                  max={5}
+                  placeholder="grade"
+                  inputMode="decimal"
+                  defaultValue={maneuver?.grade}
+                  // onChange={handleChange.bind(null, "grade")}
+                  ref={register}
+                ></input>
+              </span>
             ) : (
               <div
                 className="col-6 col-md-2"
@@ -83,9 +107,11 @@ function Maneuver({ maneuver, editable, register, idx }) {
         {editable ? (
           <textarea
             name={`[${idx}].comments`}
-            defaultValue={maneuver.comments}
+            defaultValue={maneuver?.comments}
             placeholder="Maneuver comments"
             rows="4"
+            // value={comments}
+            // onChange={handleChange.bind(null, "comments")}
             ref={register}
           ></textarea>
         ) : (

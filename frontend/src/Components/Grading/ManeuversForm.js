@@ -1,18 +1,32 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import Maneuver from "./Maneuver";
 import { updateManeuvers } from "../../Store/grades";
+import { toggleManeuverMode } from "../../Store/formControl";
 
-function ManeuversForm({ maneuvers, edit, gradesheetId }) {
-  const { register, handleSubmit } = useForm({ defaultValues: maneuvers });
+function ManeuversForm({ edit, gradesheetId }) {
+  const maneuvers = useSelector(
+    (state) => state.grades.details.grade_sheet.grade_sheet_maneuvers
+  );
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = useForm({
+    defaultValues: maneuvers,
+  });
+
+  const [submittedData, setSubmittedData] = useState({});
 
   const dispatch = useDispatch();
 
-  const submitHandler = (data) => {
-    // console.log("Maneuver data submission: ", data);
+  const submitHandler = async (data) => {
     const filteredData = {};
+
     for (let key in data) {
       let newData = { data: {} };
       //Conversion of number strings into numbers
@@ -30,8 +44,19 @@ function ManeuversForm({ maneuvers, edit, gradesheetId }) {
       }
     }
     console.log("FIltered MAnueveRs: ", filteredData);
-    dispatch(updateManeuvers(filteredData, gradesheetId));
+    //Send data to redux
+    await dispatch(updateManeuvers(filteredData, gradesheetId));
+    //Close dropdowns
+    await dispatch(toggleManeuverMode());
+    //Confirm data submission
+    setSubmittedData(data);
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ ...submittedData });
+    }
+  }, [isSubmitSuccessful, submittedData, reset]);
 
   return (
     <form id="maneuvers-form" onSubmit={handleSubmit(submitHandler)}>
