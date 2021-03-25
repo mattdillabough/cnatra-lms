@@ -6,7 +6,6 @@ import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
-import Maneuver from "./Maneuver";
 import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
 import { mockGradesheetData } from "./mockGradesheetData";

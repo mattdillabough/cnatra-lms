@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
-function Maneuver({ maneuver, editable }) {
+function Maneuver({ maneuver, editable, register, idx }) {
   // console.log("props?", maneuver)
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -33,6 +33,7 @@ function Maneuver({ maneuver, editable }) {
             </div>
             {editable ? (
               <input
+                name={`[${idx}].grade`}
                 className="col-6 col-md-2"
                 type="number"
                 step={1}
@@ -41,6 +42,7 @@ function Maneuver({ maneuver, editable }) {
                 placeholder="grade"
                 inputMode="decimal"
                 defaultValue={maneuver?.grade}
+                ref={register}
               ></input>
             ) : (
               <div
@@ -80,9 +82,11 @@ function Maneuver({ maneuver, editable }) {
       >
         {editable ? (
           <textarea
+            name={`[${idx}].comments`}
             defaultValue={maneuver.comments}
             placeholder="Maneuver comments"
             rows="4"
+            ref={register}
           ></textarea>
         ) : (
           <div title="Maneuver comments">
