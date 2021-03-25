@@ -52,6 +52,7 @@ function ManeuversForm({ edit, gradesheetId }) {
     setSubmittedData(data);
   };
 
+  //Resets Maneuvers Form if data submission was successful
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset({ ...submittedData });

@@ -68,8 +68,7 @@ export const updateManeuvers = (edits, id) => {
         );
         console.log("id:", edits[key].id, "data:", edits[key].data);
       }
-      console.log("Data has been sent to update maneuvers");
-      //Change later: Should send updated info, properly formatted
+
       const { data } = await axios.get(`${baseURL}/server/grade_sheets/${id}`);
       dispatch(modifyManeuvers(data));
     } catch (error) {

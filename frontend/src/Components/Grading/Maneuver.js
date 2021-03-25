@@ -1,34 +1,12 @@
-import React, { useState, useEffect } from "react";
-// import { useSelector } from "react-redux";
+import React, { useState } from "react";
 
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
 function Maneuver({ maneuver, editable, register, idx }) {
-  // console.log("props?", maneuver)
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
-
-  // const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
-  // const [editGrade, setGradeEdit] = useState(maneuver?.grade);
-
-  // // //Trying to force re-render to update input prefill values
-  // useEffect(() => {
-  //   setGradeEdit({ editGrade: maneuver.grade });
-  // }, [maneuverEdit, maneuver.grade]);
-
-  // const { grade, comments } = watch();
-
-  // useEffect(() => {
-  //   register({ name: "grade" });
-  //   register({ name: "comments" });
-  // }, [register]);
-
-  // const handleChange = (name, e) => {
-  //   e.persist();
-  //   setValue(name, e.target.value);
-  // };
 
   const gradeValues = {
     1: "N - Not graded",
@@ -64,7 +42,6 @@ function Maneuver({ maneuver, editable, register, idx }) {
                   placeholder="grade"
                   inputMode="decimal"
                   defaultValue={maneuver?.grade}
-                  // onChange={handleChange.bind(null, "grade")}
                   ref={register}
                 ></input>
               </span>
@@ -110,8 +87,6 @@ function Maneuver({ maneuver, editable, register, idx }) {
             defaultValue={maneuver?.comments}
             placeholder="Maneuver comments"
             rows="4"
-            // value={comments}
-            // onChange={handleChange.bind(null, "comments")}
             ref={register}
           ></textarea>
         ) : (
