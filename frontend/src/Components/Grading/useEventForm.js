@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -7,11 +7,17 @@ import { updateGradesheet } from "../../Store/grades";
 
 export const EventForm = ({ edit, values, gradesheetId }) => {
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
-  const { register, handleSubmit } = useForm({ defaultValues: values });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { submitStatus },
+  } = useForm({ defaultValues: values });
 
+  const [dataSubmission, setDataSubmission] = useState({});
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // console.log("default data: ", values);
     // console.log("Submitted data: ", data);
     //filter data
@@ -26,8 +32,16 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     }
     console.log("FILTERED DATA: ", filteredData);
     //send data to redux to update db & app state
-    dispatch(updateGradesheet(filteredData));
+    await dispatch(updateGradesheet(filteredData));
+    setDataSubmission(data);
   };
+
+  //Reset Event Details Form if data submission was successful
+  useEffect(() => {
+    if (submitStatus) {
+      reset({ ...dataSubmission });
+    }
+  }, [submitStatus, dataSubmission, reset]);
 
   /////////////////
   return (
