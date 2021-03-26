@@ -247,7 +247,10 @@ input:disabled {
 
 .btn-group {
   padding: 0em 0.25em;
-  /* background: blue; */
+}
+
+.btn-group button {
+  margin-right: 0.5em;
 }
 
 /* For smaller screens  */

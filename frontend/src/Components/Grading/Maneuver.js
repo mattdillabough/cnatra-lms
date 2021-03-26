@@ -35,10 +35,10 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
-              <span>
+              <span className="col-6 col-md-2">
                 <input
                   name={`[${idx}].grade`}
-                  className="col-6 col-md-2 maneuver-grade"
+                  className="maneuver-grade"
                   type="number"
                   step={1}
                   min={1}
