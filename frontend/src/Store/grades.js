@@ -17,10 +17,11 @@ const findGradeSheet = (data) => {
   };
 };
 
-const modifyGradeSheet = (update) => {
+const modifyGradeSheet = (update, id) => {
   return {
     type: UPDATE_GRADESHEET,
     update,
+    id,
   };
 };
 
@@ -43,15 +44,15 @@ export const getGradesheet = (id) => {
   };
 };
 
-export const updateGradesheet = (data) => {
+export const updateGradesheet = (data, id) => {
   return async (dispatch) => {
     try {
       //Assumes data will include an id corresponding to the gradesheet
-      // await axios.put(`${baseUrl}/server/grade_sheets/${data.id}`, data)
-      console.log("Data has been sent for update for gradesheetId: ", data.id);
+      // await axios.put(`${baseUrl}/server/grade_sheets/${id}`, data)
+      console.log("Data has been sent for update for gradesheetId: ", id);
       //Get updated data & dispatch with updated data from GET
-      //await axios.get(`${baseURL}/server/grade_sheets/${data.id}`)
-      dispatch(modifyGradeSheet(data));
+      //await axios.get(`${baseURL}/server/grade_sheets/${id}`)
+      dispatch(modifyGradeSheet(data, id));
     } catch (error) {
       console.log("Error: there was a problem updating the gradesheet", error);
     }

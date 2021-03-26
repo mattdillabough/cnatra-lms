@@ -21,7 +21,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     // console.log("default data: ", values);
     // console.log("Submitted data: ", data);
     //filter data
-    const filteredData = { id: gradesheetId };
+    const filteredData = {};
     for (let key in data) {
       //Conversion of number strings into numbers
       let val = Number(data[key]) ? Number(data[key]) : data[key];
@@ -32,7 +32,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     }
     console.log("FILTERED DATA: ", filteredData);
     //send data to redux to update db & app state
-    await dispatch(updateGradesheet(filteredData));
+    await dispatch(updateGradesheet(filteredData, gradesheetId));
     setDataSubmission(data);
   };
 

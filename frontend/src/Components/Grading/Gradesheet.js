@@ -40,28 +40,28 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
+    date: details?.grade_sheet.date,
     grade: details?.grade_sheet?.grade,
+    status: details?.grade_sheet.status,
+    comments: details?.grade_sheet.comments,
     clearedForSolo: mockGradesheetData.clearedForSolo,
     instructor_first_name: details?.grade_sheet.instructor.first_name,
     instructor_last_name: details?.grade_sheet.instructor.last_name,
-    date: details?.grade_sheet.date,
     hours: details?.grade_sheet.event.hours,
     media_type: details?.grade_sheet.event.media_type.media_type,
-    status: details?.grade_sheet.status,
-    comments: details?.grade_sheet.comments,
   });
 
   useEffect(() => {
     setValues({
+      date: details?.grade_sheet?.date,
       grade: details?.grade_sheet?.grade,
+      status: details?.grade_sheet.status,
+      comments: details?.grade_sheet.comments,
       clearedForSolo: mockGradesheetData.clearedForSolo,
       instructor_first_name: details?.grade_sheet.instructor.first_name,
       instructor_last_name: details?.grade_sheet.instructor.last_name,
-      date: details?.grade_sheet?.date,
       hours: details?.grade_sheet.event.hours,
       media_type: details?.grade_sheet.event.media_type.media_type,
-      status: details?.grade_sheet.status,
-      comments: details?.grade_sheet.comments,
     });
     console.log("Updated!");
   }, [details]);
