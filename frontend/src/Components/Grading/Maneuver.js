@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
-function Maneuver({ maneuver, editable, register, idx }) {
+function Maneuver({ maneuver, editable, register, idx, expand }) {
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
+
+  useEffect(() => {
+    setDropDown(expand);
+  }, [expand]);
 
   const gradeValues = {
     1: "N - Not graded",

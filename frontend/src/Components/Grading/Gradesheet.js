@@ -13,14 +13,24 @@ import { getGradesheet } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
-  //MANAGING STATE
+  //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
+
+  //Manage maneuver dropdown states
+  const [expand, setExpansion] = useState(false);
+  const expandCollapse = () => setExpansion(!expand);
+
   //Controls Event Detail edits
   const [edit, setEditMode] = useState(false);
-  const toggleEditMode = () => setEditMode(!edit);
+  const toggleEditMode = () => {
+    if (!edit) {
+      setDropDown(true);
+    }
+    setEditMode(!edit);
+  };
 
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
@@ -183,6 +193,15 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             <h4 className="event-identifier">Maneuvers</h4>
             <div className="edit-controls align-self-center align-self-md-end">
               <div className="btn-group">
+                <button
+                  type="button"
+                  onClick={expandCollapse}
+                  title={
+                    expand ? "Collapse all maneuvers" : "Expand all maneuvers"
+                  }
+                >
+                  {expand ? "Collapse" : "Expand"}
+                </button>
                 {maneuverEdit ? (
                   <button
                     type="submit"
@@ -210,6 +229,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             // maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
             edit={maneuverEdit}
             gradesheetId={props.match.params.gradesheetId}
+            expand={expand}
           />
         </div>
       </div>
