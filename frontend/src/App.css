@@ -43,6 +43,7 @@ label {
 textarea {
   width: 85vw;
   max-width: 100%;
+  padding: 0.5em;
 }
 
 input:disabled {
@@ -62,7 +63,7 @@ input:disabled {
   align-items: center;
   justify-content: space-between;
   padding: 1em;
-  margin-bottom: 4em;
+  margin-bottom: 1em;
 
   background-color: navy;
   color: whitesmoke;
@@ -234,11 +235,29 @@ input:disabled {
 
 /* ----Gradesheet-----  */
 
+.Gradesheet-wrap.container-fluid {
+  overflow-y: hidden;
+}
+
+.edit-controls {
+  max-width: fit-content;
+  padding: 0em 1em 0.5em 1em;
+  /* border: 1px solid black; */
+}
+
+.btn-group {
+  padding: 0em 0.25em;
+}
+
+.btn-group button {
+  margin-right: 0.5em;
+}
+
 /* For smaller screens  */
 @media (max-width: 576px) {
   .Gradesheet {
     width: calc(100vw - 2em);
-    margin: 0em 1em;
+    /* margin: 0em 1em; */
   }
 }
 
@@ -254,7 +273,9 @@ input:disabled {
   padding-left: 0.5em;
 }
 .event-identifier {
-  text-align: left;
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
   border-bottom: 2px solid black;
 }
 
@@ -285,6 +306,18 @@ input:disabled {
   padding: 0;
 }
 
+.event-label {
+  font-weight: 500;
+}
+.event-label div {
+  font-weight: 400;
+}
+
+.option-label,
+.option-label input {
+  margin: 0em 0.25em;
+}
+
 .event-dropdown {
   position: absolute;
   right: 2em;
@@ -310,6 +343,10 @@ input:disabled {
   background: #1a171770;
 }
 
+.gradesheet-details {
+  margin-bottom: 1.5em;
+}
+
 .constrain-input {
   width: 250px;
   max-width: 95%;
@@ -317,6 +354,11 @@ input:disabled {
 
 /* Larger than tablet views */
 @media (min-width: 576px) {
+  .event-identifier {
+    text-align: left;
+    font-size: 1.4rem;
+  }
+
   .constrain-input {
     width: 250px;
     max-width: 85%;
@@ -347,6 +389,10 @@ input:disabled {
   margin: 0;
 }
 
+.maneuver-grade {
+  min-width: fit-content;
+}
+
 .maneuver-header .toggle-dropdown {
   transition: background-color 0.25s;
 }
@@ -356,11 +402,16 @@ input:disabled {
 }
 
 .maneuver-body {
-  background-color: #a9bccb;
+  background-color: #ebf1f0;
 }
 
 .toggle-maneuver:hover {
   background: cornflowerblue;
+}
+
+.pass-MIF {
+  border: 1px black groove;
+  background: linear-gradient(0deg, #9be8bbba, #80ca9e);
 }
 
 .below-MIF {

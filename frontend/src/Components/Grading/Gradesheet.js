@@ -1,182 +1,237 @@
 //Event Grade sheet
-import React, { useState } from "react";
+
+//External Imports
+import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
 
-import Maneuver from "./Maneuver";
-import TOI from "./TextOrInput";
+//Internal imports
+import { EventForm } from "./useEventForm";
+import ManeuversForm from "./ManeuversForm";
 import { mockGradesheetData } from "./mockGradesheetData";
+import { getGradesheet } from "../../Store/grades";
+import { toggleManeuverMode } from "../../Store/formControl";
 
-//To simulate different user types
-// const user = "student";
-
-function Gradesheet() {
+function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
+  //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
 
+  //Manage maneuver dropdown states
+  const [expand, setExpansion] = useState(false);
+  const expandCollapse = () => setExpansion(!expand);
+
+  //Controls Event Detail edits
   const [edit, setEditMode] = useState(false);
-  const toggleEditMode = () => setEditMode(!edit);
+  const toggleEditMode = () => {
+    if (!edit) {
+      setDropDown(true);
+    }
+    setEditMode(!edit);
+  };
+
+  //Accessing REDUX state & methods
+  const dispatch = useDispatch();
+  const details = useSelector((state) => state.grades.details);
+
+  //Controls Maneuver edits
+  const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
+  const toggleManeuverEdits = () => dispatch(toggleManeuverMode());
+
+  //FETCH gradesheet data
+  useEffect(() => {
+    async function getData() {
+      await dispatch(getGradesheet(props.match.params.gradesheetId));
+    }
+    getData();
+  }, [dispatch, props.match.params.gradesheetId]);
+
+  // MANAGE FORM DATA
+  const [values, setValues] = useState({
+    date: details?.grade_sheet.date,
+    grade: details?.grade_sheet?.grade,
+    status: details?.grade_sheet.status,
+    comments: details?.grade_sheet.comments,
+    clearedForSolo: mockGradesheetData.clearedForSolo,
+    instructor_first_name: details?.grade_sheet.instructor.first_name,
+    instructor_last_name: details?.grade_sheet.instructor.last_name,
+    hours: details?.grade_sheet.event.hours,
+    media_type: details?.grade_sheet.event.media_type.media_type,
+  });
+
+  useEffect(() => {
+    setValues({
+      date: details?.grade_sheet?.date,
+      grade: details?.grade_sheet?.grade,
+      status: details?.grade_sheet.status,
+      comments: details?.grade_sheet.comments,
+      clearedForSolo: mockGradesheetData.clearedForSolo,
+      instructor_first_name: details?.grade_sheet.instructor.first_name,
+      instructor_last_name: details?.grade_sheet.instructor.last_name,
+      hours: details?.grade_sheet.event.hours,
+      media_type: details?.grade_sheet.event.media_type.media_type,
+    });
+    console.log("Updated!");
+  }, [details]);
+
+  // Displays LOADING page if props from redux haven't been received yet
+  if (!details?.grade_sheet.grade) {
+    return <div className="Gradesheet container">Loading...</div>;
+  }
 
   return (
     <>
-      <div className="Gradesheet container">
-        <button type="button" onClick={toggleEditMode}>
-          {edit === true ? "Cancel" : "Edit"}
-        </button>
-        <h2
-          className="student-name"
-          title="Student Name"
-        >{`${mockGradesheetData.student.rank} ${mockGradesheetData.student.name}`}</h2>
-        <h4 className="event-identifier" title="Event Identifier and title">
-          {`[${mockGradesheetData.eventId}] - ${mockGradesheetData.title}` ||
-            "[Event ID] - [Event Name]"}
-        </h4>
-        <div className="gradesheet-submission">
-          <div title="Date of event">
-            {new Date(mockGradesheetData.date).toLocaleDateString(undefined, {
-              month: "long",
-              day: "2-digit",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            })}
-          </div>
-          <div title="Gradesheet submitter">
-            <strong>Submitted by: </strong>
-            {`${mockGradesheetData.instructor.rank} ${mockGradesheetData.instructor.name}`}
-          </div>
-        </div>
-        <div
-          className="gradesheet-details container-fluid"
-          title="Event Details"
-        >
-          <div
-            className={
-              mockGradesheetData.status === "Complete"
-                ? "details-header positive-status"
-                : "details-header pending-status"
-            }
-            title="Event Status | Grade"
-          >
-            <div>
-              {mockGradesheetData.status} | {mockGradesheetData.lessonGrade}
-            </div>
-            <div className="col-1 event-dropdown">
-              <button
-                type="button"
-                className="toggle-dropdown btn"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseEvent"
-                aria-expanded="false"
-                aria-controls="collapse"
-                onClick={toggleDropDown}
-              >
-                {dropdown ? <RiArrowUpSFill /> : <RiArrowDownSFill />}
-              </button>
-            </div>
-          </div>
-          <div
-            className={
-              dropdown ? "details-body collapse show" : "details-body collapse"
-            }
-            id="collapseEvent"
-            aria-expanded="false"
-            aria-controls="collapse"
-          >
-            <div className="row">
-              <div className="col-12">
-                <h5>Flight Lesson</h5>
-                <div className="event-details-section">
-                  <TOI
-                    className="constrain-input"
-                    labeltxt="Instructor: "
-                    defaultValue={mockGradesheetData.instructor.name}
-                    editable={edit}
-                    displayVal={mockGradesheetData.instructor.name}
-                  />
-                  <TOI
-                    className="constrain-input"
-                    labeltxt="Start Date / Time: "
-                    defaultValue={mockGradesheetData.date}
-                    type="datetime-local"
-                    editable={edit}
-                    displayVal={new Date(
-                      mockGradesheetData.date
-                    ).toLocaleDateString(undefined, {
-                      month: "short",
-                      day: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: false,
-                    })}
-                  />
-                  <TOI
-                    className="constrain-input"
-                    labeltxt="Duration: "
-                    defaultValue={mockGradesheetData.flightTimelog.fltDur}
-                    type="number"
-                    step={0.1}
-                    editable={edit}
-                    displayVal={mockGradesheetData.flightTimelog.fltDur}
-                  />
-                </div>
-                <h5>Details</h5>
-                <div className="event-details-section">
-                  <label>
-                    <div>Modifier: </div>
-                  </label>
-                  <label>
-                    <div>Instruction: </div>
-                  </label>
-                  <TOI
-                    name="status-select"
-                    type="select"
-                    labeltxt="Status: "
-                    options={["Complete", "Incomplete"]}
-                    displayVal={mockGradesheetData.status}
-                    defaultValue={mockGradesheetData.status}
-                    editable={edit}
-                  />
-                  <TOI
-                    type="radio"
-                    name="clear-for-solo"
-                    labeltxt="Cleared for Solo: "
-                    options={["N/A", "Yes", "No"]}
-                    displayVal={mockGradesheetData.clearedForSolo}
-                    defaultValue={mockGradesheetData.clearedForSolo}
-                    editable={edit}
-                  />
-                  <div>Writeups upload: </div>
-                  <div>Reason:</div>
-                  <div>Activities: </div>
-                  <div>Miscellaneous: </div>
-                  <div>Flight Record: </div>
-                  <div>Winds: </div>
-                  <div>Weather: </div>
-                  <div>Overall Grade: </div>
-                  <div>Progression: </div>
-                </div>
+      <div className="Gradesheet-wrap container-fluid">
+        <div className="Gradesheet container">
+          <h2
+            className="student-name"
+            title="Student Name"
+          >{`${mockGradesheetData.student.rank} ${details.grade_sheet.student.last_name}, ${details.grade_sheet.student.first_name}`}</h2>
+          <div className="d-flex justify-content-between flex-column flex-md-row">
+            <h4 className="event-identifier" title="Event Identifier and title">
+              {`[${details.grade_sheet.event.event_code}][${details.grade_sheet.event.event_in_block}] - ${details.grade_sheet.event.title}` ||
+                "[Event ID] - [Event Name]"}
+            </h4>
+            <div className="edit-controls align-self-center align-self-md-end">
+              <div className="btn-group">
+                {edit ? (
+                  <button
+                    type="submit"
+                    form="event-details-form"
+                    title="Save event details"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  ""
+                )}
+                <button
+                  type="button"
+                  onClick={toggleEditMode}
+                  title={
+                    edit === true ? "Cancel changes" : "Edit event details"
+                  }
+                >
+                  {edit === true ? "Cancel" : "Edit"}
+                </button>
               </div>
-              <div className="col-12">
-                <h5>Event Comments: </h5>
-                <TOI
-                  type="textarea"
-                  rows="5"
-                  defaultValue={mockGradesheetData.comments}
-                  autoComplete="on"
-                  editable={edit}
-                  displayVal={mockGradesheetData.comments}
+            </div>
+          </div>
+          <div className="gradesheet-submission">
+            <div title="Date submitted">
+              {new Date(details?.grade_sheet.date).toLocaleDateString("en-US", {
+                month: "long",
+                day: "2-digit",
+                year: "numeric",
+                timeZone: "UTC",
+              })}
+            </div>
+            <div title="Gradesheet submitter">
+              <strong>Submitted by: </strong>
+              {`${mockGradesheetData.instructor.rank} ${details.grade_sheet.instructor.last_name}, ${details.grade_sheet.instructor.first_name}`}
+            </div>
+          </div>
+          <div className="gradesheet-details container-fluid">
+            <div
+              className={
+                details.grade_sheet.status === "CMP" &&
+                details.grade_sheet.grade === "PASS"
+                  ? "details-header positive-status"
+                  : "details-header pending-status"
+              }
+              title="Event Status | Grade"
+            >
+              <div>
+                {details.grade_sheet.status === "CMP"
+                  ? "Complete"
+                  : "Incomplete"}{" "}
+                |{" "}
+                {details.grade_sheet.grade === "PASS"
+                  ? "Pass"
+                  : "Unsatisfactory"}
+              </div>
+              <div className="col-1 event-dropdown">
+                <button
+                  title="Toggle Event Details"
+                  type="button"
+                  className="toggle-dropdown btn"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseEvent"
+                  aria-expanded="false"
+                  aria-controls="collapse"
+                  onClick={toggleDropDown}
+                >
+                  {dropdown ? <RiArrowUpSFill /> : <RiArrowDownSFill />}
+                </button>
+              </div>
+            </div>
+            <div
+              className={
+                dropdown
+                  ? "details-body collapse show"
+                  : "details-body collapse"
+              }
+              id="collapseEvent"
+              aria-expanded="false"
+              aria-controls="collapse"
+            >
+              {/* EVENT DETAILS FORM */}
+              {details?.grade_sheet?.grade ? (
+                <EventForm
+                  edit={edit}
+                  values={values}
+                  gradesheetId={props.match.params.gradesheetId}
                 />
+              ) : (
+                <div>Loading...</div>
+              )}
+            </div>
+          </div>
+          <div className="d-flex justify-content-between flex-column flex-md-row">
+            <h4 className="event-identifier">Maneuvers</h4>
+            <div className="edit-controls align-self-center align-self-md-end">
+              <div className="btn-group">
+                <button
+                  type="button"
+                  onClick={expandCollapse}
+                  title={
+                    expand ? "Collapse all maneuvers" : "Expand all maneuvers"
+                  }
+                >
+                  {expand ? "Collapse" : "Expand"}
+                </button>
+                {maneuverEdit ? (
+                  <button
+                    type="submit"
+                    form="maneuvers-form"
+                    title="Save event details"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  ""
+                )}
+                <button
+                  type="button"
+                  onClick={toggleManeuverEdits}
+                  title={
+                    maneuverEdit === true ? "Cancel changes" : "Edit Maneuvers "
+                  }
+                >
+                  {maneuverEdit === true ? "Cancel" : "Edit"}
+                </button>
               </div>
             </div>
           </div>
+          <ManeuversForm
+            // maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
+            edit={maneuverEdit}
+            gradesheetId={props.match.params.gradesheetId}
+            expand={expand}
+          />
         </div>
-        {mockGradesheetData.maneuvers.map((maneuver) => {
-          return <Maneuver key={maneuver.id} maneuver={maneuver} />;
-        })}
       </div>
     </>
   );

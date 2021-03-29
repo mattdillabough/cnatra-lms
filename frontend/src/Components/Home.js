@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUser } from "../Store/users";
 
 function Home(props) {
-  props.getMyUser("41e0ef686ae646528759e6b4238bf994");
+  // props.getMyUser("41e0ef686ae646528759e6b4238bf994");
 
   return (
     <div className="container-fluid">
