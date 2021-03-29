@@ -1,8 +1,8 @@
 //Grades Redux store
 import axios from "axios";
 
-const baseURL = "http://localhost:5000";
-// const instance = axios.create({baseURL});
+// const baseURL = "http://localhost:5000";
+// const instance = axios.create({ baseURL });
 
 //ACTIONS
 const GET_GRADESHEET = "GET_GRADESHEET";
@@ -36,7 +36,7 @@ const modifyManeuvers = (update) => {
 export const getGradesheet = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${baseURL}/server/grade_sheets/${id}`);
+      const { data } = await axios.get(`/server/grade_sheets/${id}`);
       dispatch(findGradeSheet(data));
     } catch (error) {
       console.log("Error: there was a problem getting that gradesheet", error);
@@ -64,13 +64,13 @@ export const updateManeuvers = (edits, id) => {
     try {
       for (let key in edits) {
         await axios.put(
-          `${baseURL}/server/grade_sheet_maneuvers/${edits[key].id}`,
+          `/server/grade_sheet_maneuvers/${edits[key].id}`,
           edits[key].data
         );
         console.log("id:", edits[key].id, "data:", edits[key].data);
       }
 
-      const { data } = await axios.get(`${baseURL}/server/grade_sheets/${id}`);
+      const { data } = await axios.get(`/server/grade_sheets/${id}`);
       dispatch(modifyManeuvers(data));
     } catch (error) {
       console.log("Error: there was a problem updating the maneuvers");
