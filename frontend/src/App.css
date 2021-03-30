@@ -213,13 +213,22 @@ input:disabled {
 
 /* ------Icons-------  */
 .tray-icon {
-  margin: 1em;
+  display: flex;
+  padding: 1em;
+}
+
+.tray-icon:hover {
+  background: teal;
 }
 
 .react-icons {
   color: white;
   width: 28px;
   height: 28px;
+}
+
+.react-icons.close {
+  margin-right: 0;
 }
 
 /* -----Grades-------- */
@@ -251,6 +260,23 @@ input:disabled {
 
 .btn-group button {
   margin-right: 0.5em;
+  border-radius: 5px;
+  box-shadow: #aca4a4 3px 3px 2px;
+}
+
+.btn-group button:hover {
+  background: #0097a7;
+  cursor: pointer;
+}
+
+.btn-group button:active {
+  background: navy;
+  color: white;
+}
+
+.btn-group button:focus {
+  border: black solid 2px;
+  font-weight: 500;
 }
 
 /* For smaller screens  */

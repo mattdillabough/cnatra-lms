@@ -46,7 +46,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
                   placeholder="grade"
                   inputMode="decimal"
                   defaultValue={maneuver?.grade}
-                  ref={register}
+                  ref={register({ min: 1, max: 5, required: true })}
                 ></input>
               </span>
             ) : (
