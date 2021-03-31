@@ -35,7 +35,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
-              <span className="col-6 col-md-2">
+              <div className="col-6 col-md-2">
                 <input
                   name={`[${idx}].grade`}
                   className="maneuver-grade"
@@ -48,7 +48,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
                   defaultValue={maneuver?.grade}
                   ref={register({ min: 1, max: 5, required: true })}
                 ></input>
-              </span>
+              </div>
             ) : (
               <div
                 className="col-6 col-md-2"

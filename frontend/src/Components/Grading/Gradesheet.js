@@ -8,9 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 //Internal imports
 import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
+import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
+import NavigationBar from "../Navigation/NavigationBar";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Manage event dropdown state
@@ -54,7 +56,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     grade: details?.grade_sheet?.grade,
     status: details?.grade_sheet.status,
     comments: details?.grade_sheet.comments,
-    clearedForSolo: mockGradesheetData.clearedForSolo,
+    // clearedForSolo: mockGradesheetData.clearedForSolo,
     instructor_first_name: details?.grade_sheet.instructor.first_name,
     instructor_last_name: details?.grade_sheet.instructor.last_name,
     hours: details?.grade_sheet.event.hours,
@@ -67,7 +69,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
       grade: details?.grade_sheet?.grade,
       status: details?.grade_sheet.status,
       comments: details?.grade_sheet.comments,
-      clearedForSolo: mockGradesheetData.clearedForSolo,
+      // clearedForSolo: mockGradesheetData.clearedForSolo,
       instructor_first_name: details?.grade_sheet.instructor.first_name,
       instructor_last_name: details?.grade_sheet.instructor.last_name,
       hours: details?.grade_sheet.event.hours,
@@ -83,8 +85,12 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
 
   return (
     <>
-      <div className="Gradesheet-wrap container-fluid">
-        <div className="Gradesheet container">
+      <div className="Gradesheet-wrap d-flex flex-column container-fluid">
+        <div className="grade-nav-container container d-flex justify-content-between">
+          <NavGradesheets direction={"prev"} />
+          <NavGradesheets direction={"next"} />
+        </div>
+        <div className="Gradesheet container my-4">
           <h2
             className="student-name"
             title="Student Name"
@@ -226,7 +232,6 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             </div>
           </div>
           <ManeuversForm
-            // maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
             edit={maneuverEdit}
             gradesheetId={props.match.params.gradesheetId}
             expand={expand}

@@ -162,7 +162,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             defaultValue={values?.status}
           />
           {/* clearedForSolo isn't included in db data, excluding from register */}
-          <TOI
+          {/* <TOI
             name="clearedForSolo"
             labeltxt="Cleared for Solo: "
             type="radio"
@@ -171,7 +171,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             check={values.clearedForSolo}
             // register={register}
             displayVal={values.clearedForSolo}
-          />
+          /> */}
           <TOI
             name="grade"
             labeltxt="Overall Grade: "

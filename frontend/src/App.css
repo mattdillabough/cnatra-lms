@@ -242,6 +242,40 @@ input:disabled {
   width: 100%;
 }
 
+/* ----Gradesheet Navigation----  */
+.grade-nav-container.container {
+  max-width: 100%;
+  overflow-y: visible;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.nav-sheets-btn {
+  background: #f5f5f599;
+  border: none;
+  max-width: min-content;
+}
+
+.nav-sheets-btn:hover {
+  background: teal;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-sheets {
+  display: flex;
+  align-items: center;
+  margin: 0.1em;
+}
+
+.nav-sheets svg {
+  font-size: 2.5rem;
+}
+
+.nav-sheets span {
+  margin: 0em 0.25em;
+}
+
 /* ----Gradesheet-----  */
 
 .Gradesheet-wrap.container-fluid {
@@ -266,6 +300,7 @@ input:disabled {
 
 .btn-group button:hover {
   background: #0097a7;
+  color: whitesmoke;
   cursor: pointer;
 }
 
@@ -416,7 +451,7 @@ input:disabled {
 }
 
 .maneuver-grade {
-  min-width: fit-content;
+  width: 100%;
 }
 
 .maneuver-header .toggle-dropdown {
