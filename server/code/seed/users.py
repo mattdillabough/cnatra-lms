@@ -20,6 +20,12 @@ users = [
         'email_address': 'greg@sharp.com',
         'password': 'password',
         'user_type': 'instructor'
+    },
+    {
+        'first_name': 'Parley',
+        'last_name': 'Williams',
+        'email_address': 'parley@williams.com',
+        'user_type': 'instructor'
     }
 ]
 
