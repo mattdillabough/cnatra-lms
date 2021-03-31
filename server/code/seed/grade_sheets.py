@@ -17,6 +17,16 @@ grade_sheets = [
         'status': 'CMP',
         'lesson_type': 'NA',
         'comments': "One of the best N4301's I've seen for the navigation portion! SMA followed process at every CP and communicated well with IP his plan of attack before arriving at each CP including fuel and instrument checks. Understood a/s g/s corrections to arrive  within 3 seconds overall timing. Nice!"
+    },
+    {
+        'student': 'daniel@canham.com',
+        'instructor': 'parley@williams.com',
+        'event': 'N4302',
+        'date': datetime.date(2012, 3, 28),
+        'grade': 'PASS',
+        'status': 'CMP',
+        'lesson_type': 'NA',
+        'comments': "1stLt Canham was a bit nervous in the brief, but covered the information well. Overall, very solid flight!"
     }
 ]
 
