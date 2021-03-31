@@ -19,4 +19,4 @@ class User(Resource):
 class Users(Resource):
 
     def get(self):
-        return {'users': [user['user_id'] for user in UserModel.objects()]}
+        return {'users': [user.as_dict() for user in UserModel.objects()]}

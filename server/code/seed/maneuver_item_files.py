@@ -139,6 +139,139 @@ maneuver_item_files = [
         'maneuver_in_maneuver_item_file': 19,
         'grade': 1,
         'is_required': False
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'GENERAL KNOWLEDGE/PROCEDURES',
+        'maneuver_in_maneuver_item_file': 1,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'EMER PROCEDURES/SYS FAILURES',
+        'maneuver_in_maneuver_item_file': 2,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'HEADWORK/SITUATIONAL AWARENESS',
+        'maneuver_in_maneuver_item_file': 3,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'BASIC AIR WORK',
+        'maneuver_in_maneuver_item_file': 4,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'FLIGHT PLANNING',
+        'maneuver_in_maneuver_item_file': 5,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'GROUND OPERATIONS',
+        'maneuver_in_maneuver_item_file': 6,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'CRM',
+        'maneuver_in_maneuver_item_file': 7,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'COCKPIT MANAGEMENT',
+        'maneuver_in_maneuver_item_file': 8,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'RADIO PROCEDURES',
+        'maneuver_in_maneuver_item_file': 9,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'VERTICAL TAKEOFF',
+        'maneuver_in_maneuver_item_file': 10,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'NO-HOVER TAKEOFF',
+        'maneuver_in_maneuver_item_file': 11,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'TRANSITION TO FORWARD FLIGHT',
+        'maneuver_in_maneuver_item_file': 12,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'GROUNDSPEED/FUEL CHECKS',
+        'maneuver_in_maneuver_item_file': 13,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'NORMAL APPROACH',
+        'maneuver_in_maneuver_item_file': 14,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': '360-, 180-, 90-DEGREE APPROACH',
+        'maneuver_in_maneuver_item_file': 15,
+        'grade': 3,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'LOW-LEVEL NAVIGATION',
+        'maneuver_in_maneuver_item_file': 16,
+        'grade': 3,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'TIMING',
+        'maneuver_in_maneuver_item_file': 17,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'VERTICAL LANDING',
+        'maneuver_in_maneuver_item_file': 18,
+        'grade': 4,
+        'is_required': True
+    },
+    {
+        'event': 'N4302',
+        'maneuver': 'SPECIAL SYLLABUS REQUIREMENTS',
+        'maneuver_in_maneuver_item_file': 19,
+        'grade': 1,
+        'is_required': False
     }
 ]
 
