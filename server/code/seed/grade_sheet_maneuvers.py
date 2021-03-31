@@ -144,6 +144,139 @@ grade_sheet_maneuvers = [
         'grade': 2,
         'comments': "IP demo'd brief and first 4 CP's."
     },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'GENERAL KNOWLEDGE/PROCEDURES',
+        'grade': 4,
+        'comments': "Make sure to get several practice briefs if able so that the brief is smooth and confident."
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'EMER PROCEDURES/SYS FAILURES',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'HEADWORK/SITUATIONAL AWARENESS',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'BASIC AIR WORK',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'FLIGHT PLANNING',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'GROUND OPERATIONS',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'CRM',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'COCKPIT MANAGEMENT',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'RADIO PROCEDURES',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'VERTICAL TAKEOFF',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'NO-HOVER TAKEOFF',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'TRANSITION TO FORWARD FLIGHT',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'GROUNDSPEED/FUEL CHECKS',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'NORMAL APPROACH',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': '360-, 180-, 90-DEGREE APPROACH',
+        'grade': 4,
+        'comments': "Nice approaches."
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'LOW-LEVEL NAVIGATION',
+        'grade': 5,
+        'comments': "Excellent navigation through out the flight."
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'TIMING',
+        'grade': 5,
+        'comments': "Excellent A/S adjustments to hit the timing!"
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'VERTICAL LANDING',
+        'grade': 4,
+        'comments': ""
+    },
+    {
+        'grade_sheet': 'N4302',
+        'student': 'daniel@canham.com',
+        'maneuver_item_file': 'SPECIAL SYLLABUS REQUIREMENTS',
+        'grade': 0,
+        'comments': ""
+    },
 ]
 
 # function to insert
