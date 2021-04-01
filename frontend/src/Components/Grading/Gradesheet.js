@@ -36,6 +36,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
+  const { student } = useSelector((state) => state.students);
 
   //Controls Maneuver edits
   const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);

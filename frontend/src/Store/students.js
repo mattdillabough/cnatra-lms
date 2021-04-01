@@ -20,7 +20,7 @@ export const fetchStudent = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await instance.get(`/server/students/${id}`);
-      dispatch(findStudent(data));
+      dispatch(findStudent(data.student));
     } catch (error) {
       console.log("There was a problem fetching student info: ", error);
     }
