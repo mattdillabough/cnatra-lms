@@ -9,12 +9,34 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
   };
 
   const requirement = maneuver?.maneuver_item_file.is_required;
+  const [maneuverStyling, setManeuverStyling] = useState("");
+
+  useEffect(() => {
+    if (requirement) {
+      if (maneuver?.grade === 0) {
+        setManeuverStyling("incomplete-maneuver incomplete");
+      } else {
+        if (maneuver?.grade >= maneuver?.maneuver_item_file.grade) {
+          setManeuverStyling("pass-MIF");
+        } else {
+          setManeuverStyling("below-MIF");
+        }
+      }
+    } else {
+      if (maneuver?.grade >= maneuver?.maneuver_item_file.grade) {
+        setManeuverStyling("not-required-maneuver");
+      } else {
+        setManeuverStyling("not-required-maneuver incomplete");
+      }
+    }
+  }, [maneuver, requirement]);
 
   useEffect(() => {
     setDropDown(expand);
   }, [expand]);
 
   const gradeValues = {
+    0: "Incomplete",
     1: "N - Not graded",
     2: "U - Unsafe",
     3: "F - Fair",
@@ -23,16 +45,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
   };
 
   return (
-    <div
-      className={`
-        ${
-          maneuver.grade >= maneuver.maneuver_item_file.grade ||
-          !maneuver.maneuver_item_file.is_required
-            ? "maneuver container-fluid pass-MIF"
-            : "maneuver container-fluid below-MIF"
-        } ${requirement ? "" : "not-required-maneuver"}
-      `}
-    >
+    <div className={`maneuver container-fluid ${maneuverStyling}`}>
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
@@ -57,7 +70,11 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
             ) : (
               <div
                 className="col-6 col-md-2"
-                title={gradeValues[maneuver.grade]}
+                title={`${requirement ? gradeValues[maneuver.grade] : ""} ${
+                  maneuver.grade >= maneuver.maneuver_item_file.grade
+                    ? ""
+                    : "- below MIF"
+                }`}
               >
                 {`Grade: ${maneuver.grade}` || "--"}
               </div>

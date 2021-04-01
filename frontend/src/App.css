@@ -476,9 +476,18 @@ input:disabled {
 }
 
 .below-MIF {
-  border: 3.5px yellow groove;
+  border: 3.5px red inset;
+  background: #d16a6aba;
+}
+
+.incomplete-maneuver {
+  background: #f5ed20a8;
 }
 
 .not-required-maneuver {
   border: double 3px black;
+}
+
+.incomplete {
+  border: 3.5px #d4c200 double;
 }
