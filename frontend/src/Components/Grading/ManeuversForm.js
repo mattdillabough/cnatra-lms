@@ -20,7 +20,15 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
     defaultValues: maneuvers,
   });
 
+  const [isLoaded, setisLoaded] = useState(false);
   const [submittedData, setSubmittedData] = useState({});
+
+  useEffect(() => {
+    if (!isLoaded) {
+      reset({ ...submittedData });
+      setisLoaded(true);
+    }
+  }, []);
 
   const dispatch = useDispatch();
 

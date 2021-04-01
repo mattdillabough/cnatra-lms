@@ -12,7 +12,6 @@ import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
-import NavigationBar from "../Navigation/NavigationBar";
 
 function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Manage event dropdown state
@@ -87,8 +86,14 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     <>
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
         <div className="grade-nav-container container d-flex justify-content-between">
-          <NavGradesheets direction={"prev"} />
-          <NavGradesheets direction={"next"} />
+          <NavGradesheets
+            direction={"prev"}
+            EIB={details?.grade_sheet.event.event_in_block}
+          />
+          <NavGradesheets
+            direction={"next"}
+            EIB={details?.grade_sheet.event.event_in_block}
+          />
         </div>
         <div className="Gradesheet container my-4">
           <h2

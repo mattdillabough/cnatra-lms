@@ -14,7 +14,16 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     formState: { submitStatus },
   } = useForm({ defaultValues: values });
 
+  const [isLoaded, setisLoaded] = useState(false);
   const [dataSubmission, setDataSubmission] = useState({});
+
+  useEffect(() => {
+    if (!isLoaded) {
+      reset({ ...dataSubmission });
+      setisLoaded(true);
+    }
+  }, []);
+
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
