@@ -17,11 +17,13 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
   const [isLoaded, setisLoaded] = useState(false);
   const [dataSubmission, setDataSubmission] = useState({});
 
+  //Resets form fields onLoad, in case user navigates from another gradesheet
   useEffect(() => {
     if (!isLoaded) {
       reset({ ...dataSubmission });
       setisLoaded(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dispatch = useDispatch();

@@ -23,11 +23,13 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
   const [isLoaded, setisLoaded] = useState(false);
   const [submittedData, setSubmittedData] = useState({});
 
+  //Resets form fields onLoad, in case user navigates from another gradesheet
   useEffect(() => {
     if (!isLoaded) {
       reset({ ...submittedData });
       setisLoaded(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dispatch = useDispatch();
