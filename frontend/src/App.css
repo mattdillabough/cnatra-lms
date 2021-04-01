@@ -256,7 +256,7 @@ input:disabled {
   max-width: min-content;
 }
 
-.nav-sheets-btn:hover {
+.nav-sheets-btn:enabled:hover {
   background: teal;
   color: white;
   cursor: pointer;
@@ -323,7 +323,8 @@ input:disabled {
 }
 
 .Gradesheet {
-  background-color: #f0efeb;
+  background: linear-gradient(90deg, #f0efeb, white);
+  /* background-color: #f0efeb; */
   padding: 0.5em;
 }
 
@@ -471,8 +472,10 @@ input:disabled {
 }
 
 .pass-MIF {
-  border: 1px black groove;
-  background: linear-gradient(0deg, #9be8bbba, #80ca9e);
+  background: #6ad195ba;
+  box-shadow: green 1px 1px 3px;
+  /* border: 1px black groove; */
+  /* background: linear-gradient(0deg, #9be8bbba, #80ca9e); */
 }
 
 .below-MIF {

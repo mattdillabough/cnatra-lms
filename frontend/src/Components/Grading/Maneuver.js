@@ -8,6 +8,8 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
     setDropDown(!dropdown);
   };
 
+  const requirement = maneuver?.maneuver_item_file.is_required;
+
   useEffect(() => {
     setDropDown(expand);
   }, [expand]);
@@ -23,7 +25,8 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
   return (
     <div
       className={
-        maneuver.grade >= maneuver.maneuver_item_file.grade
+        maneuver.grade >= maneuver.maneuver_item_file.grade ||
+        !maneuver.maneuver_item_file.is_required
           ? "maneuver container-fluid pass-MIF"
           : "maneuver container-fluid below-MIF"
       }
@@ -45,8 +48,8 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
                   max={5}
                   placeholder="grade"
                   inputMode="decimal"
-                  defaultValue={maneuver?.grade}
-                  ref={register({ min: 1, max: 5, required: true })}
+                  defaultValue={maneuver?.grade || 0}
+                  ref={register({ min: 1, max: 5, required: requirement })}
                 ></input>
               </div>
             ) : (
