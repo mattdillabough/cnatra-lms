@@ -24,12 +24,14 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
 
   return (
     <div
-      className={
-        maneuver.grade >= maneuver.maneuver_item_file.grade ||
-        !maneuver.maneuver_item_file.is_required
-          ? "maneuver container-fluid pass-MIF"
-          : "maneuver container-fluid below-MIF"
-      }
+      className={`
+        ${
+          maneuver.grade >= maneuver.maneuver_item_file.grade ||
+          !maneuver.maneuver_item_file.is_required
+            ? "maneuver container-fluid pass-MIF"
+            : "maneuver container-fluid below-MIF"
+        } ${requirement ? "" : "not-required-maneuver"}
+      `}
     >
       <div className="maneuver-header row">
         <div className="col-10">
@@ -44,12 +46,12 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
                   className="maneuver-grade"
                   type="number"
                   step={1}
-                  min={1}
+                  min={0}
                   max={5}
                   placeholder="grade"
                   inputMode="decimal"
                   defaultValue={maneuver?.grade || 0}
-                  ref={register({ min: 1, max: 5, required: requirement })}
+                  ref={register({ min: 0, max: 5, required: requirement })}
                 ></input>
               </div>
             ) : (
@@ -60,9 +62,16 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
                 {`Grade: ${maneuver.grade}` || "--"}
               </div>
             )}
-            <div className="col-6 col-md-2" title="Maneuver Item File">
+            <div
+              className="col-6 col-md-2"
+              title={
+                requirement
+                  ? "Maneuver Item File - required"
+                  : "Maneuver Item File - NOT required"
+              }
+            >
               {`MIF: ${maneuver.maneuver_item_file.grade}` || "MIF"}
-              {maneuver.maneuver_item_file.is_required ? "+" : ""}
+              {requirement ? "+" : ""}
             </div>
           </div>
         </div>

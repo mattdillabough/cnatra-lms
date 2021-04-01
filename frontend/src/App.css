@@ -324,7 +324,6 @@ input:disabled {
 
 .Gradesheet {
   background: linear-gradient(90deg, #f0efeb, white);
-  /* background-color: #f0efeb; */
   padding: 0.5em;
 }
 
@@ -474,10 +473,12 @@ input:disabled {
 .pass-MIF {
   background: #6ad195ba;
   box-shadow: green 1px 1px 3px;
-  /* border: 1px black groove; */
-  /* background: linear-gradient(0deg, #9be8bbba, #80ca9e); */
 }
 
 .below-MIF {
   border: 3.5px yellow groove;
+}
+
+.not-required-maneuver {
+  border: double 3px black;
 }
