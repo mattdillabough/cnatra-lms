@@ -2,7 +2,6 @@
 from flask_restful import Resource, reqparse, inputs
 
 # project imports
-from models.grade_sheet_maneuvers import GradeSheetManeuverModel
 from models.grade_sheets import GradeSheetModel
 
 class GradeSheet(Resource):
@@ -17,9 +16,6 @@ class GradeSheet(Resource):
         user_fields = ['user_id', 'first_name', 'last_name']
         grade_sheet['student'] = {k:grade_sheet['student'][k] for k in user_fields}
         grade_sheet['instructor'] = {k:grade_sheet['instructor'][k] for k in user_fields}
-
-        # get grade_sheet grade_sheet_maneuvers
-        grade_sheet['grade_sheet_maneuvers'] = [grade_sheet_maneuver.as_dict() for grade_sheet_maneuver in GradeSheetManeuverModel.objects(grade_sheet=grade_sheet['grade_sheet_id'])]
 
         # return grade_sheet or 404 (not found)
         if grade_sheet:
