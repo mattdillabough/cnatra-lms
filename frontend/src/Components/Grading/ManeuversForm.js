@@ -8,7 +8,7 @@ import { toggleManeuverMode } from "../../Store/formControl";
 
 function ManeuversForm({ edit, gradesheetId, expand }) {
   const maneuvers = useSelector(
-    (state) => state.grades.details.grade_sheet.grade_sheet_maneuvers
+    (state) => state.grades.maneuvers.grade_sheet_maneuvers
   );
 
   const {
