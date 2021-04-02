@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
-function NavGradesheets({ direction, EIB }) {
+function NavGradesheets({ direction, EIB, sheet_code, sheet_id, length }) {
   //EIB = Event in block
-  const nextGradesheet = "5e5740dac9fb404089bde611c7be4c0c";
   const handleClick = (e) => {
     console.log("clicked: ", e.target.value);
   };
@@ -12,21 +11,19 @@ function NavGradesheets({ direction, EIB }) {
   return (
     <>
       {direction === "prev" ? (
-        <button
-          className="nav-sheets-btn left"
-          disabled={EIB && EIB === 1}
-          onClick={handleClick}
-        >
-          <div className="nav-sheets">
-            <IoIosArrowDropleft />
-            <span>Previous Gradesheet</span>
-          </div>
-        </button>
-      ) : (
-        <Link to={`/Grades/${nextGradesheet}`}>
-          <button className="nav-sheets-btn right">
+        <Link to={`/Grades/${sheet_id}`} className="nav-sheets-lk">
+          <button disabled={EIB && EIB === 1} onClick={handleClick}>
             <div className="nav-sheets">
-              <span>Next Gradesheet</span>
+              <IoIosArrowDropleft />
+              <span>{sheet_code || "Prev"}</span>
+            </div>
+          </button>
+        </Link>
+      ) : (
+        <Link to={`/Grades/${sheet_id}`} className="nav-sheets-lk">
+          <button disabled={EIB === length}>
+            <div className="nav-sheets">
+              <span>{sheet_code || "Next"}</span>
               <IoIosArrowDropright />
             </div>
           </button>

@@ -12,8 +12,9 @@ import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
+import { fetchStudent } from "../../Store/students";
 
-function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
+function Gradesheet({ ...props }) {
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -50,6 +51,13 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     getData();
   }, [dispatch, props.match.params.gradesheetId]);
 
+  //FETCH student data if not already loaded
+  useEffect(() => {
+    if (!student?.first_name) {
+      dispatch(fetchStudent("bb7cefa2936648bdaab12ea89b048bec"));
+    }
+  }, [dispatch, student]);
+
   // MANAGE FORM DATA
   const [values, setValues] = useState({
     date: details?.grade_sheet.date,
@@ -83,17 +91,34 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     return <div className="Gradesheet container">Loading...</div>;
   }
 
+  const EIB = details?.grade_sheet.event.event_in_block;
+  const total_EIB = student?.grade_sheets.length;
+
   return (
     <>
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
         <div className="grade-nav-container container d-flex justify-content-between">
           <NavGradesheets
             direction={"prev"}
-            EIB={details?.grade_sheet.event.event_in_block}
+            EIB={EIB}
+            sheet_id={
+              EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
+            }
+            sheet_code={
+              EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
+            }
+            length={total_EIB}
           />
           <NavGradesheets
             direction={"next"}
             EIB={details?.grade_sheet.event.event_in_block}
+            sheet_id={
+              EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
+            }
+            sheet_code={
+              EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
+            }
+            length={total_EIB}
           />
         </div>
         <div className="Gradesheet container my-4">

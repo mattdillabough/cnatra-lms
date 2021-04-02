@@ -250,16 +250,25 @@ input:disabled {
   padding-right: 0;
 }
 
-.nav-sheets-btn {
-  background: #f5f5f599;
-  border: none;
+.nav-sheets-lk {
   max-width: min-content;
 }
 
-.nav-sheets-btn:enabled:hover {
+.nav-sheets-lk button {
+  border: none;
+  background: #f5f5f599;
+  border-radius: 5px;
+  box-shadow: #aca4a4 3px 3px 2px;
+}
+
+.nav-sheets-lk button:enabled:hover {
   background: teal;
   color: white;
   cursor: pointer;
+}
+
+.nav-sheets-lk button:disabled:hover {
+  cursor: initial;
 }
 
 .nav-sheets {
