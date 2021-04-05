@@ -278,7 +278,7 @@ input:disabled {
 }
 
 .nav-sheets svg {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .nav-sheets span {
@@ -341,7 +341,14 @@ input:disabled {
   color: white;
   text-align: left;
   padding-left: 0.5em;
+  font-size: 1.65rem;
 }
+
+.event-header-sect {
+  background: #e7e0e0;
+  padding-top: 0.5em;
+}
+
 .event-identifier {
   width: 100%;
   font-size: 1.2rem;
@@ -424,9 +431,13 @@ input:disabled {
 
 /* Larger than tablet views */
 @media (min-width: 576px) {
+  .student-name {
+    font-size: 1.75rem;
+  }
   .event-identifier {
     text-align: left;
     font-size: 1.4rem;
+    padding-left: 0.5em;
   }
 
   .constrain-input {

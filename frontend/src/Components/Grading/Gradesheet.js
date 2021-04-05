@@ -126,7 +126,7 @@ function Gradesheet({ ...props }) {
             className="student-name"
             title="Student Name"
           >{`${mockGradesheetData.student.rank} ${details.grade_sheet.student.last_name}, ${details.grade_sheet.student.first_name}`}</h2>
-          <div className="d-flex justify-content-between flex-column flex-md-row">
+          <div className="d-flex justify-content-between flex-column flex-md-row event-header-sect">
             <h4 className="event-identifier" title="Event Identifier and title">
               {`[${details.grade_sheet.event.event_code}][${details.grade_sheet.event.event_in_block}] - ${details.grade_sheet.event.title}` ||
                 "[Event ID] - [Event Name]"}
