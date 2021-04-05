@@ -405,6 +405,11 @@ input:disabled {
   text-align: left;
 }
 
+.event-details-section {
+  display: flex;
+  flex-direction: column;
+}
+
 .event-dropdown .toggle-dropdown {
   background: white;
   padding: 0em 0.45em;
