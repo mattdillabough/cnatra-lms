@@ -1,8 +1,8 @@
 //Grades Redux store
 import axios from "axios";
 
-// const baseURL = "http://localhost:5000";
-// const instance = axios.create({ baseURL });
+const baseURL = "http://localhost:5000";
+const instance = axios.create({ baseURL });
 
 //ACTIONS
 const GET_GRADESHEET = "GET_GRADESHEET";
@@ -37,8 +37,10 @@ const modifyManeuvers = (maneuvers) => {
 export const getGradesheet = (id) => {
   return async (dispatch) => {
     try {
-      const details = await axios.get(`/server/grade_sheets/${id}`);
-      const maneuvers = await axios.get(`/server/grade_sheets/${id}/maneuvers`);
+      const details = await instance.get(`/server/grade_sheets/${id}`);
+      const maneuvers = await instance.get(
+        `/server/grade_sheets/${id}/maneuvers`
+      );
       dispatch(findGradeSheet(details.data, maneuvers.data));
     } catch (error) {
       console.log("Error: there was a problem getting that gradesheet", error);
@@ -50,11 +52,13 @@ export const updateGradesheet = (data, id) => {
   return async (dispatch) => {
     try {
       //Assumes data will include an id corresponding to the gradesheet
-      // await axios.put(`/server/grade_sheets/${id}`, data)
-      console.log("Data has been sent for update for gradesheetId: ", id);
+      await instance.put(`/server/grade_sheets/${id}`, data);
       //Get updated data & dispatch with updated data from GET
-      //await axios.get(`/server/grade_sheets/${id}`)
-      dispatch(modifyGradeSheet(data, id));
+      const update = await instance.get(`/server/grade_sheets/${id}`);
+
+      console.log("Data has been sent for update for gradesheetId: ", id, data);
+      console.log("update from db", update.data);
+      // dispatch(modifyGradeSheet(data, id));
     } catch (error) {
       console.log("Error: there was a problem updating the gradesheet", error);
     }
@@ -65,14 +69,16 @@ export const updateManeuvers = (edits, id) => {
   return async (dispatch) => {
     try {
       for (let key in edits) {
-        await axios.put(
+        await instance.put(
           `/server/grade_sheet_maneuvers/${edits[key].id}`,
           edits[key].data
         );
         console.log("id:", edits[key].id, "data:", edits[key].data);
       }
 
-      const { data } = await axios.get(`/server/grade_sheets/${id}/maneuvers`);
+      const { data } = await instance.get(
+        `/server/grade_sheets/${id}/maneuvers`
+      );
       dispatch(modifyManeuvers(data));
     } catch (error) {
       console.log("Error: there was a problem updating the maneuvers");

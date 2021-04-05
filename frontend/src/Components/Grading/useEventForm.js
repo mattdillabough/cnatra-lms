@@ -29,8 +29,8 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    // console.log("default data: ", values);
-    // console.log("Submitted data: ", data);
+    console.log("Submitted data: ", data);
+
     //filter data
     const filteredData = {};
     for (let key in data) {
@@ -70,7 +70,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             className="constrain-input"
             labeltxt="Last Name: "
             type="text"
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values?.instructor_last_name}
             defaultValue={values?.instructor_last_name}
@@ -81,7 +81,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             className="constrain-input"
             labeltxt="First Name: "
             type="text"
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values.instructor_first_name}
             defaultValue={values?.instructor_first_name}
@@ -140,7 +140,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             labeltxt="Duration: "
             type="number"
             step={0.1}
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values?.hours}
             defaultValue={
@@ -156,7 +156,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             name="media_type"
             labeltxt="Media Type: "
             type="select"
-            editable={edit}
+            editable={false}
             options={["TH-57C", "Option 2", "Option 3"]}
             displayVal={values?.media_type}
             register={register}
@@ -188,7 +188,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             labeltxt="Overall Grade: "
             type="radio"
             editable={edit}
-            options={["Pass", "Fail"]}
+            options={["PASS", "FAIL"]}
             check={values?.grade}
             register={register}
             displayVal={values.grade}
