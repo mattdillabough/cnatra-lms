@@ -50,14 +50,15 @@ export const getGradesheet = (id) => {
 
 export const updateGradesheet = (data, id) => {
   return async (dispatch) => {
+    console.log("Data in redux: ", data, id);
     try {
       //Assumes data will include an id corresponding to the gradesheet
       await instance.put(`/server/grade_sheets/${id}`, data);
       //Get updated data & dispatch with updated data from GET
       const update = await instance.get(`/server/grade_sheets/${id}`);
 
-      console.log("Data has been sent for update for gradesheetId: ", id, data);
       console.log("update from db", update.data);
+      dispatch(modifyGradeSheet(update.data));
       // dispatch(modifyGradeSheet(data, id));
     } catch (error) {
       console.log("Error: there was a problem updating the gradesheet", error);

@@ -106,7 +106,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             name="date"
             className="constrain-input"
             labeltxt="Start Date / Time: "
-            type="datetime-local"
+            type="date"
             editable={edit}
             register={register}
             // value={values.date}
@@ -118,20 +118,20 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             defaultValue={
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
-                : String(`${values?.date}T12:30`)
+                : String(`${values?.date}`)
             }
             displayVal={new Date(
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
-                : String(`${values?.date}T12:30`)
-            ).toLocaleDateString(undefined, {
+                : String(`${values?.date}`)
+            ).toLocaleDateString("en-US", {
               month: "short",
               day: "2-digit",
               year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-              timeZone: "UTC",
+              // hour: "2-digit",
+              // minute: "2-digit",
+              // hour12: false,
+              timeZone: "CST",
             })}
           />
           <TOI

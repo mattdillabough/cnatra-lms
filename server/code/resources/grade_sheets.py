@@ -27,7 +27,7 @@ class GradeSheet(Resource):
 
         # parse request
         parser = reqparse.RequestParser()
-        parser.add_argument('date', type=inputs.date)
+        parser.add_argument('date')
         parser.add_argument('grade')
         parser.add_argument('status')
         parser.add_argument('comments')

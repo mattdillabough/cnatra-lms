@@ -162,7 +162,7 @@ function Gradesheet({ ...props }) {
                 month: "long",
                 day: "2-digit",
                 year: "numeric",
-                timeZone: "UTC",
+                timeZone: "CST",
               })}
             </div>
             <div title="Gradesheet submitter">
