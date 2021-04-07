@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
-import { fetchStudent } from "../../Store/students";
+// import { fetchStudent } from "../../Store/students";
 
 function Grades() {
   //Would receive from redux store
@@ -17,17 +17,17 @@ function Grades() {
     ],
   };
 
-  const userId = "bb7cefa2936648bdaab12ea89b048bec"; //student id
+  // const userId = "bb7cefa2936648bdaab12ea89b048bec"; //student id
 
-  const { student } = useSelector((state) => state.students);
-  const dispatch = useDispatch();
+  // const { student } = useSelector((state) => state.students);
+  // const dispatch = useDispatch();
 
-  //Fetching student info here, but it's assumed that after clicking 'Open Gradebook' the user would probably choose a student's gradebook to view
-  useEffect(() => {
-    if (!student?.first_name) {
-      dispatch(fetchStudent(userId));
-    }
-  }, [dispatch, student]);
+  // //Fetching student info here, but it's assumed that after clicking 'Open Gradebook' the user would probably choose a student's gradebook to view
+  // useEffect(() => {
+  //   if (!student?.first_name) {
+  //     dispatch(fetchStudent(userId));
+  //   }
+  // }, [dispatch, student]);
 
   return (
     <div className="Grades container-fluid">
@@ -37,7 +37,7 @@ function Grades() {
           <h4 className="cardgroup-title">Current Phase Gradebook</h4>
           <div className="card">
             <label className="card-title">{mockGradeData.phaseName}</label>
-            <Link to={`/Grades/${mockGradeData.gradesheetId}`}>
+            <Link to={`/Grades/${mockGradeData.phaseName}`}>
               <button type="button">Open Gradebook</button>
             </Link>
           </div>
@@ -48,7 +48,7 @@ function Grades() {
             return (
               <div className="card" key={`phase_${idx}`}>
                 <label className="card-title">{phase.phaseName}</label>
-                <Link to={`/Grades/${phase.gradesheetId}`}>
+                <Link to={`/Grades/${phase.phaseName}`}>
                   <button type="button">Open Gradebook</button>
                 </Link>
               </div>
