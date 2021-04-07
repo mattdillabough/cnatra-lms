@@ -158,11 +158,11 @@ function Gradesheet({ ...props }) {
           </div>
           <div className="gradesheet-submission">
             <div title="Date submitted">
-              {new Date(details?.grade_sheet.date).toLocaleDateString("en-US", {
+              {new Date(details?.grade_sheet.date).toLocaleString("en-US", {
                 month: "long",
                 day: "2-digit",
                 year: "numeric",
-                timeZone: "CST",
+                // timeZone: "CST",
               })}
             </div>
             <div title="Gradesheet submitter">

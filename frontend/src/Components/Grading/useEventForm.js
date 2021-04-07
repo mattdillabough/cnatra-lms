@@ -115,6 +115,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             //   ? values.date
             //   : String(`${values?.date}T12:30`)
             // }
+            // pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
             defaultValue={
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
@@ -131,7 +132,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
               // hour: "2-digit",
               // minute: "2-digit",
               // hour12: false,
-              timeZone: "CST",
+              // timeZone: "UTC",
             })}
           />
           <TOI
