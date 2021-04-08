@@ -16,7 +16,7 @@ class GradeSheetModel(BaseMixin, me.Document):
     student = me.ReferenceField(UserModel, required=True)
     instructor = me.ReferenceField(UserModel, required=True)
     event = me.ReferenceField(EventModel, required=True)
-    date = me.DateField()
+    date_time = me.DateTimeField()
     grade = me.StringField()
     status = me.StringField()
     lesson_type = me.StringField()
