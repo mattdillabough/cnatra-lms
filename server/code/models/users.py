@@ -14,6 +14,7 @@ class UserModel(BaseMixin, me.Document):
     user_id = me.StringField(primary_key=True, default=uuid_value)
     first_name = me.StringField()
     last_name = me.StringField()
+    username = me.StringField()
     email_address = me.EmailField()
     password = me.StringField()
     user_type = me.ReferenceField(UserTypeModel, required=True)

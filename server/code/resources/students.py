@@ -7,10 +7,10 @@ from models.users import UserModel
 
 class Student(Resource):
 
-    def get(self, student_id):
+    def get(self, student_username):
         
         # query for student
-        student_model = UserModel.objects(user_id=student_id).first()
+        student_model = UserModel.objects(username=student_username).first()
         student = student_model.as_dict()
 
         # get student grade_sheets
