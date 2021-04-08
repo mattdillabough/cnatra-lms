@@ -15,6 +15,7 @@ import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
 function Gradesheet({ ...props }) {
+  console.log("PROPS:", props);
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -46,17 +47,23 @@ function Gradesheet({ ...props }) {
   //FETCH gradesheet data
   useEffect(() => {
     async function getData() {
-      await dispatch(getGradesheet(props.match.params.gradesheetId));
+      await dispatch(
+        getGradesheet(
+          props?.location.state.gradesheetId,
+          props?.match.params.username,
+          props?.match.params.evt_code
+        )
+      );
     }
     getData();
-  }, [dispatch, props.match.params.gradesheetId]);
+  }, [dispatch, props.location.state, props.match.params]);
 
   //FETCH student data if not already loaded
   useEffect(() => {
     if (!student?.first_name) {
-      dispatch(fetchStudent("bb7cefa2936648bdaab12ea89b048bec"));
+      dispatch(fetchStudent(props.match.params.username));
     }
-  }, [dispatch, student]);
+  }, [dispatch, student, props.match.params]);
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
@@ -108,6 +115,8 @@ function Gradesheet({ ...props }) {
               EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
             }
             length={total_EIB}
+            phase={props.match.params.phaseName}
+            username={props.match.params.username}
           />
           <NavGradesheets
             direction={"next"}
@@ -119,6 +128,8 @@ function Gradesheet({ ...props }) {
               EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
             }
             length={total_EIB}
+            phase={props.match.params.phaseName}
+            username={props.match.params.username}
           />
         </div>
         <div className="Gradesheet container my-4">

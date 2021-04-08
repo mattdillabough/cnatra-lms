@@ -6,7 +6,7 @@ import { fetchStudent } from "../../Store/students";
 import mockStdData from "./mockStudentData";
 
 function PhaseNav(props) {
-  const userId = "bb7cefa2936648bdaab12ea89b048bec"; //student id
+  const userName = "danielcanham"; //student username
 
   const { student } = useSelector((state) => state.students);
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function PhaseNav(props) {
   //Fetching a specific student's info here, but it's assumed that when the user clicks the button to open this phase's gradebook a class roster will be provided to this component to map out
   useEffect(() => {
     if (!student?.first_name) {
-      dispatch(fetchStudent(userId));
+      dispatch(fetchStudent(userName));
     }
   }, [dispatch, student]);
   console.log("Student info: ", student);
@@ -37,7 +37,7 @@ function PhaseNav(props) {
             <div className="row">
               <div className="col">
                 <Link
-                  to={`/Grades/${props.match.params.phaseName}/compare-grades`}
+                  to={`/Grades/${props.match.params.phaseName}/${student.username}/compare-grades`}
                 >
                   <button type="button">Grade Comparison</button>
                 </Link>
@@ -46,7 +46,12 @@ function PhaseNav(props) {
                 <label>
                   {/* View Most Recent Gradesheet: */}
                   <Link
-                    to={`/Grades/${props.match.params.phaseName}/${student.grade_sheets[0].grade_sheet_id}`}
+                    to={{
+                      pathname: `/Grades/${props.match.params.phaseName}/${student.username}/${student.grade_sheets[0].event.event_code}`,
+                      state: {
+                        gradesheetId: student.grade_sheets[0].grade_sheet_id,
+                      },
+                    }}
                   >
                     <button type="button">Most Recent</button>
                   </Link>

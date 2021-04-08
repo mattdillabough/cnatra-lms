@@ -34,10 +34,12 @@ const modifyManeuvers = (maneuvers) => {
 };
 
 //THUNK CREATOR
-export const getGradesheet = (id) => {
+export const getGradesheet = (id, username, evt_code) => {
   return async (dispatch) => {
     try {
-      const details = await instance.get(`/server/grade_sheets/${id}`);
+      const details = await instance.get(
+        `/server/students/${username}/grade_sheets/${evt_code}`
+      );
       const maneuvers = await instance.get(
         `/server/grade_sheets/${id}/maneuvers`
       );

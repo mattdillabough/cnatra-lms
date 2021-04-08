@@ -16,10 +16,10 @@ const findStudent = (info) => {
 };
 
 //THUNK (CREATOR)
-export const fetchStudent = (id) => {
+export const fetchStudent = (userName) => {
   return async (dispatch) => {
     try {
-      const { data } = await instance.get(`/server/students/${id}`);
+      const { data } = await instance.get(`/server/students/${userName}`);
       dispatch(findStudent(data.student));
     } catch (error) {
       console.log("There was a problem fetching student info: ", error);
