@@ -38,9 +38,9 @@ def index():
 
 
 api.add_resource(GradeSheetManeuver,'/server/grade_sheet_maneuvers/<string:grade_sheet_maneuver_id>')
-api.add_resource(GradeSheet, '/server/grade_sheets/<string:grade_sheet_id>')
+api.add_resource(GradeSheet, '/server/students/<string:student_username>/grade_sheets/<string:event_code>')
 api.add_resource(GradeSheetManeuvers, '/server/grade_sheets/<string:grade_sheet_id>/maneuvers')
-api.add_resource(Student, '/server/students/<string:username>')
+api.add_resource(Student, '/server/students/<string:student_username>')
 
 
 # RUN APP
