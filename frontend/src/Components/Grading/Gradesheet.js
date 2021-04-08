@@ -15,7 +15,6 @@ import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
 function Gradesheet({ ...props }) {
-  console.log("PROPS:", props);
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -230,7 +229,9 @@ function Gradesheet({ ...props }) {
                 <EventForm
                   edit={edit}
                   values={values}
-                  gradesheetId={props.match.params.gradesheetId}
+                  gradesheetId={props.location.state.gradesheetId}
+                  username={props.match.params.username}
+                  evt_code={props.match.params.evt_code}
                 />
               ) : (
                 <div>Loading...</div>
@@ -275,7 +276,7 @@ function Gradesheet({ ...props }) {
           </div>
           <ManeuversForm
             edit={maneuverEdit}
-            gradesheetId={props.match.params.gradesheetId}
+            gradesheetId={props.location.state.gradesheetId}
             expand={expand}
           />
         </div>

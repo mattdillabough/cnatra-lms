@@ -5,7 +5,13 @@ import { useForm } from "react-hook-form";
 import TOI from "./TextOrInput";
 import { updateGradesheet } from "../../Store/grades";
 
-export const EventForm = ({ edit, values, gradesheetId }) => {
+export const EventForm = ({
+  edit,
+  values,
+  gradesheetId,
+  username,
+  evt_code,
+}) => {
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
   const {
     register,
@@ -43,7 +49,9 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     }
     console.log("FILTERED DATA: ", filteredData);
     //send data to redux to update db & app state
-    await dispatch(updateGradesheet(filteredData, gradesheetId));
+    await dispatch(
+      updateGradesheet(filteredData, gradesheetId, username, evt_code)
+    );
     setDataSubmission(data);
   };
 

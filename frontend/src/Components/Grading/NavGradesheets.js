@@ -13,10 +13,6 @@ function NavGradesheets({
 }) {
   //EIB = Event in block
 
-  const handleClick = (e) => {
-    console.log("clicked: ", e.target.value);
-  };
-
   return (
     <>
       {direction === "prev" ? (
@@ -27,7 +23,7 @@ function NavGradesheets({
           }}
           className="nav-sheets-lk"
         >
-          <button disabled={EIB && EIB === 1} onClick={handleClick}>
+          <button disabled={EIB && EIB === 1}>
             <div className="nav-sheets">
               <IoIosArrowDropleft />
               <span>{sheet_code || "Prev"}</span>
