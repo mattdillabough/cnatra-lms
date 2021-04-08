@@ -242,6 +242,17 @@ input:disabled {
   width: 100%;
 }
 
+/*------PhaseNav-------*/
+.student-row {
+  background: linear-gradient(90deg, #f0efeb, white);
+  padding: 0.5em;
+}
+
+.student-row button {
+  width: max-content;
+  height: min-content;
+}
+
 /* ----Gradesheet Navigation----  */
 .grade-nav-container.container {
   max-width: 100%;

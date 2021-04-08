@@ -30,20 +30,52 @@ function PhaseNav(props) {
   return (
     <>
       <div className="container">
-        Students will be listed here
-        <div>
-          <div>{`${student.last_name}, ${student.first_name}`}</div>
-          <button type="button">View Grade Comparison</button>
-          <Link
-            to={`/Grades/${props.match.params.phaseName}/${student.grade_sheets[0].grade_sheet_id}`}
-          >
-            <button type="button">Most Recent Grade</button>
-          </Link>
+        Roster
+        <div className="student-row row row-columns-3 mx-xs-1">
+          <div className="col-sm-12 col-md-3">{`${student.last_name}, ${student.first_name}`}</div>
+          <div className="col-sm-12 col-md-9">
+            <div className="row">
+              <div className="col">
+                <button type="button">Grade Progression</button>
+              </div>
+              <div className="col">
+                <label>
+                  {/* View Most Recent Gradesheet: */}
+                  <Link
+                    to={`/Grades/${props.match.params.phaseName}/${student.grade_sheets[0].grade_sheet_id}`}
+                  >
+                    <button type="button">Most Recent</button>
+                  </Link>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         {mockStdData.map((stdt, idx) => {
           return (
-            <div key={`${stdt.user_id}_${idx}`}>
-              <div>{`${stdt.last_name}, ${stdt.first_name}`}</div>
+            <div
+              key={`${stdt.user_id}_${idx}`}
+              className="student-row row row-columns-3 mx-xs-1"
+            >
+              <div className="col-sm-12 col-md-3">{`${stdt.last_name}, ${stdt.first_name}`}</div>
+              <div className="col-sm-12 col-md-9">
+                <div className="row">
+                  <div className="col">
+                    <label>
+                      {/* View Grade Progression: */}
+                      <button type="button">Grade Progression</button>
+                    </label>
+                  </div>
+                  <div className="col">
+                    <label>
+                      {/* View Most Recent Gradesheet: */}
+                      <Link to={`#`}>
+                        <button type="button">Most Recent</button>
+                      </Link>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}
