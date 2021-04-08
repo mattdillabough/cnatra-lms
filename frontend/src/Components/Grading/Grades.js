@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
-
-// import { fetchStudent } from "../../Store/students";
 
 function Grades() {
   //Would receive from redux store
@@ -16,18 +13,6 @@ function Grades() {
       { gradesheetId: "07h3r", phaseName: "Other Course" },
     ],
   };
-
-  // const userId = "bb7cefa2936648bdaab12ea89b048bec"; //student id
-
-  // const { student } = useSelector((state) => state.students);
-  // const dispatch = useDispatch();
-
-  // //Fetching student info here, but it's assumed that after clicking 'Open Gradebook' the user would probably choose a student's gradebook to view
-  // useEffect(() => {
-  //   if (!student?.first_name) {
-  //     dispatch(fetchStudent(userId));
-  //   }
-  // }, [dispatch, student]);
 
   return (
     <div className="Grades container-fluid">
