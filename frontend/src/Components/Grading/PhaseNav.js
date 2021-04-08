@@ -36,7 +36,11 @@ function PhaseNav(props) {
           <div className="col-sm-12 col-md-9">
             <div className="row">
               <div className="col">
-                <button type="button">Grade Progression</button>
+                <Link
+                  to={`/Grades/${props.match.params.phaseName}/compare-grades`}
+                >
+                  <button type="button">Grade Comparison</button>
+                </Link>
               </div>
               <div className="col">
                 <label>
@@ -63,7 +67,7 @@ function PhaseNav(props) {
                   <div className="col">
                     <label>
                       {/* View Grade Progression: */}
-                      <button type="button">Grade Progression</button>
+                      <button type="button">Grade Comparison</button>
                     </label>
                   </div>
                   <div className="col">

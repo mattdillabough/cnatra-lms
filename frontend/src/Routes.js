@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import Academics from "./Components/Academics";
 import Grades from "./Components/Grading/Grades";
 import PhaseNav from "./Components/Grading/PhaseNav";
+import GradeComparison from "./Components/Grading/GradeComparison";
 import Gradesheet from "./Components/Grading/Gradesheet";
 import Settings from "./Components/Settings";
 import Login from "./Components/Login";
@@ -16,9 +17,15 @@ function Routes() {
       <Route exact path="/" component={Home} />
       <Route
         exact
+        path="/Grades/:phaseName/compare-grades"
+        component={GradeComparison}
+      />
+      <Route
+        exact
         path="/Grades/:phaseName/:gradesheetId"
         component={Gradesheet}
       />
+
       <Route exact path="/Grades/:phaseName" component={PhaseNav} />
       <Route path="/Academics" component={Academics} />
       <Route path="/Grades" component={Grades} />
