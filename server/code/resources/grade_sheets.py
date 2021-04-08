@@ -1,15 +1,20 @@
 # python imports
 from flask_restful import Resource, reqparse, inputs
+from mongoengine.queryset.visitor import Q
 
 # project imports
+from models.events import EventModel
 from models.grade_sheets import GradeSheetModel
+from models.users import UserModel
 
 class GradeSheet(Resource):
 
-    def get(self, grade_sheet_id):
+    def get(self, student_username, event_code):
 
         # query for grade_sheet
-        grade_sheet_model = GradeSheetModel.objects(grade_sheet_id=grade_sheet_id).first()
+        student_model = UserModel.objects(username=student_username).first()
+        event_model = EventModel.objects(event_code=event_code).first()
+        grade_sheet_model = GradeSheetModel.objects(Q(student=student_model['user_id']) & Q(event=event_model['event_id'])).first()
         grade_sheet = grade_sheet_model.as_dict()
 
         # format student and instructor data

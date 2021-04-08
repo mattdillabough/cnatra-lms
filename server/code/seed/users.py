@@ -10,6 +10,7 @@ users = [
     {
         'first_name': 'Daniel',
         'last_name': 'Canham',
+        'username': 'danielcanham',
         'email_address': 'daniel@canham.com',
         'password': 'password',
         'user_type': 'student'
@@ -17,6 +18,7 @@ users = [
     {
         'first_name': 'Greg',
         'last_name': 'Sharp',
+        'username': 'gregsharp',
         'email_address': 'greg@sharp.com',
         'password': 'password',
         'user_type': 'instructor'
@@ -24,7 +26,9 @@ users = [
     {
         'first_name': 'Parley',
         'last_name': 'Williams',
+        'username': 'parleywilliams',
         'email_address': 'parley@williams.com',
+        'password': 'password',
         'user_type': 'instructor'
     }
 ]
