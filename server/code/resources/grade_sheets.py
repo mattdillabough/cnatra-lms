@@ -27,6 +27,7 @@ class GradeSheet(Resource):
             return {'grade_sheet': grade_sheet}
         return {'message': 'Grade sheet not found'}, 404
 
+class GradeSheetId(Resource):
 
     def put(self, grade_sheet_id):
 
