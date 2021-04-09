@@ -1,8 +1,8 @@
 //Grades Redux store
 import axios from "axios";
 
-// const baseURL = "http://localhost:5000";
-// const instance = axios.create({ baseURL });
+const baseURL = "http://localhost:5000";
+const instance = axios.create({ baseURL });
 
 //ACTIONS
 const GET_GRADESHEET = "GET_GRADESHEET";
@@ -10,49 +10,60 @@ const UPDATE_GRADESHEET = "UPDATE_GRADESHEET"; //Only includes event details
 const UPDATE_MANEUVERS = "UPDATE_MANEUVERS";
 
 //ACTION CREATOR
-const findGradeSheet = (data) => {
+const findGradeSheet = (details, maneuvers) => {
   return {
     type: GET_GRADESHEET,
-    data,
+    details,
+    maneuvers,
   };
 };
 
-const modifyGradeSheet = (update, id) => {
+const modifyGradeSheet = (evt_details, id) => {
   return {
     type: UPDATE_GRADESHEET,
-    update,
+    evt_details,
     id,
   };
 };
 
-const modifyManeuvers = (update) => {
+const modifyManeuvers = (maneuvers) => {
   return {
     type: UPDATE_MANEUVERS,
-    update,
+    maneuvers,
   };
 };
 
 //THUNK CREATOR
-export const getGradesheet = (id) => {
+export const getGradesheet = (id, username, evt_code) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/server/grade_sheets/${id}`);
-      dispatch(findGradeSheet(data));
+      const details = await instance.get(
+        `/server/students/${username}/grade_sheets/${evt_code}`
+      );
+      const maneuvers = await instance.get(
+        `/server/grade_sheets/${id}/maneuvers`
+      );
+      dispatch(findGradeSheet(details.data, maneuvers.data));
     } catch (error) {
       console.log("Error: there was a problem getting that gradesheet", error);
     }
   };
 };
 
-export const updateGradesheet = (data, id) => {
+export const updateGradesheet = (data, id, username, evt_code) => {
   return async (dispatch) => {
+    console.log("Data in redux: ", data, id);
     try {
       //Assumes data will include an id corresponding to the gradesheet
-      // await axios.put(`${baseUrl}/server/grade_sheets/${id}`, data)
-      console.log("Data has been sent for update for gradesheetId: ", id);
+      await instance.put(`/server/grade_sheets/${id}`, data);
       //Get updated data & dispatch with updated data from GET
-      //await axios.get(`${baseURL}/server/grade_sheets/${id}`)
-      dispatch(modifyGradeSheet(data, id));
+      const update = await instance.get(
+        `/server/students/${username}/grade_sheets/${evt_code}`
+      );
+
+      console.log("update from db", update.data);
+      dispatch(modifyGradeSheet(update.data));
+      // dispatch(modifyGradeSheet(data, id));
     } catch (error) {
       console.log("Error: there was a problem updating the gradesheet", error);
     }
@@ -63,14 +74,16 @@ export const updateManeuvers = (edits, id) => {
   return async (dispatch) => {
     try {
       for (let key in edits) {
-        await axios.put(
+        await instance.put(
           `/server/grade_sheet_maneuvers/${edits[key].id}`,
           edits[key].data
         );
         console.log("id:", edits[key].id, "data:", edits[key].data);
       }
 
-      const { data } = await axios.get(`/server/grade_sheets/${id}`);
+      const { data } = await instance.get(
+        `/server/grade_sheets/${id}/maneuvers`
+      );
       dispatch(modifyManeuvers(data));
     } catch (error) {
       console.log("Error: there was a problem updating the maneuvers");
@@ -82,13 +95,11 @@ export const updateManeuvers = (edits, id) => {
 export default function gradesReducer(state = {}, action) {
   switch (action.type) {
     case GET_GRADESHEET:
-      return { ...state, details: action.data };
+      return { ...state, details: action.details, maneuvers: action.maneuvers };
     case UPDATE_GRADESHEET:
-      //Will need to find all the fields for update; or make another GET req to replace old details
-      return { ...state };
+      return { ...state, details: action.evt_details };
     case UPDATE_MANEUVERS:
-      //Likewise for maneuvers
-      return { ...state, details: action.update };
+      return { ...state, maneuvers: action.maneuvers };
     default:
       return state;
   }

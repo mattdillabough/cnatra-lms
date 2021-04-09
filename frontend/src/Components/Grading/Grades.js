@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Grades() {
   //Would receive from redux store
   const mockGradeData = {
-    gradesheetId: "2402007d1bab4f61a1f2238c93ab72cb",
+    gradesheetId: "d6a592f205a046a284c0b5ac4f358986",
     phaseName: "Helicopter",
 
     pastGradebooks: [
@@ -22,7 +22,7 @@ function Grades() {
           <h4 className="cardgroup-title">Current Phase Gradebook</h4>
           <div className="card">
             <label className="card-title">{mockGradeData.phaseName}</label>
-            <Link to={`/Grades/${mockGradeData.gradesheetId}`}>
+            <Link to={`/Grades/${mockGradeData.phaseName}`}>
               <button type="button">Open Gradebook</button>
             </Link>
           </div>
@@ -33,7 +33,7 @@ function Grades() {
             return (
               <div className="card" key={`phase_${idx}`}>
                 <label className="card-title">{phase.phaseName}</label>
-                <Link to={`/Grades/${phase.gradesheetId}`}>
+                <Link to={`/Grades/${phase.phaseName}`}>
                   <button type="button">Open Gradebook</button>
                 </Link>
               </div>

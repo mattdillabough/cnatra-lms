@@ -8,11 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 //Internal imports
 import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
+import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
 import { getGradesheet } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
+import { fetchStudent } from "../../Store/students";
 
-function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
+function Gradesheet({ ...props }) {
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -35,6 +37,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
   const details = useSelector((state) => state.grades.details);
+  const { student } = useSelector((state) => state.students);
 
   //Controls Maneuver edits
   const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
@@ -43,10 +46,23 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
   //FETCH gradesheet data
   useEffect(() => {
     async function getData() {
-      await dispatch(getGradesheet(props.match.params.gradesheetId));
+      await dispatch(
+        getGradesheet(
+          props?.location.state.gradesheetId,
+          props?.match.params.username,
+          props?.match.params.evt_code
+        )
+      );
     }
     getData();
-  }, [dispatch, props.match.params.gradesheetId]);
+  }, [dispatch, props.location.state, props.match.params]);
+
+  //FETCH student data if not already loaded
+  useEffect(() => {
+    if (!student?.first_name) {
+      dispatch(fetchStudent(props.match.params.username));
+    }
+  }, [dispatch, student, props.match.params]);
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
@@ -54,7 +70,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     grade: details?.grade_sheet?.grade,
     status: details?.grade_sheet.status,
     comments: details?.grade_sheet.comments,
-    clearedForSolo: mockGradesheetData.clearedForSolo,
+    // clearedForSolo: mockGradesheetData.clearedForSolo,
     instructor_first_name: details?.grade_sheet.instructor.first_name,
     instructor_last_name: details?.grade_sheet.instructor.last_name,
     hours: details?.grade_sheet.event.hours,
@@ -67,7 +83,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
       grade: details?.grade_sheet?.grade,
       status: details?.grade_sheet.status,
       comments: details?.grade_sheet.comments,
-      clearedForSolo: mockGradesheetData.clearedForSolo,
+      // clearedForSolo: mockGradesheetData.clearedForSolo,
       instructor_first_name: details?.grade_sheet.instructor.first_name,
       instructor_last_name: details?.grade_sheet.instructor.last_name,
       hours: details?.grade_sheet.event.hours,
@@ -81,15 +97,46 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
     return <div className="Gradesheet container">Loading...</div>;
   }
 
+  const EIB = details?.grade_sheet.event.event_in_block;
+  const total_EIB = student?.grade_sheets.length;
+
   return (
     <>
-      <div className="Gradesheet-wrap container-fluid">
-        <div className="Gradesheet container">
+      <div className="Gradesheet-wrap d-flex flex-column container-fluid">
+        <div className="grade-nav-container container d-flex justify-content-between">
+          <NavGradesheets
+            direction={"prev"}
+            EIB={EIB}
+            sheet_id={
+              EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
+            }
+            sheet_code={
+              EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
+            }
+            length={total_EIB}
+            phase={props.match.params.phaseName}
+            username={props.match.params.username}
+          />
+          <NavGradesheets
+            direction={"next"}
+            EIB={details?.grade_sheet.event.event_in_block}
+            sheet_id={
+              EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
+            }
+            sheet_code={
+              EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
+            }
+            length={total_EIB}
+            phase={props.match.params.phaseName}
+            username={props.match.params.username}
+          />
+        </div>
+        <div className="Gradesheet container my-4">
           <h2
             className="student-name"
             title="Student Name"
           >{`${mockGradesheetData.student.rank} ${details.grade_sheet.student.last_name}, ${details.grade_sheet.student.first_name}`}</h2>
-          <div className="d-flex justify-content-between flex-column flex-md-row">
+          <div className="d-flex justify-content-between flex-column flex-md-row event-header-sect">
             <h4 className="event-identifier" title="Event Identifier and title">
               {`[${details.grade_sheet.event.event_code}][${details.grade_sheet.event.event_in_block}] - ${details.grade_sheet.event.title}` ||
                 "[Event ID] - [Event Name]"}
@@ -121,7 +168,7 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
           </div>
           <div className="gradesheet-submission">
             <div title="Date submitted">
-              {new Date(details?.grade_sheet.date).toLocaleDateString("en-US", {
+              {new Date(details?.grade_sheet.date).toLocaleString("en-US", {
                 month: "long",
                 day: "2-digit",
                 year: "numeric",
@@ -182,7 +229,9 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
                 <EventForm
                   edit={edit}
                   values={values}
-                  gradesheetId={props.match.params.gradesheetId}
+                  gradesheetId={props.location.state.gradesheetId}
+                  username={props.match.params.username}
+                  evt_code={props.match.params.evt_code}
                 />
               ) : (
                 <div>Loading...</div>
@@ -226,9 +275,8 @@ function Gradesheet({ gradeDetails, fetchGradesheet, ...props }) {
             </div>
           </div>
           <ManeuversForm
-            // maneuvers={details?.grade_sheet.grade_sheet_maneuvers}
             edit={maneuverEdit}
-            gradesheetId={props.match.params.gradesheetId}
+            gradesheetId={props.location.state.gradesheetId}
             expand={expand}
           />
         </div>

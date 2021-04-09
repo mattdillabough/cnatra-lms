@@ -8,11 +8,35 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
     setDropDown(!dropdown);
   };
 
+  const requirement = maneuver?.maneuver_item_file.is_required;
+  const [maneuverStyling, setManeuverStyling] = useState("");
+
+  useEffect(() => {
+    if (requirement) {
+      if (maneuver?.grade === 0) {
+        setManeuverStyling("incomplete-maneuver incomplete");
+      } else {
+        if (maneuver?.grade >= maneuver?.maneuver_item_file.grade) {
+          setManeuverStyling("pass-MIF");
+        } else {
+          setManeuverStyling("below-MIF");
+        }
+      }
+    } else {
+      if (maneuver?.grade >= maneuver?.maneuver_item_file.grade) {
+        setManeuverStyling("not-required-maneuver");
+      } else {
+        setManeuverStyling("not-required-maneuver incomplete");
+      }
+    }
+  }, [maneuver, requirement]);
+
   useEffect(() => {
     setDropDown(expand);
   }, [expand]);
 
   const gradeValues = {
+    0: "Incomplete",
     1: "N - Not graded",
     2: "U - Unsafe",
     3: "F - Fair",
@@ -21,13 +45,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
   };
 
   return (
-    <div
-      className={
-        maneuver.grade >= maneuver.maneuver_item_file.grade
-          ? "maneuver container-fluid pass-MIF"
-          : "maneuver container-fluid below-MIF"
-      }
-    >
+    <div className={`maneuver container-fluid ${maneuverStyling}`}>
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
@@ -35,31 +53,42 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
-              <span className="col-6 col-md-2">
+              <div className="col-6 col-md-2">
                 <input
                   name={`[${idx}].grade`}
                   className="maneuver-grade"
                   type="number"
                   step={1}
-                  min={1}
+                  min={0}
                   max={5}
                   placeholder="grade"
                   inputMode="decimal"
-                  defaultValue={maneuver?.grade}
-                  ref={register}
+                  defaultValue={maneuver?.grade || 0}
+                  ref={register({ min: 0, max: 5, required: requirement })}
                 ></input>
-              </span>
+              </div>
             ) : (
               <div
                 className="col-6 col-md-2"
-                title={gradeValues[maneuver.grade]}
+                title={`${requirement ? gradeValues[maneuver.grade] : ""} ${
+                  maneuver.grade >= maneuver.maneuver_item_file.grade
+                    ? ""
+                    : "- below MIF"
+                }`}
               >
                 {`Grade: ${maneuver.grade}` || "--"}
               </div>
             )}
-            <div className="col-6 col-md-2" title="Maneuver Item File">
+            <div
+              className="col-6 col-md-2"
+              title={
+                requirement
+                  ? "Maneuver Item File - required"
+                  : "Maneuver Item File - NOT required"
+              }
+            >
               {`MIF: ${maneuver.maneuver_item_file.grade}` || "MIF"}
-              {maneuver.maneuver_item_file.is_required ? "+" : ""}
+              {requirement ? "+" : ""}
             </div>
           </div>
         </div>

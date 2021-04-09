@@ -8,7 +8,7 @@ import { toggleManeuverMode } from "../../Store/formControl";
 
 function ManeuversForm({ edit, gradesheetId, expand }) {
   const maneuvers = useSelector(
-    (state) => state.grades.details.grade_sheet.grade_sheet_maneuvers
+    (state) => state.grades.maneuvers.grade_sheet_maneuvers
   );
 
   const {
@@ -20,7 +20,17 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
     defaultValues: maneuvers,
   });
 
+  const [isLoaded, setisLoaded] = useState(false);
   const [submittedData, setSubmittedData] = useState({});
+
+  //Resets form fields onLoad, in case user navigates from another gradesheet
+  useEffect(() => {
+    if (!isLoaded) {
+      reset({ ...submittedData });
+      setisLoaded(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -38,7 +48,7 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
       if (comments !== maneuvers[key].comments) {
         newData.data.comments = comments;
       }
-      if (newData.data.grade || newData.data.hasOwnProperty("comments")) {
+      if (newData.data.grade >= 0 || newData.data.hasOwnProperty("comments")) {
         newData.id = maneuvers[key].grade_sheet_maneuver_id;
         filteredData[key] = newData;
       }

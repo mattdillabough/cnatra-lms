@@ -5,7 +5,13 @@ import { useForm } from "react-hook-form";
 import TOI from "./TextOrInput";
 import { updateGradesheet } from "../../Store/grades";
 
-export const EventForm = ({ edit, values, gradesheetId }) => {
+export const EventForm = ({
+  edit,
+  values,
+  gradesheetId,
+  username,
+  evt_code,
+}) => {
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
   const {
     register,
@@ -14,12 +20,23 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     formState: { submitStatus },
   } = useForm({ defaultValues: values });
 
+  const [isLoaded, setisLoaded] = useState(false);
   const [dataSubmission, setDataSubmission] = useState({});
+
+  //Resets form fields onLoad, in case user navigates from another gradesheet
+  useEffect(() => {
+    if (!isLoaded) {
+      reset({ ...dataSubmission });
+      setisLoaded(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    // console.log("default data: ", values);
-    // console.log("Submitted data: ", data);
+    console.log("Submitted data: ", data);
+
     //filter data
     const filteredData = {};
     for (let key in data) {
@@ -32,7 +49,9 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
     }
     console.log("FILTERED DATA: ", filteredData);
     //send data to redux to update db & app state
-    await dispatch(updateGradesheet(filteredData, gradesheetId));
+    await dispatch(
+      updateGradesheet(filteredData, gradesheetId, username, evt_code)
+    );
     setDataSubmission(data);
   };
 
@@ -59,7 +78,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             className="constrain-input"
             labeltxt="Last Name: "
             type="text"
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values?.instructor_last_name}
             defaultValue={values?.instructor_last_name}
@@ -70,7 +89,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             className="constrain-input"
             labeltxt="First Name: "
             type="text"
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values.instructor_first_name}
             defaultValue={values?.instructor_first_name}
@@ -95,7 +114,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             name="date"
             className="constrain-input"
             labeltxt="Start Date / Time: "
-            type="datetime-local"
+            type="date"
             editable={edit}
             register={register}
             // value={values.date}
@@ -104,22 +123,23 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             //   ? values.date
             //   : String(`${values?.date}T12:30`)
             // }
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
             defaultValue={
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
-                : String(`${values?.date}T12:30`)
+                : String(`${values?.date}`)
             }
             displayVal={new Date(
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
-                : String(`${values?.date}T12:30`)
-            ).toLocaleDateString(undefined, {
+                : String(`${values?.date}`)
+            ).toLocaleDateString("en-US", {
               month: "short",
               day: "2-digit",
               year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
+              // hour: "2-digit",
+              // minute: "2-digit",
+              // hour12: false,
               timeZone: "UTC",
             })}
           />
@@ -129,7 +149,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             labeltxt="Duration: "
             type="number"
             step={0.1}
-            editable={edit}
+            editable={false}
             register={register}
             displayVal={values?.hours}
             defaultValue={
@@ -145,7 +165,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             name="media_type"
             labeltxt="Media Type: "
             type="select"
-            editable={edit}
+            editable={false}
             options={["TH-57C", "Option 2", "Option 3"]}
             displayVal={values?.media_type}
             register={register}
@@ -162,7 +182,7 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             defaultValue={values?.status}
           />
           {/* clearedForSolo isn't included in db data, excluding from register */}
-          <TOI
+          {/* <TOI
             name="clearedForSolo"
             labeltxt="Cleared for Solo: "
             type="radio"
@@ -171,13 +191,13 @@ export const EventForm = ({ edit, values, gradesheetId }) => {
             check={values.clearedForSolo}
             // register={register}
             displayVal={values.clearedForSolo}
-          />
+          /> */}
           <TOI
             name="grade"
             labeltxt="Overall Grade: "
             type="radio"
             editable={edit}
-            options={["Pass", "Fail"]}
+            options={["PASS", "FAIL"]}
             check={values?.grade}
             register={register}
             displayVal={values.grade}

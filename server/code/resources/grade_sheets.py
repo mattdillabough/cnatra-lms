@@ -27,12 +27,13 @@ class GradeSheet(Resource):
             return {'grade_sheet': grade_sheet}
         return {'message': 'Grade sheet not found'}, 404
 
+class GradeSheetId(Resource):
 
     def put(self, grade_sheet_id):
 
         # parse request
         parser = reqparse.RequestParser()
-        parser.add_argument('date', type=inputs.date)
+        parser.add_argument('date')
         parser.add_argument('grade')
         parser.add_argument('status')
         parser.add_argument('comments')
