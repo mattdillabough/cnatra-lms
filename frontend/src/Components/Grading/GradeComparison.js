@@ -1,6 +1,11 @@
 import React from "react";
 
 function GradeComparison() {
+  /*TODO:
+  - Receive data for all maneuver data for events in a phase/stage/block
+  - Add links to each respective gradesheet in header
+  - Conditionally style
+  */
   return (
     <>
       <div className="container">
