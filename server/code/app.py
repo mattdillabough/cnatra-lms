@@ -10,6 +10,7 @@ from flask_cors import CORS
 # project imports
 from resources.grade_sheet_maneuvers import GradeSheetManeuver, GradeSheetManeuvers
 from resources.grade_sheets import GradeSheet, GradeSheetId
+from resources.maneuver_item_files import StageManeuvers
 from resources.students import Student
 
 
@@ -40,6 +41,7 @@ api.add_resource(GradeSheetId, '/server/grade_sheets/<string:grade_sheet_id>')
 api.add_resource(GradeSheetManeuver,'/server/grade_sheet_maneuvers/<string:grade_sheet_maneuver_id>')
 api.add_resource(GradeSheet, '/server/students/<string:student_username>/grade_sheets/<string:event_code>')
 api.add_resource(GradeSheetManeuvers, '/server/grade_sheets/<string:grade_sheet_id>/maneuvers')
+api.add_resource(StageManeuvers, '/server/stages/<string:stage>/maneuvers')
 api.add_resource(Student, '/server/students/<string:student_username>')
 
 
