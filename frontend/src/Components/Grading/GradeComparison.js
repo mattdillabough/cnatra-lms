@@ -1,5 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchEvents } from "../../Store/eventsInStage";
 
 function GradeComparison() {
   /*TODO:
@@ -7,6 +10,15 @@ function GradeComparison() {
   - Add links to each respective gradesheet in header
   - Conditionally style
   */
+
+  //Fetch grade comparison data
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchEvents("N"));
+  }, [dispatch]);
+
+  const { stageEvents } = useSelector((state) => state.EIS);
+  console.log("EIS maneuvers: ", stageEvents);
 
   const data = useMemo(
     () => [
@@ -62,6 +74,62 @@ function GradeComparison() {
       {
         maneuver_id: 8,
         maneuver: "COCKPIT MANAGEMENT",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 9,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 10,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 11,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 12,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 13,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 14,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 15,
+        maneuver: "OTHER",
+        MIF: "1",
+        event_code1: 0,
+        event_code2: 0,
+      },
+      {
+        maneuver_id: 16,
+        maneuver: "OTHER",
         MIF: "1",
         event_code1: 0,
         event_code2: 0,
