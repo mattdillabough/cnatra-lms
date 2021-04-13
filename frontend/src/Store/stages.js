@@ -1,6 +1,9 @@
 //Stages store
 import axios from "axios";
 
+const baseURL = "http://localhost:5000";
+const instance = axios.create({ baseURL });
+
 //ACTIONS
 const GET_STAGES = "GET_STAGES";
 
@@ -16,8 +19,8 @@ const getAllStages = (stages) => {
 export const fetchStages = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("/server/stages");
-      dispatch(getAllStages(data));
+      const { data } = await instance.get("/server/stages");
+      dispatch(getAllStages(data.stages));
     } catch (error) {
       console.log("Error: there was a problem fetching the stages: ", error);
     }
