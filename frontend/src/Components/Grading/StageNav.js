@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { fetchStudent } from "../../Store/students";
 import mockStdData from "./mockStudentData";
 
-function PhaseNav(props) {
+function StageNav(props) {
   const userName = "danielcanham"; //student username
 
   const { student } = useSelector((state) => state.students);
@@ -93,4 +93,4 @@ function PhaseNav(props) {
   );
 }
 
-export default PhaseNav;
+export default StageNav;
