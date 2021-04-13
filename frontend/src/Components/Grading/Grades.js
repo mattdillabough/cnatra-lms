@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { fetchStages } from "../../Store/stages";
+
 function Grades() {
-  //Would receive from redux store
+  //Grades should receive all the stages active in the current phase & past stages graded (for instructor)
   const mockGradeData = {
+    phaseName: "Helicopter",
     gradesheetId: "d6a592f205a046a284c0b5ac4f358986",
-    phaseStage: "Helicopter-navigation",
+    phaseStage: "Navigation",
 
     pastGradebooks: [
       { gradesheetId: "Pr1marY", phaseStage: "Primary" },
@@ -14,15 +18,25 @@ function Grades() {
     ],
   };
 
+  const dispatch = useDispatch();
+  //Fetch references for each stage in the current phase. The references would be used to link each gradebook to each listed option.
+  useEffect(() => {
+    dispatch(fetchStages());
+  });
+
   return (
     <div className="Grades container-fluid">
-      <h2>This is the landing page for Grades</h2>
+      <h2 title="Phase name">{mockGradeData.phaseName}</h2>
       <div className="container">
         <div className="card-group">
-          <h4 className="cardgroup-title">Current Phase Gradebook</h4>
+          <h4 className="cardgroup-title">Active Gradebooks</h4>
           <div className="card">
-            <label className="card-title">{mockGradeData.phaseStage}</label>
-            <Link to={`/Grades/${mockGradeData.phaseStage}`}>
+            <label className="card-title" title="stage">
+              {mockGradeData.phaseStage}
+            </label>
+            <Link
+              to={`/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`}
+            >
               <button type="button">Open Gradebook</button>
             </Link>
           </div>
@@ -32,8 +46,12 @@ function Grades() {
           {mockGradeData.pastGradebooks.map((phase, idx) => {
             return (
               <div className="card" key={`phase_${idx}`}>
-                <label className="card-title">{phase.phaseStage}</label>
-                <Link to={`/Grades/${phase.phaseStage}`}>
+                <label className="card-title" title="stage">
+                  {phase.phaseStage}
+                </label>
+                <Link
+                  to={`/Grades/${mockGradeData.phaseName.toLowerCase()}/${phase.phaseStage.toLowerCase()}`}
+                >
                   <button type="button">Open Gradebook</button>
                 </Link>
               </div>
