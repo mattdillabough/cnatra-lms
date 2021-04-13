@@ -5,12 +5,12 @@ function Grades() {
   //Would receive from redux store
   const mockGradeData = {
     gradesheetId: "d6a592f205a046a284c0b5ac4f358986",
-    phaseName: "Helicopter",
+    phaseStage: "Helicopter-navigation",
 
     pastGradebooks: [
-      { gradesheetId: "Pr1marY", phaseName: "Primary" },
-      { gradesheetId: "G40un9", phaseName: "Ground" },
-      { gradesheetId: "07h3r", phaseName: "Other Course" },
+      { gradesheetId: "Pr1marY", phaseStage: "Primary" },
+      { gradesheetId: "G40un9", phaseStage: "Ground" },
+      { gradesheetId: "07h3r", phaseStage: "Other Course" },
     ],
   };
 
@@ -21,8 +21,8 @@ function Grades() {
         <div className="card-group">
           <h4 className="cardgroup-title">Current Phase Gradebook</h4>
           <div className="card">
-            <label className="card-title">{mockGradeData.phaseName}</label>
-            <Link to={`/Grades/${mockGradeData.phaseName}`}>
+            <label className="card-title">{mockGradeData.phaseStage}</label>
+            <Link to={`/Grades/${mockGradeData.phaseStage}`}>
               <button type="button">Open Gradebook</button>
             </Link>
           </div>
@@ -32,8 +32,8 @@ function Grades() {
           {mockGradeData.pastGradebooks.map((phase, idx) => {
             return (
               <div className="card" key={`phase_${idx}`}>
-                <label className="card-title">{phase.phaseName}</label>
-                <Link to={`/Grades/${phase.phaseName}`}>
+                <label className="card-title">{phase.phaseStage}</label>
+                <Link to={`/Grades/${phase.phaseStage}`}>
                   <button type="button">Open Gradebook</button>
                 </Link>
               </div>

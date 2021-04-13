@@ -10,6 +10,7 @@ import students from "./students";
 import grades from "./grades";
 import formControls from "./formControl";
 import eventsInStage from "./eventsInStage";
+import stages from "./stages";
 
 //This determines what the props are called when state is referenced within a connected component
 const reducer = combineReducers({
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   grades,
   formControls,
   EIS: eventsInStage,
+  stages,
 });
 
 const middleware = composeWithDevTools(
