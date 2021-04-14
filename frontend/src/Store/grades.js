@@ -46,12 +46,6 @@ export const getGradesheet = (id, username, evt_code) => {
       dispatch(findGradeSheet(details.data, maneuvers.data));
     } catch (error) {
       console.log("Error: there was a problem getting that gradesheet", error);
-      console.log(
-        "REDUX- grades: id, username, evt_code",
-        id,
-        username,
-        evt_code
-      );
     }
   };
 };

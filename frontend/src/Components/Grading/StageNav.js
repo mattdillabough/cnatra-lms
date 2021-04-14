@@ -17,7 +17,6 @@ function StageNav(props) {
       dispatch(fetchStudent(userName));
     }
   }, [dispatch, student]);
-  console.log("Student info: ", student);
 
   if (!student || !student.first_name) {
     return (
@@ -26,7 +25,7 @@ function StageNav(props) {
       </div>
     );
   }
-  console.log("STAGE NAV PROPS:", props);
+
   return (
     <>
       <div className="container">

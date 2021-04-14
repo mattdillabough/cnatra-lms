@@ -14,7 +14,7 @@ function Grades() {
     pastGradebooks: [
       { gradesheetId: "Pr1marY", phaseStage: "Primary" },
       { gradesheetId: "G40un9", phaseStage: "Ground" },
-      { gradesheetId: "07h3r", phaseStage: "Other Course" },
+      { gradesheetId: "07h3r", phaseStage: "OtherCourse" },
     ],
   };
 
@@ -46,6 +46,7 @@ function Grades() {
             <label className="card-title" title="stage">
               {mockGradeData.phaseStage}
             </label>
+            {/* Here a defined state is passed to this Link but should be changed to map out the appropriate stage value once there is more stage/grade data */}
             <Link
               to={{
                 pathname: `/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`,
@@ -64,9 +65,7 @@ function Grades() {
                 <label className="card-title" title="stage">
                   {phase.phaseStage}
                 </label>
-                <Link
-                  to={`/Grades/${mockGradeData.phaseName.toLowerCase()}/${phase.phaseStage.toLowerCase()}`}
-                >
+                <Link to="#">
                   <button type="button">Open Gradebook</button>
                 </Link>
               </div>
