@@ -37,12 +37,13 @@ function StageNav(props) {
             <div className="row">
               <div className="col">
                 <Link
-                  to={{
-                    pathname: `/Grades/${props.match.params.phaseName}/${props.match.params.stageName}/${student.username}/compare-grades`,
+                  to={(location) => ({
+                    ...location,
+                    pathname: `${location.pathname}/${student.username}`,
                     state: {
                       stage_code: props.location.state.stage,
                     },
-                  }}
+                  })}
                 >
                   <button type="button">Grade Comparison</button>
                 </Link>
@@ -51,12 +52,12 @@ function StageNav(props) {
                 <label>
                   {/* View Most Recent Gradesheet: */}
                   <Link
-                    to={{
-                      pathname: `/Grades/${props.match.params.phaseName}/${props.match.params.stageName}/${student.username}/${student.grade_sheets[0].event.event_code}`,
+                    to={(location) => ({
+                      pathname: `${location.pathname}/${student.username}/${student.grade_sheets[0].event.event_code}`,
                       state: {
                         gradesheetId: student.grade_sheets[0].grade_sheet_id,
                       },
-                    }}
+                    })}
                   >
                     <button type="button">Most Recent</button>
                   </Link>
