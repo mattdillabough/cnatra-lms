@@ -19,10 +19,22 @@ function Grades() {
   };
 
   const dispatch = useDispatch();
-  //Fetch references for each stage in the current phase. The references would be used to link each gradebook to each listed option.
+  //Fetch references for each stage in the current phase. The references would be used to link each gradebook to each Link option and pass along its identifier.
+  const { stages } = useSelector((state) => state.stages);
+
   useEffect(() => {
-    dispatch(fetchStages());
-  });
+    if (!stages?.length) {
+      dispatch(fetchStages());
+    }
+  }, [dispatch, stages]);
+
+  if (!stages || !stages.length) {
+    return (
+      <div className="container">
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="Grades container-fluid">
@@ -35,7 +47,10 @@ function Grades() {
               {mockGradeData.phaseStage}
             </label>
             <Link
-              to={`/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`}
+              to={{
+                pathname: `/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`,
+                state: stages[0],
+              }}
             >
               <button type="button">Open Gradebook</button>
             </Link>

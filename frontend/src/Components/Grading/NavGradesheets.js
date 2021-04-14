@@ -9,6 +9,7 @@ function NavGradesheets({
   sheet_id,
   length,
   phase,
+  stage,
   username,
 }) {
   //EIB = Event in block
@@ -18,7 +19,7 @@ function NavGradesheets({
       {direction === "prev" ? (
         <Link
           to={{
-            pathname: `/Grades/${phase}/${username}/${sheet_code}`,
+            pathname: `/Grades/${phase}/${stage}/${username}/${sheet_code}`,
             state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"
@@ -33,7 +34,7 @@ function NavGradesheets({
       ) : (
         <Link
           to={{
-            pathname: `/Grades/${phase}/${username}/${sheet_code}`,
+            pathname: `/Grades/${phase}/${stage}/${username}/${sheet_code}`,
             state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"

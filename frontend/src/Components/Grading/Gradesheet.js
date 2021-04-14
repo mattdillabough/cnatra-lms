@@ -100,6 +100,7 @@ function Gradesheet({ ...props }) {
   const EIB = details?.grade_sheet.event.event_in_block;
   const total_EIB = student?.grade_sheets.length;
 
+  console.log("PROPS IN GRADESHEET", props);
   return (
     <>
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
@@ -115,6 +116,7 @@ function Gradesheet({ ...props }) {
             }
             length={total_EIB}
             phase={props.match.params.phaseName}
+            stage={props.match.params.stageName}
             username={props.match.params.username}
           />
           <NavGradesheets
@@ -128,6 +130,7 @@ function Gradesheet({ ...props }) {
             }
             length={total_EIB}
             phase={props.match.params.phaseName}
+            stage={props.match.params.stageName}
             username={props.match.params.username}
           />
         </div>
