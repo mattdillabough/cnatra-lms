@@ -6,24 +6,24 @@ const baseURL = "http://localhost:5000";
 const instance = axios.create({ baseURL });
 
 //ACTIONS
-const GET_ALL_EVENTS = "GET_ALL_EVENTS";
+const GET_STAGE_MANEUVERS = "GET_STAGE_MANEUVERS";
 
 //ACTION CREATORS
-const getAllEvents = (data) => {
+const getStageManeuvers = (data) => {
   return {
-    type: GET_ALL_EVENTS,
+    type: GET_STAGE_MANEUVERS,
     data,
   };
 };
 
 // THUNK CREATORS
 //Fetches all the maneuvers in a stage
-export const fetchEvents = (stage) => {
+export const fetchManeuvers = (stage) => {
   return async (dispatch) => {
     try {
       const { data } = await instance.get(`/server/stages/${stage}/maneuvers`);
 
-      dispatch(getAllEvents(data));
+      dispatch(getStageManeuvers(data));
     } catch (error) {
       console.log(
         "Error: there was a problem fetching the events in the stage ",
@@ -37,7 +37,7 @@ export const fetchEvents = (stage) => {
 
 export default function eventsInStageReducer(state = {}, action) {
   switch (action.type) {
-    case GET_ALL_EVENTS:
+    case GET_STAGE_MANEUVERS:
       return { ...state, stageEvents: action.data };
     default:
       return state;

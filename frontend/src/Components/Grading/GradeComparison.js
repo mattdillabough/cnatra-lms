@@ -2,23 +2,23 @@ import React, { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchEvents } from "../../Store/eventsInStage";
+import { fetchManeuvers } from "../../Store/eventsInStage";
 
-function GradeComparison() {
+function GradeComparison(props) {
   /*TODO:
   - Receive data for all maneuver data for events in a phase/stage/block
   - Add links to each respective gradesheet in header
   - Conditionally style
   */
 
+  const { stageEvents } = useSelector((state) => state.EIS);
+  console.log("EIS maneuvers: ", stageEvents);
+
   //Fetch grade comparison data
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchEvents("N"));
+    dispatch(fetchManeuvers("N"));
   }, [dispatch]);
-
-  const { stageEvents } = useSelector((state) => state.EIS);
-  console.log("EIS maneuvers: ", stageEvents);
 
   const data = useMemo(
     () => [
