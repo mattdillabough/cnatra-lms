@@ -41,7 +41,14 @@ function GradeComparison(props) {
   }, [dispatch]);
 
   const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
-  console.log("EIS maneuvers: ", stageEvents, "Grades: ", stageGrades);
+  console.log(
+    "EIS maneuvers: ",
+    stageEvents,
+    "Grades: ",
+    stageGrades,
+    "Props: ",
+    props
+  );
 
   const data = useMemo(
     () => [
@@ -198,6 +205,13 @@ function GradeComparison(props) {
   return (
     <>
       <div className="container">
+        <h4 className="row">
+          <span className="col-sm-12 col-md-3 text-sm-center text-md-start">{`${student.last_name}, ${student.first_name}`}</span>
+          <span className="col-sm-12 col-md-9 text-sm-center text-md-end">
+            {`${props.match.params.phaseName} - ${props.match.params.stageName}`}{" "}
+            Grade Comparison
+          </span>
+        </h4>
         <div className="table-responsive">
           <table
             className="table table-light table-hover table-striped"
