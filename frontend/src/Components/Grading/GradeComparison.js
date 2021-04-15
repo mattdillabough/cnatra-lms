@@ -2,7 +2,8 @@ import React, { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchManeuvers } from "../../Store/eventsInStage";
+import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
+import { fetchStudent } from "../../Store/students";
 
 function GradeComparison(props) {
   /*TODO:
@@ -10,15 +11,37 @@ function GradeComparison(props) {
   - Add links to each respective gradesheet in header
   - Conditionally style
   */
-
-  const { stageEvents } = useSelector((state) => state.EIS);
-  console.log("EIS maneuvers: ", stageEvents);
-
-  //Fetch grade comparison data
   const dispatch = useDispatch();
+  const { student } = useSelector((state) => state.students);
+
+  //fetch student info if not already available
+  useEffect(() => {
+    if (!student?.first_name) {
+      dispatch(fetchStudent(props.match.params.username));
+    }
+  }, [dispatch, student, props.match.params.username]);
+  console.log("STUDENT DATA", student);
+
+  //Fetch grade comparison grades
+  useEffect(() => {
+    if (student?.first_name) {
+      const gradeSheetIds = student.grade_sheets.map((gradesheet) => {
+        return {
+          eventCode: gradesheet.event.event_code,
+          id: gradesheet.grade_sheet_id,
+        };
+      });
+      dispatch(fetchGrades(gradeSheetIds));
+    }
+  }, [dispatch, student]);
+
+  //Fetch grade comparison maneuvers
   useEffect(() => {
     dispatch(fetchManeuvers("N"));
   }, [dispatch]);
+
+  const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
+  console.log("EIS maneuvers: ", stageEvents, "Grades: ", stageGrades);
 
   const data = useMemo(
     () => [
