@@ -16,13 +16,13 @@ function Routes() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route
-        path="/Grades/:phaseName/:stageName/:username"
-        component={GradeComparison}
-      />
-      <Route
         exact
         path="/Grades/:phaseName/:stageName/:username/:evt_code"
         component={Gradesheet}
+      />
+      <Route
+        path="/Grades/:phaseName/:stageName/:username"
+        component={GradeComparison}
       />
       <Route path="/Grades/:phaseName/:stageName" component={StageNav} />
       <Route path="/Academics" component={Academics} />
