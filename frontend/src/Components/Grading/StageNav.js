@@ -20,7 +20,7 @@ function StageNav(props) {
 
   if (!student || !student.first_name) {
     return (
-      <div className="container">
+      <div className="container text-center">
         <div>Loading...</div>
       </div>
     );

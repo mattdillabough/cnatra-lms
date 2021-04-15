@@ -237,7 +237,7 @@ function Gradesheet({ ...props }) {
                   evt_code={props.match.params.evt_code}
                 />
               ) : (
-                <div>Loading...</div>
+                <div className="text-center">Loading...</div>
               )}
             </div>
           </div>

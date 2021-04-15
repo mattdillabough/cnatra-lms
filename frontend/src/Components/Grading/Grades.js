@@ -30,7 +30,7 @@ function Grades() {
 
   if (!stages || !stages.length) {
     return (
-      <div className="container">
+      <div className="container text-center">
         <div>Loading...</div>
       </div>
     );
@@ -38,7 +38,9 @@ function Grades() {
 
   return (
     <div className="Grades container-fluid">
-      <h2 title="Phase name">{mockGradeData.phaseName}</h2>
+      <h2 className="text-center" title="Phase name">
+        {mockGradeData.phaseName}
+      </h2>
       <div className="container">
         <div className="card-group">
           <h4 className="cardgroup-title">Active Gradebooks</h4>

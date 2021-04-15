@@ -7,7 +7,7 @@
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
-  text-align: center;
+  /* text-align: center; */
   padding: 0;
   background: #aecce6;
 }
@@ -232,10 +232,21 @@ input:disabled {
 }
 
 /* -----Grades-------- */
+.Grades .container {
+  width: max-content;
+  border: solid #aaaaaa 0.25px;
+  padding: 1em;
+  background: white;
+}
+
 .Grades .card-group,
 .Grades .card {
   padding: 1em;
   flex-flow: column wrap;
+}
+
+.Grades .card {
+  background: linear-gradient(189deg, #ececec, transparent);
 }
 
 .cardgroup-title {
