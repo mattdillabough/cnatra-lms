@@ -45,12 +45,12 @@ export const fetchGrades = (ids) => {
   return async (dispatch) => {
     try {
       //Assuming we're given a list of gradesheet ids
-      let data = [];
+      let data = {};
       for (let obj of ids) {
         const gradesheet = await instance.get(
           `/server/grade_sheets/${obj.id}/maneuvers`
         );
-        data.push({ [obj.eventCode]: gradesheet.data });
+        data[obj.eventCode] = gradesheet.data;
       }
       dispatch(getStageGrades(data));
     } catch (error) {

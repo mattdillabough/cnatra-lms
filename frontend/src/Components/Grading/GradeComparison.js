@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
 
+import configureData from "./stageGradeConfig";
+
 function GradeComparison(props) {
   /*TODO:
   - Receive data for all maneuver data for events in a phase/stage/block
@@ -20,7 +22,6 @@ function GradeComparison(props) {
       dispatch(fetchStudent(props.match.params.username));
     }
   }, [dispatch, student, props.match.params.username]);
-  console.log("STUDENT DATA", student);
 
   //Fetch grade comparison grades
   useEffect(() => {
@@ -49,6 +50,13 @@ function GradeComparison(props) {
     "Props: ",
     props
   );
+
+  //Formatting data for table
+  useEffect(() => {
+    if (stageEvents && stageGrades) {
+      console.log(configureData(stageEvents.maneuvers, stageGrades));
+    }
+  }, [stageEvents, stageGrades]);
 
   const data = useMemo(
     () => [
@@ -202,12 +210,20 @@ function GradeComparison(props) {
     prepareRow,
   } = useTable({ columns, data });
 
+  if (!student?.first_name) {
+    return (
+      <div className="container text-center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="container">
-        <h4 className="row">
+        <h4 className="row text-capitalize">
           <span className="col-sm-12 col-md-3 text-sm-center text-md-start">{`${student.last_name}, ${student.first_name}`}</span>
-          <span className="col-sm-12 col-md-9 text-sm-center text-md-end">
+          <span className="col-sm-12 col-md-9 text-md-end">
             {`${props.match.params.phaseName} - ${props.match.params.stageName}`}{" "}
             Grade Comparison
           </span>
