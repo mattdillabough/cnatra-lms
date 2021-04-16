@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -9,7 +9,6 @@ import configureData from "./stageGradeConfig";
 
 function GradeComparison(props) {
   /*TODO:
-  - Receive data for all maneuver data for events in a phase/stage/block
   - Add links to each respective gradesheet in header
   - Conditionally style
   */
@@ -51,156 +50,17 @@ function GradeComparison(props) {
     props
   );
 
+  const [columns, setColumns] = useState([]);
+  const [data, setData] = useState([]);
+
   //Formatting data for table
   useEffect(() => {
     if (stageEvents && stageGrades) {
-      console.log(configureData(stageEvents.maneuvers, stageGrades));
+      let { columns, data } = configureData(stageEvents.maneuvers, stageGrades);
+      setColumns(columns);
+      setData(data);
     }
   }, [stageEvents, stageGrades]);
-
-  const data = useMemo(
-    () => [
-      {
-        maneuver_id: 1,
-        maneuver: "GENERAL KNOWLEDGE/PROCEDURES",
-        MIF: "4+",
-        event_code1: 0,
-        event_code2: 4,
-      },
-      {
-        maneuver_id: 2,
-        maneuver: "EMER PROCEDURES/SYS FAILURES",
-        MIF: "4+",
-        event_code1: 3,
-        event_code2: 2,
-      },
-      {
-        maneuver_id: 3,
-        maneuver: "HEADWORK/SITUATIONAL AWARENESS",
-        MIF: "4+",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 4,
-        maneuver: "BASIC AIR WORK",
-        MIF: "4+",
-        event_code1: 3,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 5,
-        maneuver: "FLIGHT PLANNING",
-        MIF: "4+",
-        event_code1: 4,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 6,
-        maneuver: "GROUND OPERATIONS",
-        MIF: "4+",
-        event_code1: 2,
-        event_code2: 4,
-      },
-      {
-        maneuver_id: 7,
-        maneuver: "CRM",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 8,
-        maneuver: "COCKPIT MANAGEMENT",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 9,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 10,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 11,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 12,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 13,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 14,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 15,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 16,
-        maneuver: "OTHER",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-    ],
-    []
-  );
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "#",
-        accessor: "maneuver_id",
-      },
-      {
-        Header: "Maneuver",
-        accessor: "maneuver",
-      },
-      {
-        Header: "MIF",
-        accessor: "MIF",
-      },
-      {
-        Header: "N4301",
-        accessor: "event_code" + String(1), //event_code + event_in_block
-      },
-      {
-        Header: "N4302",
-        accessor: "event_code" + String(2),
-      },
-    ],
-    []
-  );
 
   const {
     getTableProps,
@@ -210,7 +70,7 @@ function GradeComparison(props) {
     prepareRow,
   } = useTable({ columns, data });
 
-  if (!student?.first_name) {
+  if (!student?.first_name || !stageEvents || !stageGrades) {
     return (
       <div className="container text-center">
         <div>Loading...</div>

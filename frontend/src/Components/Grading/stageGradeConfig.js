@@ -83,7 +83,6 @@ function configureData(maneuvers, grades) {
     },
   ];
   let data = {};
-  // const maneuverTypes = new Set()
 
   //Format columns
   for (let key in grades) {
@@ -95,7 +94,6 @@ function configureData(maneuvers, grades) {
 
   //Format data
   maneuvers.forEach((maneuver) => {
-    // debugger;
     let id_from_maneuvers = maneuver.maneuver.maneuver_id;
     //Create new row obj if maneuver doesn't already have entry in data
     if (!data[maneuver.maneuver.maneuver_id]) {
