@@ -15,7 +15,7 @@ function GradeComparison(props) {
   const dispatch = useDispatch();
   const { student } = useSelector((state) => state.students);
 
-  //fetch student info if not already available
+  //Fetch student info if not already available
   useEffect(() => {
     if (!student?.first_name) {
       dispatch(fetchStudent(props.match.params.username));
