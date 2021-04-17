@@ -524,7 +524,7 @@ input:disabled {
 }
 
 .below-MIF {
-  border: 3.5px red inset;
+  box-shadow: darkred -2px -2px 1px inset, darkred 2px 2px 1px inset;
   background: #d16a6aba;
 }
 

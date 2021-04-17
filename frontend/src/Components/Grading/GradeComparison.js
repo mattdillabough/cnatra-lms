@@ -41,14 +41,6 @@ function GradeComparison(props) {
   }, [dispatch]);
 
   const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
-  console.log(
-    "EIS maneuvers: ",
-    stageEvents,
-    "Grades: ",
-    stageGrades,
-    "Props: ",
-    props
-  );
 
   const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
@@ -89,10 +81,7 @@ function GradeComparison(props) {
           </span>
         </h4>
         <div className="table-responsive">
-          <table
-            className="table table-light table-hover table-striped"
-            {...getTableProps()}
-          >
+          <table className="table table-light table-hover" {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
@@ -107,8 +96,17 @@ function GradeComparison(props) {
             <tbody {...getTableBodyProps()}>
               {rows.map((row) => {
                 prepareRow(row);
+
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr
+                    {...row.getRowProps({
+                      className:
+                        row.cells[row.cells.length - 1].value >=
+                        Number(row.values.MIF.slice(0, 1))
+                          ? "pass-MIF"
+                          : "below-MIF",
+                    })}
+                  >
                     {row.cells.map((cell) => {
                       return (
                         <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
