@@ -1,7 +1,7 @@
 //Event Grade sheet
 
 //External Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,6 +16,9 @@ import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
 function Gradesheet({ ...props }) {
+  //Loading State
+  const [isLoaded, setIsLoaded] = useState(false);
+
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -93,8 +96,21 @@ function Gradesheet({ ...props }) {
     console.log("Updated!");
   }, [details]);
 
+  //Set loading state
+  // useEffect(() => {
+  //   if (student?.first_name && details?.grade_sheet.grade) {
+  //     setIsLoaded(true);
+  //     console.log("set to true");
+  //   }
+  // }, [isLoaded, student, details]);
+  useMemo(() => {
+    if (details?.grade_sheet.event.event_code) {
+      setIsLoaded(true);
+    }
+  }, [details?.grade_sheet.event.event_code]);
+
   // Displays LOADING page if props from redux haven't been received yet
-  if (!details?.grade_sheet.grade) {
+  if (!isLoaded) {
     return <Loading />;
   }
 
@@ -107,6 +123,7 @@ function Gradesheet({ ...props }) {
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
         <div className="grade-nav-container container d-flex justify-content-between">
           <NavGradesheets
+            onClick={() => setIsLoaded(false)}
             direction={"prev"}
             EIB={EIB}
             sheet_id={
@@ -121,6 +138,7 @@ function Gradesheet({ ...props }) {
             username={props.match.params.username}
           />
           <NavGradesheets
+            onClick={() => setIsLoaded(false)}
             direction={"next"}
             EIB={details?.grade_sheet.event.event_in_block}
             sheet_id={

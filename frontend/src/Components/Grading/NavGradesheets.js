@@ -11,6 +11,7 @@ function NavGradesheets({
   phase,
   stage,
   username,
+  onClick,
 }) {
   //EIB = Event in block
 
@@ -23,6 +24,7 @@ function NavGradesheets({
             state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"
+          onClick={onClick}
         >
           <button disabled={EIB && EIB === 1}>
             <div className="nav-sheets">
@@ -38,6 +40,7 @@ function NavGradesheets({
             state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"
+          onClick={onClick}
         >
           <button disabled={EIB === length}>
             <div className="nav-sheets">
