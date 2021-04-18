@@ -81,6 +81,11 @@ function configureData(maneuvers, grades) {
       Header: "MIF",
       accessor: "MIF",
     },
+    {
+      Header: "Grade Status",
+      accessor: "grade_status",
+      id: "grade_status",
+    },
   ];
   let data = {};
 
@@ -101,6 +106,7 @@ function configureData(maneuvers, grades) {
         maneuver_id: id_from_maneuvers,
         maneuver: maneuver.maneuver.maneuver,
         MIF: `${maneuver.grade}${maneuver.is_required ? "+" : ""}`,
+        grade_status: 0,
       };
     }
     //Use information from maneuvers to get grades
@@ -113,12 +119,14 @@ function configureData(maneuvers, grades) {
     //If the maneuver ids match then add that event's grade to the data row
     if (grades[event_code] && id_from_maneuvers === id_from_grades) {
       //Keep all the data already in the object + add the new event grade
-      data[id_from_maneuvers] = {
-        ...data[id_from_maneuvers],
-        [event_code]:
-          grades[event_code].grade_sheet_maneuvers[id_from_maneuvers - 1].grade,
-      };
+      data[id_from_maneuvers][event_code] =
+        grades[event_code].grade_sheet_maneuvers[id_from_maneuvers - 1].grade;
     }
+    //Highest grade received for the maneuver is set to grade_status
+    data[id_from_maneuvers].grade_status = Math.max(
+      data[id_from_maneuvers].grade_status,
+      grades[event_code].grade_sheet_maneuvers[id_from_maneuvers - 1].grade
+    );
   });
   data = Object.values(data);
   return { columns, data };
