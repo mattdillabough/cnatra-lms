@@ -7,7 +7,6 @@
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
-  /* text-align: center; */
   padding: 0;
   background: #aecce6;
 }
@@ -34,6 +33,16 @@
 .App .container-fluid,
 .App .container {
   border-radius: 5px;
+}
+
+.container.loading {
+  overflow-y: visible;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 2em);
 }
 
 label {

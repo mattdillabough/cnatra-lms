@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Loading from "../Loading";
 import { fetchStages } from "../../Store/stages";
 
 function Grades() {
@@ -14,7 +15,7 @@ function Grades() {
     pastGradebooks: [
       { gradesheetId: "Pr1marY", phaseStage: "Primary" },
       { gradesheetId: "G40un9", phaseStage: "Ground" },
-      { gradesheetId: "07h3r", phaseStage: "OtherCourse" },
+      { gradesheetId: "07h3r", phaseStage: "Other" },
     ],
   };
 
@@ -29,11 +30,7 @@ function Grades() {
   }, [dispatch, stages]);
 
   if (!stages || !stages.length) {
-    return (
-      <div className="container text-center">
-        <div>Loading...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

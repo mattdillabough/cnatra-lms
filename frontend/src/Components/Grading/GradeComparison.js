@@ -3,6 +3,8 @@ import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Loading from "../Loading";
+
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
 
@@ -93,13 +95,7 @@ function GradeComparison(props) {
   });
 
   if (!student?.first_name || !stageEvents || !stageGrades) {
-    return (
-      <div className="container text-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

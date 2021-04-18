@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Loading from "../Loading";
+
 import { fetchStudent } from "../../Store/students";
 import mockStdData from "./mockStudentData";
 
@@ -19,11 +21,7 @@ function StageNav(props) {
   }, [dispatch, student]);
 
   if (!student || !student.first_name) {
-    return (
-      <div className="container text-center">
-        <div>Loading...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

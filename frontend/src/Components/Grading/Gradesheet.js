@@ -6,6 +6,7 @@ import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
+import Loading from "../Loading";
 import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
@@ -94,7 +95,7 @@ function Gradesheet({ ...props }) {
 
   // Displays LOADING page if props from redux haven't been received yet
   if (!details?.grade_sheet.grade) {
-    return <div className="Gradesheet container text-center">Loading...</div>;
+    return <Loading />;
   }
 
   const EIB = details?.grade_sheet.event.event_in_block;
