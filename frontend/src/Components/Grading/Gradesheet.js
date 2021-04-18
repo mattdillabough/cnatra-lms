@@ -1,12 +1,14 @@
 //Event Grade sheet
 
 //External Imports
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Loading from "../Loading";
+import findGradesheet from "../Utils/findGradesheet";
+
 import { EventForm } from "./useEventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
@@ -47,26 +49,30 @@ function Gradesheet({ ...props }) {
   const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
   const toggleManeuverEdits = () => dispatch(toggleManeuverMode());
 
-  //FETCH gradesheet data
-  useEffect(() => {
-    async function getData() {
-      await dispatch(
-        getGradesheet(
-          props?.location.state.gradesheetId,
-          props?.match.params.username,
-          props?.match.params.evt_code
-        )
-      );
-    }
-    getData();
-  }, [dispatch, props.location.state, props.match.params]);
-
   //FETCH student data if not already loaded
   useEffect(() => {
     if (!student?.first_name) {
       dispatch(fetchStudent(props.match.params.username));
     }
   }, [dispatch, student, props.match.params]);
+
+  //FETCH gradesheet data
+  useEffect(() => {
+    let gradesheetId = props?.location.state.gradesheetId
+      ? props?.location.state.gradesheetId
+      : findGradesheet(student, props?.match.params.evt_code);
+
+    async function getData() {
+      await dispatch(
+        getGradesheet(
+          gradesheetId,
+          props?.match.params.username,
+          props?.match.params.evt_code
+        )
+      );
+    }
+    getData();
+  }, [dispatch, student, props.location.state, props.match.params]);
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
@@ -97,12 +103,6 @@ function Gradesheet({ ...props }) {
   }, [details]);
 
   //Set loading state
-  // useEffect(() => {
-  //   if (student?.first_name && details?.grade_sheet.grade) {
-  //     setIsLoaded(true);
-  //     console.log("set to true");
-  //   }
-  // }, [isLoaded, student, details]);
   useMemo(() => {
     if (details?.grade_sheet.event.event_code) {
       setIsLoaded(true);
