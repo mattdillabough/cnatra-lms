@@ -54,6 +54,30 @@ function GradeComparison(props) {
     }
   }, [stageEvents, stageGrades]);
 
+  function styleRows(MIF, value) {
+    let computedClass = "";
+    let requirement = MIF.slice(MIF.length - 1) === "+" ? true : false;
+    let numMIF = Number(MIF.slice(0, 1));
+    if (requirement) {
+      if (value === 0) {
+        computedClass += "incomplete-maneuver incomplete";
+      } else {
+        if (value >= numMIF) {
+          computedClass += "pass-MIF";
+        } else {
+          computedClass += "below-MIF";
+        }
+      }
+    } else {
+      if (value >= numMIF) {
+        computedClass += "not-required-maneuver";
+      } else {
+        computedClass += "not-required-maneuver incomplete";
+      }
+    }
+    return computedClass;
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -100,11 +124,12 @@ function GradeComparison(props) {
                 return (
                   <tr
                     {...row.getRowProps({
-                      className:
-                        row.cells[row.cells.length - 1].value >=
-                        Number(row.values.MIF.slice(0, 1))
-                          ? "pass-MIF"
-                          : "below-MIF",
+                      className: `maneuver
+                        ${styleRows(
+                          row.values.MIF,
+                          row.cells[row.cells.length - 1].value
+                        )}`,
+                      onClick: () => console.log("row", row),
                     })}
                   >
                     {row.cells.map((cell) => {

@@ -524,7 +524,7 @@ input:disabled {
 }
 
 .below-MIF {
-  box-shadow: darkred -2px -2px 1px inset, darkred 2px 2px 1px inset;
+  box-shadow: darkred -5px -5px 1px inset, darkred 5px 5px 1px inset;
   background: #d16a6aba;
 }
 
@@ -533,9 +533,9 @@ input:disabled {
 }
 
 .not-required-maneuver {
-  border: double 3px black;
+  background: linear-gradient(180deg, #d1d0d0, white);
 }
 
 .incomplete {
-  border: 3.5px #d4c200 double;
+  outline: darkorange ridge 2px;
 }
