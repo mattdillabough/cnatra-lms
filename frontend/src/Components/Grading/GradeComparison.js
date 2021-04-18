@@ -95,7 +95,9 @@ function GradeComparison(props) {
   if (!student?.first_name || !stageEvents || !stageGrades) {
     return (
       <div className="container text-center">
-        <div>Loading...</div>
+        <div className="spinner-border" role="status">
+          <span className="sr-only visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }

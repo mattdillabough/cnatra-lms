@@ -94,7 +94,7 @@ function Gradesheet({ ...props }) {
 
   // Displays LOADING page if props from redux haven't been received yet
   if (!details?.grade_sheet.grade) {
-    return <div className="Gradesheet container">Loading...</div>;
+    return <div className="Gradesheet container text-center">Loading...</div>;
   }
 
   const EIB = details?.grade_sheet.event.event_in_block;
