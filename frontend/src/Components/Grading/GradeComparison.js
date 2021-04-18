@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
@@ -40,6 +41,7 @@ function GradeComparison(props) {
     dispatch(fetchManeuvers("N"));
   }, [dispatch]);
 
+  //Retrieve data for table
   const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
 
   const [columns, setColumns] = useState([]);
@@ -113,11 +115,34 @@ function GradeComparison(props) {
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>
-                      {column.render("Header")}
-                    </th>
-                  ))}
+                  {headerGroup.headers.map((column) => {
+                    if (column.id.slice(0, 5) === "event") {
+                      return (
+                        <th {...column.getHeaderProps()}>
+                          <Link
+                            to={(location) => ({
+                              ...location,
+                              pathname: `${location.pathname}/${column.Header}`,
+                              state: {
+                                gradesheetId: column.grade_sheet,
+                              },
+                            })}
+                          >
+                            {column.render("Header")}
+                          </Link>
+                        </th>
+                      );
+                    }
+                    return (
+                      <th
+                        {...column.getHeaderProps({
+                          onClick: () => console.log(column),
+                        })}
+                      >
+                        {column.render("Header")}
+                      </th>
+                    );
+                  })}
                 </tr>
               ))}
             </thead>

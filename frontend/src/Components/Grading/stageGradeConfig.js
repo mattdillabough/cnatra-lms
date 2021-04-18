@@ -90,11 +90,15 @@ function configureData(maneuvers, grades) {
   let data = {};
 
   //Format columns
+  let num = 1;
   for (let key in grades) {
     columns.push({
       Header: key,
       accessor: key,
+      id: `event_${num}`,
+      grade_sheet: grades[key].grade_sheet_maneuvers[0].grade_sheet,
     });
+    num++;
   }
 
   //Format data
