@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loading from "../Loading";
 import findGradesheet from "../Utils/findGradesheet";
 
-import { EventForm } from "./useEventForm";
+import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
