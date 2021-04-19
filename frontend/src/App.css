@@ -244,6 +244,14 @@ input:disabled {
   margin-right: 0;
 }
 
+/* -------Home--------  */
+@media (min-width: 756px) {
+  .Home img {
+    max-width: 600px;
+    height: auto;
+  }
+}
+
 /* -----Grades-------- */
 .Grades .container {
   max-width: 600px;
