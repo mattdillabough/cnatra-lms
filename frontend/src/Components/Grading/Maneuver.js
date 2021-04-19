@@ -49,7 +49,10 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
-            <div className="col-sm-12 col-md-8" title="Maneuver Description">
+            <div
+              className="col-sm-12 col-md-8 text-break"
+              title="Maneuver Description"
+            >
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
@@ -107,9 +110,8 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
         </div>
       </div>
       <div
-        className={
-          dropdown ? "maneuver-body collapse show" : "maneuver-body collapse"
-        }
+        className={`maneuver-body collapse px-2
+         ${dropdown ? "show" : ""}`}
         id="collapseExample"
         aria-expanded="false"
         aria-controls="collapseExample"

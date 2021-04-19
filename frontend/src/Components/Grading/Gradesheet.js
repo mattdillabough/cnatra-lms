@@ -251,9 +251,9 @@ function Gradesheet({ ...props }) {
                 <EventForm
                   edit={edit}
                   values={values}
-                  gradesheetId={props.location.state.gradesheetId}
-                  username={props.match.params.username}
-                  evt_code={props.match.params.evt_code}
+                  gradesheetId={props?.location?.state?.gradesheetId}
+                  username={props?.match?.params?.username}
+                  evt_code={props?.match?.params?.evt_code}
                 />
               ) : (
                 <div className="text-center">Loading...</div>
