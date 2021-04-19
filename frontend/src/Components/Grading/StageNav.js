@@ -26,8 +26,10 @@ function StageNav(props) {
 
   return (
     <>
-      <div className="container">
-        Roster
+      <div className="stageNav container text-center">
+        <div className="h2-header student-row row justify-content-center">
+          Class Roster
+        </div>
         <div className="student-row row row-columns-3 mx-xs-1">
           <div className="col-sm-12 col-md-3">{`${student.last_name}, ${student.first_name}`}</div>
           <div className="col-sm-12 col-md-9">

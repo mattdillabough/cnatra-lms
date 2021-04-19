@@ -259,7 +259,8 @@ input:disabled {
 }
 
 .Grades .card {
-  background: linear-gradient(189deg, #ececec, transparent);
+  /* background: linear-gradient(189deg, #ececec, transparent); */
+  background: #ececec;
 }
 
 .cardgroup-title {
@@ -267,8 +268,18 @@ input:disabled {
 }
 
 /*------StageNav-------*/
+.stageNav.container {
+  max-width: calc(100vw - 2em);
+  width: initial;
+}
+
+.stageNav .h2-header {
+  background: white;
+}
+
 .student-row {
-  background: linear-gradient(90deg, #f0efeb, white);
+  /* background: linear-gradient(90deg, #f0efeb, white); */
+  background: #ececec;
   padding: 0.5em;
 }
 
@@ -551,4 +562,11 @@ input:disabled {
 
 .incomplete {
   outline: darkorange ridge 2px;
+}
+
+/* -----Grade Comparison----  */
+.GradeComparison h5 {
+  max-width: 100%;
+  margin: 0;
+  /* background: grey; */
 }

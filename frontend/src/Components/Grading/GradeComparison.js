@@ -96,15 +96,15 @@ function GradeComparison(props) {
 
   return (
     <>
-      <div className="container">
-        <h4 className="row text-capitalize">
-          <span className="col-sm-12 col-md-3 text-sm-center text-md-start">{`${student.last_name}, ${student.first_name}`}</span>
-          <span className="col-sm-12 col-md-9 text-md-end">
-            {`${props.match.params.phaseName} - ${props.match.params.stageName}`}{" "}
-            Grade Comparison
-          </span>
-        </h4>
+      <div className="GradeComparison container">
         <div className="table-responsive">
+          <h5 className="row text-capitalize p-2">
+            <span className="p-0 col-sm-12 col-md-3">{`${student.last_name}, ${student.first_name}`}</span>
+            <span className="p-0 col-sm-12 col-md-9">
+              {`${props.match.params.phaseName} - ${props.match.params.stageName}`}{" "}
+              Grade Comparison
+            </span>
+          </h5>
           <table className="table table-light table-hover" {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (
