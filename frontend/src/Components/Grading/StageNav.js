@@ -42,7 +42,9 @@ function StageNav(props) {
                     },
                   })}
                 >
-                  <button type="button">Grade Comparison</button>
+                  <button className="px-3 m-0.5" type="button">
+                    Grade Comparison
+                  </button>
                 </Link>
               </div>
               <div className="col">
@@ -56,7 +58,9 @@ function StageNav(props) {
                       },
                     })}
                   >
-                    <button type="button">Most Recent</button>
+                    <button className="px-3 m-0.5" type="button">
+                      Most Recent
+                    </button>
                   </Link>
                 </label>
               </div>
@@ -75,14 +79,18 @@ function StageNav(props) {
                   <div className="col">
                     <label>
                       {/* View Grade Progression: */}
-                      <button type="button">Grade Comparison</button>
+                      <button className="px-3 m-0.5" type="button">
+                        Grade Comparison
+                      </button>
                     </label>
                   </div>
                   <div className="col">
                     <label>
                       {/* View Most Recent Gradesheet: */}
                       <Link to={`#`}>
-                        <button type="button">Most Recent</button>
+                        <button className="px-3 m-0.5" type="button">
+                          Most Recent
+                        </button>
                       </Link>
                     </label>
                   </div>

@@ -35,12 +35,12 @@ function Grades() {
 
   return (
     <div className="Grades container-fluid">
-      <h2 className="text-center" title="Phase name">
+      <header className="text-center h2-header" title="Phase name">
         {mockGradeData.phaseName}
-      </h2>
+      </header>
       <div className="container">
-        <div className="card-group">
-          <h4 className="cardgroup-title">Active Gradebooks</h4>
+        <div className="card-group text-center">
+          <h5 className="cardgroup-title">Active Gradebooks</h5>
           <div className="card">
             <label className="card-title" title="stage">
               {mockGradeData.phaseStage}
@@ -52,12 +52,14 @@ function Grades() {
                 state: stages[0],
               }}
             >
-              <button type="button">Open Gradebook</button>
+              <button className="px-3" type="button">
+                Open
+              </button>
             </Link>
           </div>
         </div>
-        <div className="card-group">
-          <h4 className="cardgroup-title">Past Gradebooks</h4>
+        <div className="card-group text-center">
+          <h5 className="cardgroup-title">Past Gradebooks</h5>
           {mockGradeData.pastGradebooks.map((phase, idx) => {
             return (
               <div className="card" key={`phase_${idx}`}>
@@ -65,7 +67,9 @@ function Grades() {
                   {phase.phaseStage}
                 </label>
                 <Link to="#">
-                  <button type="button">Open Gradebook</button>
+                  <button className="px-3" type="button">
+                    Open
+                  </button>
                 </Link>
               </div>
             );

@@ -60,6 +60,10 @@ input:disabled {
   color: black;
 }
 
+.h2-header {
+  font-size: 1.25em;
+}
+
 /* ------Navbar--------  */
 .NavigationBar {
   display: flex;
@@ -250,7 +254,7 @@ input:disabled {
 
 .Grades .card-group,
 .Grades .card {
-  padding: 1em;
+  padding: 0.5em;
   flex-flow: column wrap;
 }
 
