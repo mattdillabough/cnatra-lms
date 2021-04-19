@@ -7,7 +7,7 @@ function Home(props) {
 
   return (
     <div className="container-fluid text-center">
-      <h2>This would be the homepage</h2>
+      <h2>Welcome Home!</h2>
     </div>
   );
 }
