@@ -53,7 +53,7 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
         filteredData[key] = newData;
       }
     }
-    console.log("FIltered MAnueveRs: ", filteredData);
+
     //Send data to redux
     await dispatch(updateManeuvers(filteredData, gradesheetId));
     //Close dropdowns

@@ -3,7 +3,7 @@ import { useTable } from "react-table";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
@@ -11,10 +11,6 @@ import { fetchStudent } from "../../Store/students";
 import configureData from "./stageGradeConfig";
 
 function GradeComparison(props) {
-  /*TODO:
-  - Add links to each respective gradesheet in header
-  - Conditionally style
-  */
   const dispatch = useDispatch();
   const { student } = useSelector((state) => state.students);
 

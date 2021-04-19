@@ -6,7 +6,7 @@ import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 import findGradesheet from "../Utils/findGradesheet";
 
 import { EventForm } from "./EventForm";
@@ -58,7 +58,7 @@ function Gradesheet({ ...props }) {
 
   //FETCH gradesheet data
   useEffect(() => {
-    let gradesheetId = props?.location.state.gradesheetId
+    let gradesheetId = props?.location?.state?.gradesheetId
       ? props?.location.state.gradesheetId
       : findGradesheet(student, props?.match.params.evt_code);
 
@@ -110,7 +110,7 @@ function Gradesheet({ ...props }) {
   }, [details?.grade_sheet.event.event_code]);
 
   // Displays LOADING page if props from redux haven't been received yet
-  if (!isLoaded) {
+  if (!isLoaded || !props) {
     return <Loading />;
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 
 import { fetchStudent } from "../../Store/students";
 import mockStdData from "./mockStudentData";
@@ -20,7 +20,7 @@ function StageNav(props) {
     }
   }, [dispatch, student]);
 
-  if (!student || !student.first_name) {
+  if (!student || !student.first_name || !props) {
     return <Loading />;
   }
 
@@ -38,7 +38,7 @@ function StageNav(props) {
                     ...location,
                     pathname: `${location.pathname}/${student.username}`,
                     state: {
-                      stage_code: props.location.state.stage,
+                      stage_code: props?.location?.state?.stage,
                     },
                   })}
                 >

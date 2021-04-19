@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 import { fetchStages } from "../../Store/stages";
 
 function Grades() {
