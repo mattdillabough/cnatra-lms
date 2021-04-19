@@ -259,7 +259,6 @@ input:disabled {
 }
 
 .Grades .card {
-  /* background: linear-gradient(189deg, #ececec, transparent); */
   background: #ececec;
 }
 
@@ -278,7 +277,6 @@ input:disabled {
 }
 
 .student-row {
-  /* background: linear-gradient(90deg, #f0efeb, white); */
   background: #ececec;
   padding: 0.5em;
 }
@@ -373,7 +371,6 @@ input:disabled {
 @media (max-width: 576px) {
   .Gradesheet {
     width: calc(100vw - 2em);
-    /* margin: 0em 1em; */
   }
 }
 
@@ -568,5 +565,4 @@ input:disabled {
 .GradeComparison h5 {
   max-width: 100%;
   margin: 0;
-  /* background: grey; */
 }
