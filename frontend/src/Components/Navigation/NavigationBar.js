@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 
 import SubNav from "./SubNavigation";
 
-//Thinking we can conditionally load nav icons based on type of user
+//Can conditionally load nav icons based on type of user
 import InstructorSidebarData from "./InstructorSidebarData";
 
 function NavigationBar() {
@@ -19,7 +19,6 @@ function NavigationBar() {
   const dispatch = useDispatch();
 
   //Toggles state of sidebar
-  // const showSidebar = () => setSidebar(!sidebar);
   const showSidebar = () => dispatch({ type: TOGGLE_NAVBAR });
 
   return (

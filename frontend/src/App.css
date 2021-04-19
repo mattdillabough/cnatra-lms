@@ -532,11 +532,12 @@ input:disabled {
 }
 
 .maneuver-header .toggle-dropdown {
+  background: whitesmoke;
   transition: background-color 0.25s;
 }
 
 .maneuver-header .toggle-dropdown:hover {
-  background-color: grey;
+  background-color: #2525257d;
 }
 
 .maneuver-body {

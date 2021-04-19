@@ -70,7 +70,7 @@ export const EventForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="col-12">
-        <h5>Flight Lesson</h5>
+        <h5 className="mt-2">Flight Lesson</h5>
         <h6>Instructor</h6>
         <div className="event-details-section">
           <TOI
@@ -113,7 +113,7 @@ export const EventForm = ({
           <TOI
             name="date"
             className="constrain-input"
-            labeltxt="Start Date / Time: "
+            labeltxt="Start Date: "
             type="date"
             editable={edit}
             register={register}
