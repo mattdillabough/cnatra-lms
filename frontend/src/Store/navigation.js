@@ -1,22 +1,18 @@
-//Navigation
+//Navigation Redux Reducer
 
-//ACTION
+//ACTIONS
 export const TOGGLE_NAVBAR = "TOGGLE_NAVBAR";
+
 //ACTION CREATORS
-export const toggleNav = ()=> (
-  {
-    type: TOGGLE_NAVBAR,
-  }
-)
-
-
-//THUNK CREATOR
+export const toggleNav = () => ({
+  type: TOGGLE_NAVBAR,
+});
 
 //REDUCER
-export default function navigationReducer(state={navBar:false}, action){
-  switch(action.type){
+export default function navigationReducer(state = { navBar: false }, action) {
+  switch (action.type) {
     case TOGGLE_NAVBAR:
-      return {...state, navBar:!state.navBar}
+      return { ...state, navBar: !state.navBar };
     default:
       return state;
   }

@@ -44,7 +44,7 @@ export const fetchManeuvers = (stage) => {
 export const fetchGrades = (ids) => {
   return async (dispatch) => {
     try {
-      //Assuming we're given a list of gradesheet ids
+      //Assuming we're given an array of gradesheet ids
       let data = {};
       for (let obj of ids) {
         const gradesheet = await instance.get(

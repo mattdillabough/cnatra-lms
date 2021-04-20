@@ -1,4 +1,4 @@
-//Grades Redux store
+//Grades Redux Reducer
 import axios from "axios";
 
 const baseURL = "http://localhost:5000";
@@ -10,7 +10,7 @@ const GET_GRADESHEET = "GET_GRADESHEET";
 const UPDATE_GRADESHEET = "UPDATE_GRADESHEET"; //Only includes event details
 const UPDATE_MANEUVERS = "UPDATE_MANEUVERS";
 
-//ACTION CREATOR
+//ACTION CREATORS
 export const setGradeSheetId = (id) => {
   return {
     type: SET_GRADESHEET_ID,
@@ -41,7 +41,7 @@ const modifyManeuvers = (maneuvers) => {
   };
 };
 
-//THUNK CREATOR
+//THUNK CREATORS
 export const getGradesheet = (id, username, evt_code) => {
   return async (dispatch) => {
     try {
@@ -61,7 +61,7 @@ export const getGradesheet = (id, username, evt_code) => {
 export const updateGradesheet = (data, id, username, evt_code) => {
   return async (dispatch) => {
     try {
-      //Assumes data will include an id corresponding to the gradesheet
+      //Send updates to database
       await instance.put(`/server/grade_sheets/${id}`, data);
       //Get updated data & dispatch with updated data from GET
       const update = await instance.get(

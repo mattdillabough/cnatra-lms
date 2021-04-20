@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+
 //Reducers
 // import userReducer from "./users";
 import navigation from "./navigation";
@@ -12,7 +13,8 @@ import formControls from "./formControl";
 import eventsInStage from "./eventsInStage";
 import stages from "./stages";
 
-//This determines what the props are called when state is referenced within a connected component
+//This 'master reducer' determines what the props are called when state is referenced within a connected component
+//If the Redux logger is active you should be able to see actions from these reducers as they're called in the browser console
 const reducer = combineReducers({
   // userDetails: userReducer,
   students,

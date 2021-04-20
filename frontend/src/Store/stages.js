@@ -1,4 +1,4 @@
-//Stages store
+//Stages Redux Feducer
 import axios from "axios";
 
 const baseURL = "http://localhost:5000";
@@ -27,6 +27,7 @@ export const fetchStages = () => {
   };
 };
 
+//REDUCER
 export default function stagesReducer(state = {}, action) {
   switch (action.type) {
     case GET_STAGES:
