@@ -25,15 +25,11 @@ columns = [
   {
     Header: "Event1_code",
     accessor: event1,
-  }
+  },
   {
     Header: "Event2_code",
     accessor: event2,
-  }
-  {
-    Header: "Event3_code",
-    accessor: event3,
-  }
+  },
   ...
 ]
 
@@ -45,6 +41,7 @@ data = [
     event1: grade,
     event2: grade,
     event3: grade,
+    ...
   },
   {
     maneuver_id: 2,
@@ -53,16 +50,8 @@ data = [
     event1: grade,
     event2: grade,
     event3: grade,
+    ...
   },
-  {
-    maneuver_id: 3,
-    maneuver: "Some maneuver",
-    MIF: "required grade",
-    event1: grade,
-    event2: grade,
-    event3: grade,
-  },
-  ...
 ]
 
 */

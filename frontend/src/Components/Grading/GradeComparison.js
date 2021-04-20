@@ -36,6 +36,7 @@ function GradeComparison(props) {
   }, [dispatch, student]);
 
   //Fetch grade comparison maneuvers
+  //TODO: Track stagecode via redux & use that to perform this dispatch
   useEffect(() => {
     dispatch(fetchManeuvers("N"));
   }, [dispatch]);
