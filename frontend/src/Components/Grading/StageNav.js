@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Loading from "../Utils/Loading";
 
 import { fetchStudent } from "../../Store/students";
+import { setGradeSheetId } from "../../Store/grades";
 import mockStdData from "./mockStudentData";
 
 function StageNav(props) {
@@ -19,6 +20,11 @@ function StageNav(props) {
       dispatch(fetchStudent(userName));
     }
   }, [dispatch, student]);
+
+  //Will save gradesheetId in redux
+  function setGradeSheet() {
+    dispatch(setGradeSheetId(student.grade_sheets[0].grade_sheet_id));
+  }
 
   if (!student || !student.first_name || !props) {
     return <Loading />;
@@ -53,11 +59,9 @@ function StageNav(props) {
                 <label>
                   {/* View Most Recent Gradesheet: */}
                   <Link
+                    onClick={setGradeSheet}
                     to={(location) => ({
                       pathname: `${location.pathname}/${student.username}/${student.grade_sheets[0].event.event_code}`,
-                      state: {
-                        gradesheetId: student.grade_sheets[0].grade_sheet_id,
-                      },
                     })}
                   >
                     <button className="px-3 m-0.5" type="button">

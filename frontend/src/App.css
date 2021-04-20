@@ -8,7 +8,7 @@
   min-height: 100vh;
   min-width: 100vw;
   padding: 0;
-  background: #aecce6;
+  background: #a6c9e8;
 }
 
 /* larger than tablet view  */
@@ -554,7 +554,7 @@ input:disabled {
 }
 
 .below-MIF {
-  box-shadow: darkred -5px -5px 1px inset, darkred 5px 5px 1px inset;
+  box-shadow: darkred -2px -2px 1px inset, darkred 2px 2px 1px inset;
   background: #d16a6aba;
 }
 

@@ -21,7 +21,6 @@ function NavGradesheets({
         <Link
           to={{
             pathname: `/Grades/${phase}/${stage}/${username}/${sheet_code}`,
-            state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"
           onClick={onClick}
@@ -37,7 +36,6 @@ function NavGradesheets({
         <Link
           to={{
             pathname: `/Grades/${phase}/${stage}/${username}/${sheet_code}`,
-            state: { gradesheetId: sheet_id },
           }}
           className="nav-sheets-lk"
           onClick={onClick}

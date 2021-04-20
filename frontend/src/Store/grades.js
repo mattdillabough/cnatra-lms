@@ -5,11 +5,19 @@ const baseURL = "http://localhost:5000";
 const instance = axios.create({ baseURL });
 
 //ACTIONS
+const SET_GRADESHEET_ID = "SET_GRADESHEET_ID";
 const GET_GRADESHEET = "GET_GRADESHEET";
 const UPDATE_GRADESHEET = "UPDATE_GRADESHEET"; //Only includes event details
 const UPDATE_MANEUVERS = "UPDATE_MANEUVERS";
 
 //ACTION CREATOR
+export const setGradeSheetId = (id) => {
+  return {
+    type: SET_GRADESHEET_ID,
+    id,
+  };
+};
+
 const findGradeSheet = (details, maneuvers) => {
   return {
     type: GET_GRADESHEET,
@@ -94,6 +102,8 @@ export const updateManeuvers = (edits, id) => {
 //REDUCER
 export default function gradesReducer(state = {}, action) {
   switch (action.type) {
+    case SET_GRADESHEET_ID:
+      return { ...state, currentID: action.id };
     case GET_GRADESHEET:
       return { ...state, details: action.details, maneuvers: action.maneuvers };
     case UPDATE_GRADESHEET:

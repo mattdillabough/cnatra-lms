@@ -13,7 +13,7 @@ import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./mockGradesheetData";
-import { getGradesheet } from "../../Store/grades";
+import { getGradesheet, setGradeSheetId } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
@@ -42,7 +42,7 @@ function Gradesheet({ ...props }) {
 
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
-  const details = useSelector((state) => state.grades.details);
+  const { details, currentID } = useSelector((state) => state.grades);
   const { student } = useSelector((state) => state.students);
 
   //Controls Maneuver edits
@@ -58,21 +58,23 @@ function Gradesheet({ ...props }) {
 
   //FETCH gradesheet data
   useEffect(() => {
-    let gradesheetId = props?.location?.state?.gradesheetId
-      ? props?.location.state.gradesheetId
-      : findGradesheet(student, props?.match.params.evt_code);
+    if (currentID) {
+      // let gradesheetId = props?.location?.state?.gradesheetId
+      //   ? props?.location.state.gradesheetId
+      //   : findGradesheet(student, props?.match.params.evt_code);
 
-    async function getData() {
-      await dispatch(
-        getGradesheet(
-          gradesheetId,
-          props?.match.params.username,
-          props?.match.params.evt_code
-        )
-      );
+      async function getData() {
+        await dispatch(
+          getGradesheet(
+            currentID,
+            props?.match.params.username,
+            props?.match.params.evt_code
+          )
+        );
+      }
+      getData();
     }
-    getData();
-  }, [dispatch, student, props.location.state, props.match.params]);
+  }, [dispatch, student, currentID, props.location.state, props.match.params]);
 
   // MANAGE FORM DATA
   const [values, setValues] = useState({
@@ -102,6 +104,11 @@ function Gradesheet({ ...props }) {
     console.log("Updated!");
   }, [details]);
 
+  function changeSheet(loadstatus, id) {
+    setIsLoaded(loadstatus);
+    dispatch(setGradeSheetId(id));
+  }
+
   //Set loading state
   useMemo(() => {
     if (details?.grade_sheet.event.event_code) {
@@ -117,18 +124,23 @@ function Gradesheet({ ...props }) {
   const EIB = details?.grade_sheet.event.event_in_block;
   const total_EIB = student?.grade_sheets.length;
 
-  console.log("PROPS IN GRADESHEET", props);
+  // console.log("PROPS IN GRADESHEET", props);
   return (
     <>
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
         <div className="grade-nav-container container d-flex justify-content-between">
           <NavGradesheets
-            onClick={() => setIsLoaded(false)}
+            onClick={() =>
+              changeSheet(
+                false,
+                EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
+              )
+            }
             direction={"prev"}
             EIB={EIB}
-            sheet_id={
-              EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
-            }
+            // sheet_id={
+            //   EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
+            // }
             sheet_code={
               EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
             }
@@ -138,12 +150,19 @@ function Gradesheet({ ...props }) {
             username={props.match.params.username}
           />
           <NavGradesheets
-            onClick={() => setIsLoaded(false)}
+            onClick={() =>
+              changeSheet(
+                false,
+                EIB < total_EIB
+                  ? student?.grade_sheets[EIB]?.grade_sheet_id
+                  : ""
+              )
+            }
             direction={"next"}
             EIB={details?.grade_sheet.event.event_in_block}
-            sheet_id={
-              EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
-            }
+            // sheet_id={
+            //   EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
+            // }
             sheet_code={
               EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
             }
@@ -251,7 +270,7 @@ function Gradesheet({ ...props }) {
                 <EventForm
                   edit={edit}
                   values={values}
-                  gradesheetId={props?.location?.state?.gradesheetId}
+                  gradesheetId={currentID}
                   username={props?.match?.params?.username}
                   evt_code={props?.match?.params?.evt_code}
                 />
@@ -298,7 +317,7 @@ function Gradesheet({ ...props }) {
           </div>
           <ManeuversForm
             edit={maneuverEdit}
-            gradesheetId={props.location.state.gradesheetId}
+            gradesheetId={currentID}
             expand={expand}
           />
         </div>

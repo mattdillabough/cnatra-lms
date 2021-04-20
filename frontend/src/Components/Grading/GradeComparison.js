@@ -7,6 +7,7 @@ import Loading from "../Utils/Loading";
 
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
+import { setGradeSheetId } from "../../Store/grades";
 
 import configureData from "./stageGradeConfig";
 
@@ -78,6 +79,11 @@ function GradeComparison(props) {
     return computedClass;
   }
 
+  //Will save gradesheetId in redux
+  function setGradeSheet() {
+    dispatch(setGradeSheetId(student.grade_sheets[0].grade_sheet_id));
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -114,12 +120,10 @@ function GradeComparison(props) {
                       return (
                         <th {...column.getHeaderProps()}>
                           <Link
+                            onClick={() => setGradeSheet(column.grade_sheet)}
                             to={(location) => ({
                               ...location,
                               pathname: `${location.pathname}/${column.Header}`,
-                              state: {
-                                gradesheetId: column.grade_sheet,
-                              },
                             })}
                           >
                             {column.render("Header")}
@@ -128,11 +132,7 @@ function GradeComparison(props) {
                       );
                     }
                     return (
-                      <th
-                        {...column.getHeaderProps({
-                          onClick: () => console.log(column),
-                        })}
-                      >
+                      <th {...column.getHeaderProps()}>
                         {column.render("Header")}
                       </th>
                     );
@@ -143,14 +143,12 @@ function GradeComparison(props) {
             <tbody {...getTableBodyProps()}>
               {rows.map((row) => {
                 prepareRow(row);
-
                 return (
                   <tr
                     {...row.getRowProps({
                       className: `maneuver
                         ${styleRows(row.values.MIF, row.values.grade_status)}
                         `,
-                      onClick: () => console.log("row", row),
                     })}
                   >
                     {row.cells.map((cell) => {

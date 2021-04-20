@@ -12,6 +12,8 @@ export const EventForm = ({
   username,
   evt_code,
 }) => {
+  console.log("eventform test");
+
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
   const {
     register,

@@ -7,6 +7,7 @@ import { updateManeuvers } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 
 function ManeuversForm({ edit, gradesheetId, expand }) {
+  console.log("test");
   const maneuvers = useSelector(
     (state) => state.grades.maneuvers.grade_sheet_maneuvers
   );
