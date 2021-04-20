@@ -12,8 +12,6 @@ export const EventForm = ({
   username,
   evt_code,
 }) => {
-  console.log("eventform test");
-
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
   const {
     register,
@@ -37,8 +35,6 @@ export const EventForm = ({
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    console.log("Submitted data: ", data);
-
     //filter data
     const filteredData = {};
     for (let key in data) {
@@ -49,7 +45,6 @@ export const EventForm = ({
         filteredData[key] = val;
       }
     }
-    console.log("FILTERED DATA: ", filteredData);
     //send data to redux to update db & app state
     await dispatch(
       updateGradesheet(filteredData, gradesheetId, username, evt_code)

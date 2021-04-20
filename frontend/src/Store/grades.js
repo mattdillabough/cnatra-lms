@@ -53,14 +53,13 @@ export const getGradesheet = (id, username, evt_code) => {
       );
       dispatch(findGradeSheet(details.data, maneuvers.data));
     } catch (error) {
-      console.log("Error: there was a problem getting that gradesheet", error);
+      console.log("There was a problem getting that gradesheet \n", error);
     }
   };
 };
 
 export const updateGradesheet = (data, id, username, evt_code) => {
   return async (dispatch) => {
-    console.log("Data in redux: ", data, id);
     try {
       //Assumes data will include an id corresponding to the gradesheet
       await instance.put(`/server/grade_sheets/${id}`, data);
@@ -69,11 +68,9 @@ export const updateGradesheet = (data, id, username, evt_code) => {
         `/server/students/${username}/grade_sheets/${evt_code}`
       );
 
-      console.log("update from db", update.data);
       dispatch(modifyGradeSheet(update.data));
-      // dispatch(modifyGradeSheet(data, id));
     } catch (error) {
-      console.log("Error: there was a problem updating the gradesheet", error);
+      console.log("There was a problem updating the gradesheet \n", error);
     }
   };
 };
@@ -81,12 +78,12 @@ export const updateGradesheet = (data, id, username, evt_code) => {
 export const updateManeuvers = (edits, id) => {
   return async (dispatch) => {
     try {
+      //Currently loops through array of maneuvers and sends UPDATE request one by one
       for (let key in edits) {
         await instance.put(
           `/server/grade_sheet_maneuvers/${edits[key].id}`,
           edits[key].data
         );
-        console.log("id:", edits[key].id, "data:", edits[key].data);
       }
 
       const { data } = await instance.get(
@@ -94,7 +91,7 @@ export const updateManeuvers = (edits, id) => {
       );
       dispatch(modifyManeuvers(data));
     } catch (error) {
-      console.log("Error: there was a problem updating the maneuvers");
+      console.log("There was a problem updating the maneuvers \n", error);
     }
   };
 };

@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Loading from "../Utils/Loading";
-import findGradesheet from "../Utils/findGradesheet";
 
 import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
@@ -59,10 +58,6 @@ function Gradesheet({ ...props }) {
   //FETCH gradesheet data
   useEffect(() => {
     if (currentID) {
-      // let gradesheetId = props?.location?.state?.gradesheetId
-      //   ? props?.location.state.gradesheetId
-      //   : findGradesheet(student, props?.match.params.evt_code);
-
       async function getData() {
         await dispatch(
           getGradesheet(
@@ -101,7 +96,6 @@ function Gradesheet({ ...props }) {
       hours: details?.grade_sheet.event.hours,
       media_type: details?.grade_sheet.event.media_type.media_type,
     });
-    console.log("Updated!");
   }, [details]);
 
   function changeSheet(loadstatus, id) {
@@ -124,7 +118,6 @@ function Gradesheet({ ...props }) {
   const EIB = details?.grade_sheet.event.event_in_block;
   const total_EIB = student?.grade_sheets.length;
 
-  // console.log("PROPS IN GRADESHEET", props);
   return (
     <>
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
@@ -138,9 +131,6 @@ function Gradesheet({ ...props }) {
             }
             direction={"prev"}
             EIB={EIB}
-            // sheet_id={
-            //   EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
-            // }
             sheet_code={
               EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
             }
@@ -160,9 +150,6 @@ function Gradesheet({ ...props }) {
             }
             direction={"next"}
             EIB={details?.grade_sheet.event.event_in_block}
-            // sheet_id={
-            //   EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
-            // }
             sheet_code={
               EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
             }

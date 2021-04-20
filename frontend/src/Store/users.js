@@ -24,11 +24,11 @@ export const getUser = (id) => {
       let { data } = await axios.get(
         `${baseUrl}/server/users/41e0ef686ae646528759e6b4238bf994`
       );
-      console.log("Getting user", data);
+
       //Dispatch action to reducer (below) after it has been reformatted to an object
       dispatch(findUser(data));
     } catch (error) {
-      console.log("Error: that user was not found", error);
+      console.log("There was a problem retreiving that user \n", error);
     }
   };
 };

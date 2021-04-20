@@ -22,7 +22,7 @@ export const fetchStages = () => {
       const { data } = await instance.get("/server/stages");
       dispatch(getAllStages(data.stages));
     } catch (error) {
-      console.log("Error: there was a problem fetching the stages: ", error);
+      console.log("There was a problem fetching the stages \n", error);
     }
   };
 };
