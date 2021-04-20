@@ -11,7 +11,7 @@ import Loading from "../Utils/Loading";
 import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
-import { mockGradesheetData } from "./mockGradesheetData";
+import { mockGradesheetData } from "./MockData/mockGradesheetData";
 import { getGradesheet, setGradeSheetId } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";

@@ -6,7 +6,7 @@ import Loading from "../Utils/Loading";
 
 import { fetchStudent } from "../../Store/students";
 import { setGradeSheetId } from "../../Store/grades";
-import mockStdData from "./mockStudentData";
+import mockStdData from "./MockData/mockStudentData";
 
 function StageNav(props) {
   const userName = "danielcanham"; //student username
