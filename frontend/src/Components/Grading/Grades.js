@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Loading from "../Utils/Loading";
-import { fetchStages } from "../../Store/stages";
+import { fetchStages, setCurrentStage } from "../../Store/stages";
 
 function Grades() {
   //Grades should receive all the stages active in the current phase & past stages graded (for instructor)
@@ -29,6 +29,10 @@ function Grades() {
     }
   }, [dispatch, stages]);
 
+  function setStage(stage) {
+    dispatch(setCurrentStage(stage));
+  }
+
   if (!stages || !stages.length) {
     return <Loading />;
   }
@@ -45,11 +49,12 @@ function Grades() {
             <label className="card-title" title="stage">
               {mockGradeData.phaseStage}
             </label>
-            {/* Here a defined state is passed to this Link but should be changed to map out the appropriate stage value once there is more stage/grade data */}
+            {/* Here a defined stage is passed to this Link but should be changed to map out the appropriate stage value once there is more stage/grade data */}
             <Link
+              onClick={() => setStage(stages[0])}
               to={{
                 pathname: `/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`,
-                state: stages[0],
+                // state: stages[0],
               }}
             >
               <button className="px-3" type="button">

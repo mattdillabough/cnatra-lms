@@ -6,12 +6,20 @@ const instance = axios.create({ baseURL });
 
 //ACTIONS
 const GET_STAGES = "GET_STAGES";
+const SET_STAGE = "SET_STAGE";
 
 //ACTION CREATORS
 const getAllStages = (stages) => {
   return {
     type: GET_STAGES,
     stages,
+  };
+};
+
+export const setCurrentStage = (stage) => {
+  return {
+    type: SET_STAGE,
+    stage,
   };
 };
 
@@ -32,6 +40,8 @@ export default function stagesReducer(state = {}, action) {
   switch (action.type) {
     case GET_STAGES:
       return { ...state, stages: action.stages };
+    case SET_STAGE:
+      return { ...state, currentStage: action.stage };
     default:
       return state;
   }

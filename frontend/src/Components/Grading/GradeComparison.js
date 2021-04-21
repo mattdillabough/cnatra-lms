@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Loading from "../Utils/Loading";
+import findStage from "../Utils/findStage";
 
 import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
 import { fetchStudent } from "../../Store/students";
 import { setGradeSheetId } from "../../Store/grades";
+import { fetchStages, setCurrentStage } from "../../Store/stages";
 
 import configureData from "./stageGradeConfig";
 
@@ -35,11 +37,29 @@ function GradeComparison(props) {
     }
   }, [dispatch, student]);
 
-  //Fetch grade comparison maneuvers
-  //TODO: Track stagecode via redux & use that to perform this dispatch
+  const { stages, currentStage } = useSelector((state) => state.stages);
+  //Find correct stage if not already available
+  //Get list of stages
   useEffect(() => {
-    dispatch(fetchManeuvers("N"));
-  }, [dispatch]);
+    if (!currentStage?.stage) {
+      dispatch(fetchStages());
+    }
+  }, [dispatch, currentStage?.stage]);
+  //Identify current stage & save it in redux
+  useEffect(() => {
+    if (!currentStage?.stage && stages && stages[0].stage) {
+      dispatch(
+        setCurrentStage(findStage(props.match.params.stageName, stages))
+      );
+    }
+  }, [dispatch, currentStage, stages, props.match.params.stageName]);
+
+  //Fetch grade comparison maneuvers
+  useEffect(() => {
+    if (currentStage?.stage) {
+      dispatch(fetchManeuvers(currentStage.stage));
+    }
+  }, [dispatch, currentStage]);
 
   //Retrieve data for table
   const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
