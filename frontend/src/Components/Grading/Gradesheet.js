@@ -13,14 +13,12 @@ import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
 import { mockGradesheetData } from "./MockData/mockGradesheetData";
+
 import { getGradesheet, setGradeSheetId } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
 function Gradesheet({ ...props }) {
-  //Loading State
-  const [isLoaded, setIsLoaded] = useState(false);
-
   //Manage event dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
@@ -45,7 +43,7 @@ function Gradesheet({ ...props }) {
   const { details, currentID } = useSelector((state) => state.grades);
   const { student } = useSelector((state) => state.students);
 
-  //Controls Maneuver edits
+  //Controls Maneuver edit mode
   const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
   const toggleManeuverEdits = () => dispatch(toggleManeuverMode());
 
@@ -59,7 +57,7 @@ function Gradesheet({ ...props }) {
   //Find gradesheetID if not available
   useEffect(() => {
     if (!currentID && student) {
-      //find gradesheet id from event code & student dets
+      //find gradesheet id from event code & student detailss
       dispatch(
         setGradeSheetId(findGradeSheet(student, props.match.params.evt_code))
       );
@@ -82,7 +80,7 @@ function Gradesheet({ ...props }) {
     }
   }, [dispatch, student, currentID, props.location.state, props.match.params]);
 
-  //Format values to pass to EventForm; only recalculated when details.grade_sheet changes
+  //Format values to pass to EventForm; Only recalculated when details.grade_sheet changes
   const values = useMemo(() => {
     if (details?.grade_sheet.date) {
       return {
@@ -98,6 +96,10 @@ function Gradesheet({ ...props }) {
     }
   }, [details?.grade_sheet]);
 
+  //Loading State
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  //Shows loading between gradesheets
   function changeSheet(loadstatus, id) {
     setIsLoaded(loadstatus);
     dispatch(setGradeSheetId(id));
@@ -302,6 +304,7 @@ function Gradesheet({ ...props }) {
               </div>
             </div>
           </div>
+          {/* ALL MANEUVERS FORM */}
           <ManeuversForm
             edit={maneuverEdit}
             gradesheetId={currentID}

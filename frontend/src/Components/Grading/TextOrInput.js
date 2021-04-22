@@ -1,13 +1,11 @@
 import React from "react";
-// import { debounce } from "lodash";
 
-//To simulate different user types
+//Change to simulate different user types
 const user = "instructor";
 
-//TOI = text or input (conditionally renders html elements based on user role and/or editMode)
+//TOI = Text Or Input (conditionally renders html elements based on user role and/or editMode)
 
-// DISCLAIMER: defaultValue / displayVal attributes will likely need to be altered. defaultValue SHOULD be the 'old' value from the db. displayVal should reflect the value of an input from the db and reflect changes after update.
-// We should also implement a warning for the user letting them know if they haven't saved their changes, they will be lost after exiting "Edit mode".
+// DispalayVal is the value for the text element, defaultValue is the initial value for the input element, which should reset after a form edit is saved.
 
 function TOI({
   labeltxt,
@@ -20,7 +18,7 @@ function TOI({
   register,
   ...props
 }) {
-  //if Student is viewing or Instructor in Viewing mode
+  //If Student is viewing or Instructor in Viewing mode
   if (user === "student" || !editable) {
     return (
       <label className="event-label">
@@ -30,7 +28,7 @@ function TOI({
     );
   }
 
-  //if in Edit mode
+  //If in Edit mode
   //Render input depending on input type
   else {
     function RenderedElement() {

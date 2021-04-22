@@ -9,12 +9,12 @@ import { setGradeSheetId } from "../../Store/grades";
 import mockStdData from "./MockData/mockStudentData";
 
 function StageNav(props) {
+  //Disclaimer: We are fetching a specific student's info here, but it's assumed that when the user clicks the button to open this stage's gradebook a class roster will be provided to this component to map out and the user will then decide the username onClick
   const userName = "danielcanham"; //student username
 
   const { student } = useSelector((state) => state.students);
   const dispatch = useDispatch();
 
-  //Fetching a specific student's info here, but it's assumed that when the user clicks the button to open this phase's gradebook a class roster will be provided to this component to map out
   useEffect(() => {
     if (!student?.first_name) {
       dispatch(fetchStudent(userName));

@@ -39,6 +39,7 @@ function GradeComparison(props) {
 
   const { stages, currentStage } = useSelector((state) => state.stages);
   //Find correct stage if not already available
+
   //Get list of stages
   useEffect(() => {
     if (!currentStage?.stage) {
@@ -76,6 +77,7 @@ function GradeComparison(props) {
     }
   }, [stageEvents, stageGrades]);
 
+  //Maneuver row styling
   function styleRows(MIF, value) {
     let computedClass = "";
     let requirement = MIF.slice(MIF.length - 1) === "+" ? true : false;
@@ -100,11 +102,12 @@ function GradeComparison(props) {
     return computedClass;
   }
 
-  //Will save gradesheetId in redux
+  //Save gradesheetId in redux
   function setGradeSheet() {
     dispatch(setGradeSheetId(student.grade_sheets[0].grade_sheet_id));
   }
 
+  //Set up React table instance
   const {
     getTableProps,
     getTableBodyProps,
@@ -117,6 +120,7 @@ function GradeComparison(props) {
     initialState: { hiddenColumns: ["grade_status"] },
   });
 
+  //Loading
   if (!student?.first_name || !stageEvents || !stageGrades) {
     return <Loading />;
   }

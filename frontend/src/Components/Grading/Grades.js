@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Loading from "../Utils/Loading";
+
 import { fetchStages, setCurrentStage } from "../../Store/stages";
 
 function Grades() {
@@ -20,7 +21,7 @@ function Grades() {
   };
 
   const dispatch = useDispatch();
-  //Fetch references for each stage in the current phase. The references would be used to link each gradebook to each Link option and pass along its identifier.
+  //Fetch references for each stage in the current phase. The references would be used to link each gradebook to each Link and pass along its identifier
   const { stages } = useSelector((state) => state.stages);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ function Grades() {
     dispatch(setCurrentStage(stage));
   }
 
+  //Loading
   if (!stages || !stages.length) {
     return <Loading />;
   }
@@ -49,12 +51,11 @@ function Grades() {
             <label className="card-title" title="stage">
               {mockGradeData.phaseStage}
             </label>
-            {/* Here a defined stage is passed to this Link but should be changed to map out the appropriate stage value once there is more stage/grade data */}
+            {/* Here a specific stage is passed to this Link but should be changed to map out the appropriate stage value once there is more stage/grade data */}
             <Link
               onClick={() => setStage(stages[0])}
               to={{
                 pathname: `/Grades/${mockGradeData.phaseName.toLowerCase()}/${mockGradeData.phaseStage.toLowerCase()}`,
-                // state: stages[0],
               }}
             >
               <button className="px-3" type="button">

@@ -3,14 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import Maneuver from "./Maneuver";
+
 import { updateManeuvers } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 
+//This component handles all the maneuvers displayed in a Gradesheet component
 function ManeuversForm({ edit, gradesheetId, expand }) {
   const maneuvers = useSelector(
     (state) => state.grades.maneuvers.grade_sheet_maneuvers
   );
 
+  //Create form instance
   const {
     register,
     handleSubmit,
@@ -39,9 +42,8 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
 
     for (let key in data) {
       let newData = { data: {} };
-      //Conversion of number strings into numbers
       let { grade, comments } = data[key];
-      //Only send new data to db
+      //Conversion of number strings into numbers
       if (Number(grade) !== Number(maneuvers[key].grade)) {
         newData.data.grade = Number(grade);
       }
@@ -54,7 +56,7 @@ function ManeuversForm({ edit, gradesheetId, expand }) {
       }
     }
 
-    //Send data to redux
+    //Send only new data to redux
     await dispatch(updateManeuvers(filteredData, gradesheetId));
     //Close dropdowns
     await dispatch(toggleManeuverMode());

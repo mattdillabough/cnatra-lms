@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
+//For Navigation between Gradesheets
 function NavGradesheets({
   direction,
   EIB,
   sheet_code,
-  sheet_id,
   length,
   phase,
   stage,
