@@ -82,32 +82,21 @@ function Gradesheet({ ...props }) {
     }
   }, [dispatch, student, currentID, props.location.state, props.match.params]);
 
-  // MANAGE FORM DATA
-  const [values, setValues] = useState({
-    date: details?.grade_sheet.date,
-    grade: details?.grade_sheet?.grade,
-    status: details?.grade_sheet.status,
-    comments: details?.grade_sheet.comments,
-    // clearedForSolo: mockGradesheetData.clearedForSolo,
-    instructor_first_name: details?.grade_sheet.instructor.first_name,
-    instructor_last_name: details?.grade_sheet.instructor.last_name,
-    hours: details?.grade_sheet.event.hours,
-    media_type: details?.grade_sheet.event.media_type.media_type,
-  });
-
-  useEffect(() => {
-    setValues({
-      date: details?.grade_sheet?.date,
-      grade: details?.grade_sheet?.grade,
-      status: details?.grade_sheet.status,
-      comments: details?.grade_sheet.comments,
-      // clearedForSolo: mockGradesheetData.clearedForSolo,
-      instructor_first_name: details?.grade_sheet.instructor.first_name,
-      instructor_last_name: details?.grade_sheet.instructor.last_name,
-      hours: details?.grade_sheet.event.hours,
-      media_type: details?.grade_sheet.event.media_type.media_type,
-    });
-  }, [details]);
+  //Format values to pass to EventForm; only recalculated when details.grade_sheet changes
+  const values = useMemo(() => {
+    if (details?.grade_sheet.date) {
+      return {
+        date: details?.grade_sheet.date,
+        grade: details?.grade_sheet?.grade,
+        status: details?.grade_sheet.status,
+        comments: details?.grade_sheet.comments,
+        instructor_first_name: details?.grade_sheet.instructor.first_name,
+        instructor_last_name: details?.grade_sheet.instructor.last_name,
+        hours: details?.grade_sheet.event.hours,
+        media_type: details?.grade_sheet.event.media_type.media_type,
+      };
+    }
+  }, [details?.grade_sheet]);
 
   function changeSheet(loadstatus, id) {
     setIsLoaded(loadstatus);
