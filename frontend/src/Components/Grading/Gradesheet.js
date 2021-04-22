@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
 import Loading from "../Utils/Loading";
+import findGradeSheet from "../Utils/findGradesheet";
 
 import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
@@ -54,6 +55,16 @@ function Gradesheet({ ...props }) {
       dispatch(fetchStudent(props.match.params.username));
     }
   }, [dispatch, student, props.match.params]);
+
+  //Find gradesheetID if not available
+  useEffect(() => {
+    if (!currentID && student) {
+      //find gradesheet id from event code & student dets
+      dispatch(
+        setGradeSheetId(findGradeSheet(student, props.match.params.evt_code))
+      );
+    }
+  }, [dispatch, currentID, student, props.match.params.evt_code]);
 
   //FETCH gradesheet data
   useEffect(() => {
