@@ -346,7 +346,6 @@ input:disabled {
 .edit-controls {
   max-width: fit-content;
   padding: 0em 1em 0.5em 1em;
-  /* border: 1px solid black; */
 }
 
 .btn-group {

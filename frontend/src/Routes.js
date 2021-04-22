@@ -11,6 +11,7 @@ import Settings from "./Components/Settings";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 
+//Routes determines which urls on the frontend are connected to wich Components
 function Routes() {
   return (
     <Switch>
