@@ -18,8 +18,9 @@ from resources.stages import Stages
 # APP SETUP
 
 # initialize app
-app = Flask(__name__, static_folder='../../frontend/build',
-            static_url_path='/')
+app = Flask(__name__)
+# app = Flask(__name__, static_folder='../../frontend/build',
+#             static_url_path='/')
 CORS(app)
 
 # configure app
@@ -35,7 +36,8 @@ db = MongoEngine(app)
 # ROUTE CONFIG
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return 'Hello World'
+    # return app.send_static_file('index.html')
 
 
 api.add_resource(GradeSheetId, '/server/grade_sheets/<string:grade_sheet_id>')
