@@ -24,8 +24,8 @@ To run this app ensure that you have done the following:
 - Currently, on refresh, the Redux store state is NOT persisted. Thus,
   a number of useEffect hooks are called to ensure that components can retreive the necessary properties from Redux / the backend. This causes the application to make a non-optimal number of data requests, slowing down performance. Some possible solutions for this may include:
 
-  - Utilizing the browser's [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) or [SessionsStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) to store certain key information that can be persisted between page reloads.
-  - Using [Redux Storage](https://www.npmjs.com/package/redux-storage) or [Redux Persist](https://www.npmjs.com/package/redux-persist) to persist the Redux store state between refreshes and reduce the number of calls to the backend
+- Utilizing the browser's [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) or [SessionsStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) to store certain key information that can be persisted between page reloads.
+- Using [Redux Storage](https://www.npmjs.com/package/redux-storage) or [Redux Persist](https://www.npmjs.com/package/redux-persist) to persist the Redux store state between refreshes and reduce the number of calls to the backend
 
 #### Navigation Bar Expansion
 
