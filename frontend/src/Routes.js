@@ -4,29 +4,28 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import Academics from "./Components/Academics";
 import Grades from "./Components/Grading/Grades";
-import PhaseNav from "./Components/Grading/PhaseNav";
+import StageNav from "./Components/Grading/StageNav";
 import GradeComparison from "./Components/Grading/GradeComparison";
 import Gradesheet from "./Components/Grading/Gradesheet";
 import Settings from "./Components/Settings";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 
+//Routes determines which urls on the frontend are connected to wich Components
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route
         exact
-        path="/Grades/:phaseName/:username/compare-grades"
-        component={GradeComparison}
-      />
-      <Route
-        exact
-        path="/Grades/:phaseName/:username/:evt_code"
+        path="/Grades/:phaseName/:stageName/:username/:evt_code"
         component={Gradesheet}
       />
-
-      <Route exact path="/Grades/:phaseName" component={PhaseNav} />
+      <Route
+        path="/Grades/:phaseName/:stageName/:username"
+        component={GradeComparison}
+      />
+      <Route path="/Grades/:phaseName/:stageName" component={StageNav} />
       <Route path="/Academics" component={Academics} />
       <Route path="/Grades" component={Grades} />
       <Route path="/Settings" component={Settings} />

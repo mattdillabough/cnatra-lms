@@ -1,125 +1,167 @@
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useTable } from "react-table";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-function GradeComparison() {
-  /*TODO:
-  - Receive data for all maneuver data for events in a phase/stage/block
-  - Add links to each respective gradesheet in header
-  - Conditionally style
-  */
+import Loading from "../Utils/Loading";
+import findStage from "../Utils/findStage";
 
-  const data = useMemo(
-    () => [
-      {
-        maneuver_id: 1,
-        maneuver: "GENERAL KNOWLEDGE/PROCEDURES",
-        MIF: "4+",
-        event_code1: 0,
-        event_code2: 4,
-      },
-      {
-        maneuver_id: 2,
-        maneuver: "EMER PROCEDURES/SYS FAILURES",
-        MIF: "4+",
-        event_code1: 3,
-        event_code2: 2,
-      },
-      {
-        maneuver_id: 3,
-        maneuver: "HEADWORK/SITUATIONAL AWARENESS",
-        MIF: "4+",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 4,
-        maneuver: "BASIC AIR WORK",
-        MIF: "4+",
-        event_code1: 3,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 5,
-        maneuver: "FLIGHT PLANNING",
-        MIF: "4+",
-        event_code1: 4,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 6,
-        maneuver: "GROUND OPERATIONS",
-        MIF: "4+",
-        event_code1: 2,
-        event_code2: 4,
-      },
-      {
-        maneuver_id: 7,
-        maneuver: "CRM",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-      {
-        maneuver_id: 8,
-        maneuver: "COCKPIT MANAGEMENT",
-        MIF: "1",
-        event_code1: 0,
-        event_code2: 0,
-      },
-    ],
-    []
-  );
+import { fetchManeuvers, fetchGrades } from "../../Store/eventsInStage";
+import { fetchStudent } from "../../Store/students";
+import { setGradeSheetId } from "../../Store/grades";
+import { fetchStages, setCurrentStage } from "../../Store/stages";
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "#",
-        accessor: "maneuver_id",
-      },
-      {
-        Header: "Maneuver",
-        accessor: "maneuver",
-      },
-      {
-        Header: "MIF",
-        accessor: "MIF",
-      },
-      {
-        Header: "N4301",
-        accessor: "event_code" + String(1), //event_code + event_in_block
-      },
-      {
-        Header: "N4302",
-        accessor: "event_code" + String(2),
-      },
-    ],
-    []
-  );
+import configureData from "./stageGradeConfig";
 
+function GradeComparison(props) {
+  const dispatch = useDispatch();
+  const { student } = useSelector((state) => state.students);
+
+  //Fetch student info if not already available
+  useEffect(() => {
+    if (!student?.first_name) {
+      dispatch(fetchStudent(props.match.params.username));
+    }
+  }, [dispatch, student, props.match.params.username]);
+
+  //Fetch grade comparison grades
+  useEffect(() => {
+    if (student?.first_name) {
+      const gradeSheetIds = student.grade_sheets.map((gradesheet) => {
+        return {
+          eventCode: gradesheet.event.event_code,
+          id: gradesheet.grade_sheet_id,
+        };
+      });
+      dispatch(fetchGrades(gradeSheetIds));
+    }
+  }, [dispatch, student]);
+
+  const { stages, currentStage } = useSelector((state) => state.stages);
+  //Find correct stage if not already available
+
+  //Get list of stages
+  useEffect(() => {
+    if (!currentStage?.stage) {
+      dispatch(fetchStages());
+    }
+  }, [dispatch, currentStage?.stage]);
+  //Identify current stage & save it in redux
+  useEffect(() => {
+    if (!currentStage?.stage && stages && stages[0].stage) {
+      dispatch(
+        setCurrentStage(findStage(props.match.params.stageName, stages))
+      );
+    }
+  }, [dispatch, currentStage, stages, props.match.params.stageName]);
+
+  //Fetch grade comparison maneuvers
+  useEffect(() => {
+    if (currentStage?.stage) {
+      dispatch(fetchManeuvers(currentStage.stage));
+    }
+  }, [dispatch, currentStage]);
+
+  //Retrieve data for table
+  const { stageEvents, stageGrades } = useSelector((state) => state.EIS);
+
+  const [columns, setColumns] = useState([]);
+  const [data, setData] = useState([]);
+
+  //Formatting data for table
+  useEffect(() => {
+    if (stageEvents && stageGrades) {
+      let { columns, data } = configureData(stageEvents.maneuvers, stageGrades);
+      setColumns(columns);
+      setData(data);
+    }
+  }, [stageEvents, stageGrades]);
+
+  //Maneuver row styling
+  function styleRows(MIF, value) {
+    let computedClass = "";
+    let requirement = MIF.slice(MIF.length - 1) === "+" ? true : false;
+    let numMIF = Number(MIF.slice(0, 1));
+    if (requirement) {
+      if (value === 0) {
+        computedClass += "incomplete-maneuver incomplete";
+      } else {
+        if (value >= numMIF) {
+          computedClass += "pass-MIF";
+        } else {
+          computedClass += "below-MIF";
+        }
+      }
+    } else {
+      if (value >= numMIF) {
+        computedClass += "not-required-maneuver";
+      } else {
+        computedClass += "not-required-maneuver incomplete";
+      }
+    }
+    return computedClass;
+  }
+
+  //Save gradesheetId in redux
+  function setGradeSheet() {
+    dispatch(setGradeSheetId(student.grade_sheets[0].grade_sheet_id));
+  }
+
+  //Set up React table instance
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data });
+  } = useTable({
+    columns,
+    data,
+    initialState: { hiddenColumns: ["grade_status"] },
+  });
+
+  //Loading
+  if (!student?.first_name || !stageEvents || !stageGrades) {
+    return <Loading />;
+  }
 
   return (
     <>
-      <div className="container">
+      <div className="GradeComparison container">
         <div className="table-responsive">
-          <table
-            className="table table-light table-hover table-striped"
-            {...getTableProps()}
-          >
+          <h5 className="row text-capitalize p-2">
+            <span className="p-0 col-sm-12 col-md-3">{`${student.last_name}, ${student.first_name}`}</span>
+            <span className="p-0 col-sm-12 col-md-9">
+              {`${props.match.params.phaseName} - ${props.match.params.stageName}`}{" "}
+              Grade Comparison
+            </span>
+          </h5>
+          <table className="table table-light table-hover" {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>
-                      {column.render("Header")}
-                    </th>
-                  ))}
+                  {headerGroup.headers.map((column) => {
+                    if (column.id.slice(0, 5) === "event") {
+                      return (
+                        <th {...column.getHeaderProps()}>
+                          <Link
+                            onClick={() => setGradeSheet(column.grade_sheet)}
+                            to={(location) => ({
+                              ...location,
+                              pathname: `${location.pathname}/${column.Header}`,
+                            })}
+                          >
+                            {column.render("Header")}
+                          </Link>
+                        </th>
+                      );
+                    }
+                    return (
+                      <th {...column.getHeaderProps()}>
+                        {column.render("Header")}
+                      </th>
+                    );
+                  })}
                 </tr>
               ))}
             </thead>
@@ -127,7 +169,13 @@ function GradeComparison() {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr
+                    {...row.getRowProps({
+                      className: `maneuver
+                        ${styleRows(row.values.MIF, row.values.grade_status)}
+                        `,
+                    })}
+                  >
                     {row.cells.map((cell) => {
                       return (
                         <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
@@ -142,102 +190,6 @@ function GradeComparison() {
       </div>
     </>
   );
-
-  // return (
-  //   <>
-  //     <div className="container">
-  //       <div className="table-responsive">
-  //         <table className="table table-light table-striped table-hover">
-  //           <thead>
-  //             <tr>
-  //               <th scope="col">#</th>
-  //               <th scope="col">Maneuvers</th>
-  //               <th scope="col">MIF</th>
-  //               <th scope="col">Evt1</th>
-  //               <th scope="col">Evt2</th>
-  //               <th scope="col">Evt3</th>
-  //               <th scope="col">Evt4</th>
-  //             </tr>
-  //           </thead>
-  //           <tbody>
-  //             <tr className="table-success">
-  //               <th scope="row">1</th>
-  //               <td>General Knowledge / Procedures</td>
-  //               <td>4+</td>
-  //               <td>3</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //             </tr>
-  //             <tr className="table-success">
-  //               <th scope="row">2</th>
-  //               <td>Emergency Procedures / System Failure</td>
-  //               <td>4+</td>
-  //               <td>0</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //             </tr>
-  //             <tr className="table=secondary">
-  //               <th scope="row">3</th>
-  //               <td>Headwork / Situational Awareness</td>
-  //               <td>1</td>
-  //               <td>0</td>
-  //               <td>1</td>
-  //               <td>1</td>
-  //               <td>1</td>
-  //             </tr>
-  //             <tr className="table-danger">
-  //               <th scope="row">4</th>
-  //               <td>Basic Air Work</td>
-  //               <td>4+</td>
-  //               <td>0</td>
-  //               <td>2</td>
-  //               <td>2</td>
-  //               <td>2</td>
-  //             </tr>
-  //             <tr className="table-warning">
-  //               <th scope="row">5</th>
-  //               <td>Flight Planning</td>
-  //               <td>4+</td>
-  //               <td>0</td>
-  //               <td>0</td>
-  //               <td>0</td>
-  //               <td>0</td>
-  //             </tr>
-  //             <tr className="table-warning">
-  //               <th scope="row">6</th>
-  //               <td>Ground Operations</td>
-  //               <td>4+</td>
-  //               <td>0</td>
-  //               <td>0</td>
-  //               <td>0</td>
-  //               <td className="bg-danger">0</td>
-  //             </tr>
-  //             <tr className="table-success">
-  //               <th scope="row">7</th>
-  //               <td>CRM</td>
-  //               <td>4+</td>
-  //               <td>3</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //             </tr>
-  //             <tr className="table-success">
-  //               <th scope="row">8</th>
-  //               <td>Cockpit Management</td>
-  //               <td>4+</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //               <td>4</td>
-  //             </tr>
-  //           </tbody>
-  //         </table>
-  //       </div>
-  //     </div>
-  //   </>
-  // );
 }
 
 export default GradeComparison;

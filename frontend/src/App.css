@@ -7,9 +7,8 @@
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
-  text-align: center;
   padding: 0;
-  background: #aecce6;
+  background: #a6c9e8;
 }
 
 /* larger than tablet view  */
@@ -36,6 +35,16 @@
   border-radius: 5px;
 }
 
+.container.loading {
+  overflow-y: visible;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 2em);
+}
+
 label {
   max-width: 100%;
 }
@@ -49,6 +58,10 @@ textarea {
 input:disabled {
   border: none;
   color: black;
+}
+
+.h2-header {
+  font-size: 1.25em;
 }
 
 /* ------Navbar--------  */
@@ -231,20 +244,48 @@ input:disabled {
   margin-right: 0;
 }
 
+/* -------Home--------  */
+@media (min-width: 756px) {
+  .Home img {
+    max-width: 600px;
+    height: auto;
+  }
+}
+
 /* -----Grades-------- */
+.Grades .container {
+  max-width: 600px;
+  border: solid #aaaaaa 0.25px;
+  padding: 1em;
+  background: white;
+}
+
 .Grades .card-group,
 .Grades .card {
-  padding: 1em;
+  padding: 0.5em;
   flex-flow: column wrap;
+}
+
+.Grades .card {
+  background: #ececec;
 }
 
 .cardgroup-title {
   width: 100%;
 }
 
-/*------PhaseNav-------*/
+/*------StageNav-------*/
+.stageNav.container {
+  max-width: calc(100vw - 2em);
+  width: initial;
+}
+
+.stageNav .h2-header {
+  background: white;
+}
+
 .student-row {
-  background: linear-gradient(90deg, #f0efeb, white);
+  background: #ececec;
   padding: 0.5em;
 }
 
@@ -305,7 +346,6 @@ input:disabled {
 .edit-controls {
   max-width: fit-content;
   padding: 0em 1em 0.5em 1em;
-  /* border: 1px solid black; */
 }
 
 .btn-group {
@@ -338,7 +378,6 @@ input:disabled {
 @media (max-width: 576px) {
   .Gradesheet {
     width: calc(100vw - 2em);
-    /* margin: 0em 1em; */
   }
 }
 
@@ -492,11 +531,12 @@ input:disabled {
 }
 
 .maneuver-header .toggle-dropdown {
+  background: whitesmoke;
   transition: background-color 0.25s;
 }
 
 .maneuver-header .toggle-dropdown:hover {
-  background-color: grey;
+  background-color: #2525257d;
 }
 
 .maneuver-body {
@@ -513,7 +553,7 @@ input:disabled {
 }
 
 .below-MIF {
-  border: 3.5px red inset;
+  box-shadow: darkred -2px -2px 1px inset, darkred 2px 2px 1px inset;
   background: #d16a6aba;
 }
 
@@ -522,9 +562,15 @@ input:disabled {
 }
 
 .not-required-maneuver {
-  border: double 3px black;
+  background: linear-gradient(180deg, #d1d0d0, white);
 }
 
 .incomplete {
-  border: 3.5px #d4c200 double;
+  outline: darkorange ridge 2px;
+}
+
+/* -----Grade Comparison----  */
+.GradeComparison h5 {
+  max-width: 100%;
+  margin: 0;
 }

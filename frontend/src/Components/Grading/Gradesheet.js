@@ -1,16 +1,20 @@
 //Event Grade sheet
 
 //External Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal imports
-import { EventForm } from "./useEventForm";
+import Loading from "../Utils/Loading";
+import findGradeSheet from "../Utils/findGradesheet";
+
+import { EventForm } from "./EventForm";
 import ManeuversForm from "./ManeuversForm";
 import NavGradesheets from "./NavGradesheets";
-import { mockGradesheetData } from "./mockGradesheetData";
-import { getGradesheet } from "../../Store/grades";
+import { mockGradesheetData } from "./MockData/mockGradesheetData";
+
+import { getGradesheet, setGradeSheetId } from "../../Store/grades";
 import { toggleManeuverMode } from "../../Store/formControl";
 import { fetchStudent } from "../../Store/students";
 
@@ -36,26 +40,12 @@ function Gradesheet({ ...props }) {
 
   //Accessing REDUX state & methods
   const dispatch = useDispatch();
-  const details = useSelector((state) => state.grades.details);
+  const { details, currentID } = useSelector((state) => state.grades);
   const { student } = useSelector((state) => state.students);
 
-  //Controls Maneuver edits
+  //Controls Maneuver edit mode
   const maneuverEdit = useSelector((state) => state.formControls.maneuverMode);
   const toggleManeuverEdits = () => dispatch(toggleManeuverMode());
-
-  //FETCH gradesheet data
-  useEffect(() => {
-    async function getData() {
-      await dispatch(
-        getGradesheet(
-          props?.location.state.gradesheetId,
-          props?.match.params.username,
-          props?.match.params.evt_code
-        )
-      );
-    }
-    getData();
-  }, [dispatch, props.location.state, props.match.params]);
 
   //FETCH student data if not already loaded
   useEffect(() => {
@@ -64,37 +54,67 @@ function Gradesheet({ ...props }) {
     }
   }, [dispatch, student, props.match.params]);
 
-  // MANAGE FORM DATA
-  const [values, setValues] = useState({
-    date: details?.grade_sheet.date,
-    grade: details?.grade_sheet?.grade,
-    status: details?.grade_sheet.status,
-    comments: details?.grade_sheet.comments,
-    // clearedForSolo: mockGradesheetData.clearedForSolo,
-    instructor_first_name: details?.grade_sheet.instructor.first_name,
-    instructor_last_name: details?.grade_sheet.instructor.last_name,
-    hours: details?.grade_sheet.event.hours,
-    media_type: details?.grade_sheet.event.media_type.media_type,
-  });
-
+  //Find gradesheetID if not available
   useEffect(() => {
-    setValues({
-      date: details?.grade_sheet?.date,
-      grade: details?.grade_sheet?.grade,
-      status: details?.grade_sheet.status,
-      comments: details?.grade_sheet.comments,
-      // clearedForSolo: mockGradesheetData.clearedForSolo,
-      instructor_first_name: details?.grade_sheet.instructor.first_name,
-      instructor_last_name: details?.grade_sheet.instructor.last_name,
-      hours: details?.grade_sheet.event.hours,
-      media_type: details?.grade_sheet.event.media_type.media_type,
-    });
-    console.log("Updated!");
-  }, [details]);
+    if (!currentID && student) {
+      //find gradesheet id from event code & student detailss
+      dispatch(
+        setGradeSheetId(findGradeSheet(student, props.match.params.evt_code))
+      );
+    }
+  }, [dispatch, currentID, student, props.match.params.evt_code]);
+
+  //FETCH gradesheet data
+  useEffect(() => {
+    if (currentID) {
+      async function getData() {
+        await dispatch(
+          getGradesheet(
+            currentID,
+            props?.match.params.username,
+            props?.match.params.evt_code
+          )
+        );
+      }
+      getData();
+    }
+  }, [dispatch, student, currentID, props.location.state, props.match.params]);
+
+  //Format values to pass to EventForm; Only recalculated when details.grade_sheet changes
+  const values = useMemo(() => {
+    if (details?.grade_sheet.date) {
+      return {
+        date: details?.grade_sheet.date,
+        grade: details?.grade_sheet?.grade,
+        status: details?.grade_sheet.status,
+        comments: details?.grade_sheet.comments,
+        instructor_first_name: details?.grade_sheet.instructor.first_name,
+        instructor_last_name: details?.grade_sheet.instructor.last_name,
+        hours: details?.grade_sheet.event.hours,
+        media_type: details?.grade_sheet.event.media_type.media_type,
+      };
+    }
+  }, [details?.grade_sheet]);
+
+  //Loading State
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  //Shows loading between gradesheets
+  function changeSheet(loadstatus, id) {
+    setIsLoaded(loadstatus);
+    dispatch(setGradeSheetId(id));
+  }
+
+  //Set loading state
+  useMemo(() => {
+    if (details?.grade_sheet.event.event_code) {
+      setIsLoaded(true);
+    }
+  }, [details?.grade_sheet.event.event_code]);
 
   // Displays LOADING page if props from redux haven't been received yet
-  if (!details?.grade_sheet.grade) {
-    return <div className="Gradesheet container">Loading...</div>;
+  if (!isLoaded || !props) {
+    return <Loading />;
   }
 
   const EIB = details?.grade_sheet.event.event_in_block;
@@ -105,29 +125,39 @@ function Gradesheet({ ...props }) {
       <div className="Gradesheet-wrap d-flex flex-column container-fluid">
         <div className="grade-nav-container container d-flex justify-content-between">
           <NavGradesheets
+            onClick={() =>
+              changeSheet(
+                false,
+                EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
+              )
+            }
             direction={"prev"}
             EIB={EIB}
-            sheet_id={
-              EIB > 1 ? student?.grade_sheets[EIB - 2]?.grade_sheet_id : ""
-            }
             sheet_code={
               EIB > 1 ? student?.grade_sheets[EIB - 2].event.event_code : ""
             }
             length={total_EIB}
             phase={props.match.params.phaseName}
+            stage={props.match.params.stageName}
             username={props.match.params.username}
           />
           <NavGradesheets
+            onClick={() =>
+              changeSheet(
+                false,
+                EIB < total_EIB
+                  ? student?.grade_sheets[EIB]?.grade_sheet_id
+                  : ""
+              )
+            }
             direction={"next"}
             EIB={details?.grade_sheet.event.event_in_block}
-            sheet_id={
-              EIB < total_EIB ? student?.grade_sheets[EIB]?.grade_sheet_id : ""
-            }
             sheet_code={
               EIB < total_EIB ? student?.grade_sheets[EIB].event.event_code : ""
             }
             length={total_EIB}
             phase={props.match.params.phaseName}
+            stage={props.match.params.stageName}
             username={props.match.params.username}
           />
         </div>
@@ -229,12 +259,12 @@ function Gradesheet({ ...props }) {
                 <EventForm
                   edit={edit}
                   values={values}
-                  gradesheetId={props.location.state.gradesheetId}
-                  username={props.match.params.username}
-                  evt_code={props.match.params.evt_code}
+                  gradesheetId={currentID}
+                  username={props?.match?.params?.username}
+                  evt_code={props?.match?.params?.evt_code}
                 />
               ) : (
-                <div>Loading...</div>
+                <div className="text-center">Loading...</div>
               )}
             </div>
           </div>
@@ -274,9 +304,10 @@ function Gradesheet({ ...props }) {
               </div>
             </div>
           </div>
+          {/* ALL MANEUVERS FORM */}
           <ManeuversForm
             edit={maneuverEdit}
-            gradesheetId={props.location.state.gradesheetId}
+            gradesheetId={currentID}
             expand={expand}
           />
         </div>

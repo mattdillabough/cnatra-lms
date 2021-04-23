@@ -3,14 +3,21 @@ import React, { useState, useEffect } from "react";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
 function Maneuver({ maneuver, editable, register, idx, expand }) {
+  //Manage dropdown state
   const [dropdown, setDropDown] = useState(false);
   const toggleDropDown = () => {
     setDropDown(!dropdown);
   };
 
+  useEffect(() => {
+    setDropDown(expand);
+  }, [expand]);
+
+  //Required maneuvers have different styling from nonrequired maneuvers
   const requirement = maneuver?.maneuver_item_file.is_required;
   const [maneuverStyling, setManeuverStyling] = useState("");
 
+  //Style maneuvers accordingly
   useEffect(() => {
     if (requirement) {
       if (maneuver?.grade === 0) {
@@ -31,10 +38,7 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
     }
   }, [maneuver, requirement]);
 
-  useEffect(() => {
-    setDropDown(expand);
-  }, [expand]);
-
+  //Reference for hover titles
   const gradeValues = {
     0: "Incomplete",
     1: "N - Not graded",
@@ -49,11 +53,15 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
       <div className="maneuver-header row">
         <div className="col-10">
           <div className="row">
-            <div className="col-sm-12 col-md-8" title="Maneuver Description">
+            <div
+              className="col-sm-12 col-md-8 text-break"
+              title="Maneuver Description"
+            >
               {maneuver.maneuver_item_file.maneuver.maneuver || "Maneuver Name"}
             </div>
             {editable ? (
               <div className="col-6 col-md-2">
+                {/* For convenience, inputMode attr is set to decimal here to allow a number pad (rather than the normal keyboard) to appear when app is run on a mobile device */}
                 <input
                   name={`[${idx}].grade`}
                   className="maneuver-grade"
@@ -107,9 +115,8 @@ function Maneuver({ maneuver, editable, register, idx, expand }) {
         </div>
       </div>
       <div
-        className={
-          dropdown ? "maneuver-body collapse show" : "maneuver-body collapse"
-        }
+        className={`maneuver-body collapse px-2
+         ${dropdown ? "show" : ""}`}
         id="collapseExample"
         aria-expanded="false"
         aria-controls="collapseExample"

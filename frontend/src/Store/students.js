@@ -1,4 +1,4 @@
-//Students Redux store
+//Students Redux Reducer
 import axios from "axios";
 
 const baseURL = "http://localhost:5000";
@@ -22,7 +22,7 @@ export const fetchStudent = (userName) => {
       const { data } = await instance.get(`/server/students/${userName}`);
       dispatch(findStudent(data.student));
     } catch (error) {
-      console.log("There was a problem fetching student info: ", error);
+      console.log("There was a problem fetching student info \n", error);
     }
   };
 };

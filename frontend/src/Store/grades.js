@@ -1,15 +1,23 @@
-//Grades Redux store
+//Grades Redux Reducer
 import axios from "axios";
 
 const baseURL = "http://localhost:5000";
 const instance = axios.create({ baseURL });
 
 //ACTIONS
+const SET_GRADESHEET_ID = "SET_GRADESHEET_ID";
 const GET_GRADESHEET = "GET_GRADESHEET";
 const UPDATE_GRADESHEET = "UPDATE_GRADESHEET"; //Only includes event details
 const UPDATE_MANEUVERS = "UPDATE_MANEUVERS";
 
-//ACTION CREATOR
+//ACTION CREATORS
+export const setGradeSheetId = (id) => {
+  return {
+    type: SET_GRADESHEET_ID,
+    id,
+  };
+};
+
 const findGradeSheet = (details, maneuvers) => {
   return {
     type: GET_GRADESHEET,
@@ -33,7 +41,7 @@ const modifyManeuvers = (maneuvers) => {
   };
 };
 
-//THUNK CREATOR
+//THUNK CREATORS
 export const getGradesheet = (id, username, evt_code) => {
   return async (dispatch) => {
     try {
@@ -45,27 +53,24 @@ export const getGradesheet = (id, username, evt_code) => {
       );
       dispatch(findGradeSheet(details.data, maneuvers.data));
     } catch (error) {
-      console.log("Error: there was a problem getting that gradesheet", error);
+      console.log("There was a problem getting that gradesheet \n", error);
     }
   };
 };
 
 export const updateGradesheet = (data, id, username, evt_code) => {
   return async (dispatch) => {
-    console.log("Data in redux: ", data, id);
     try {
-      //Assumes data will include an id corresponding to the gradesheet
+      //Send updates to database
       await instance.put(`/server/grade_sheets/${id}`, data);
       //Get updated data & dispatch with updated data from GET
       const update = await instance.get(
         `/server/students/${username}/grade_sheets/${evt_code}`
       );
 
-      console.log("update from db", update.data);
       dispatch(modifyGradeSheet(update.data));
-      // dispatch(modifyGradeSheet(data, id));
     } catch (error) {
-      console.log("Error: there was a problem updating the gradesheet", error);
+      console.log("There was a problem updating the gradesheet \n", error);
     }
   };
 };
@@ -73,12 +78,12 @@ export const updateGradesheet = (data, id, username, evt_code) => {
 export const updateManeuvers = (edits, id) => {
   return async (dispatch) => {
     try {
+      //Currently loops through array of maneuvers and sends UPDATE request one by one
       for (let key in edits) {
         await instance.put(
           `/server/grade_sheet_maneuvers/${edits[key].id}`,
           edits[key].data
         );
-        console.log("id:", edits[key].id, "data:", edits[key].data);
       }
 
       const { data } = await instance.get(
@@ -86,7 +91,7 @@ export const updateManeuvers = (edits, id) => {
       );
       dispatch(modifyManeuvers(data));
     } catch (error) {
-      console.log("Error: there was a problem updating the maneuvers");
+      console.log("There was a problem updating the maneuvers \n", error);
     }
   };
 };
@@ -94,6 +99,8 @@ export const updateManeuvers = (edits, id) => {
 //REDUCER
 export default function gradesReducer(state = {}, action) {
   switch (action.type) {
+    case SET_GRADESHEET_ID:
+      return { ...state, currentID: action.id };
     case GET_GRADESHEET:
       return { ...state, details: action.details, maneuvers: action.maneuvers };
     case UPDATE_GRADESHEET:

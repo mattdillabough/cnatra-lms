@@ -13,6 +13,8 @@ export const EventForm = ({
   evt_code,
 }) => {
   //The useForm hook helps to track inputs using an 'uncontrolled' approach. Only after submit are values checked. However this helps to prevent excessive re-rendering of the entire form when only one input is being changed.
+
+  //Create Form instance
   const {
     register,
     handleSubmit,
@@ -35,9 +37,7 @@ export const EventForm = ({
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    console.log("Submitted data: ", data);
-
-    //filter data
+    //Filter data
     const filteredData = {};
     for (let key in data) {
       //Conversion of number strings into numbers
@@ -47,8 +47,7 @@ export const EventForm = ({
         filteredData[key] = val;
       }
     }
-    console.log("FILTERED DATA: ", filteredData);
-    //send data to redux to update db & app state
+    //Send data to redux to update db & app state
     await dispatch(
       updateGradesheet(filteredData, gradesheetId, username, evt_code)
     );
@@ -62,7 +61,6 @@ export const EventForm = ({
     }
   }, [submitStatus, dataSubmission, reset]);
 
-  /////////////////
   return (
     <form
       className="row"
@@ -70,7 +68,7 @@ export const EventForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="col-12">
-        <h5>Flight Lesson</h5>
+        <h5 className="mt-2">Flight Lesson</h5>
         <h6>Instructor</h6>
         <div className="event-details-section">
           <TOI
@@ -95,35 +93,13 @@ export const EventForm = ({
             defaultValue={values?.instructor_first_name}
             placeholder="First Name"
           />
-          {/* <label className="event-label">
-            INSTRUCTOR:
-            <input
-              name="instructorName"
-              className="constrain-input"
-              placeholder="Instructor name"
-              disabled={!edit}
-              type="text"
-              ref={register}
-              // defaultValue={defaultValue}
-              // ref={inputVal}
-              // onChange={(e) => handleChange(e)}
-            />
-          </label> */}
-
           <TOI
             name="date"
             className="constrain-input"
-            labeltxt="Start Date / Time: "
+            labeltxt="Start Date: "
             type="date"
             editable={edit}
             register={register}
-            // value={values.date}
-            // displayVal={
-            // values?.date && values.date[values.date.length - 6] === "T"
-            //   ? values.date
-            //   : String(`${values?.date}T12:30`)
-            // }
-            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
             defaultValue={
               values?.date && values.date[values.date.length - 6] === "T"
                 ? values.date
@@ -137,9 +113,6 @@ export const EventForm = ({
               month: "short",
               day: "2-digit",
               year: "numeric",
-              // hour: "2-digit",
-              // minute: "2-digit",
-              // hour12: false,
               timeZone: "UTC",
             })}
           />
@@ -181,17 +154,6 @@ export const EventForm = ({
             register={register}
             defaultValue={values?.status}
           />
-          {/* clearedForSolo isn't included in db data, excluding from register */}
-          {/* <TOI
-            name="clearedForSolo"
-            labeltxt="Cleared for Solo: "
-            type="radio"
-            editable={edit}
-            options={["N/A", "Yes", "No"]}
-            check={values.clearedForSolo}
-            // register={register}
-            displayVal={values.clearedForSolo}
-          /> */}
           <TOI
             name="grade"
             labeltxt="Overall Grade: "
