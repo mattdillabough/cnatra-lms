@@ -36,3 +36,4 @@ To run this app ensure that in the frontend you have done the following:
   #### Login System
 
   - There is currently no authentication for this application. All views created are likely what an instuctor would see. Within the `TextOrInput` Component there is an option to toggle the user variable, disabling the editing ability of the user, however this no replacement for a backend authentication system that would help to serve the user different views according to their role.
+  - `Routes.js` should also redirect the user to a login page if the user is not signed yet
