@@ -1,6 +1,6 @@
 # CNATRA-LMS Gradebook
 
-This full-stack web application that was developed for the Chief of Naval Air Training (CNATRA) program. In particular, this project focused on building out features for CNATRA's learning management system gradebook.
+This full-stack web application was developed for the Chief of Naval Air Training (CNATRA) program. In particular, this project focused on building out features for CNATRA's learning management system gradebook.
 
 ## Table of Contents
 
